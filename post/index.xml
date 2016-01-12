@@ -1,0 +1,1845 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on مدوّنة فوّاز</title>
+    <link>http://forabi.net/post/</link>
+    <description>Recent content in Posts on مدوّنة فوّاز</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ar</language>
+    <lastBuildDate>Wed, 04 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://forabi.net/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ما الجديد في الإصدار القادم من JavaScript؟ (الجزء الثّاني)</title>
+      <link>http://forabi.net/post/2015-11-04-whats-new-in-es6-p2/</link>
+      <pubDate>Wed, 04 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://forabi.net/post/2015-11-04-whats-new-in-es6-p2/</guid>
+      <description>
+
+&lt;h2 id=&#34;التفكيك-destructuring:6c363bc6c0986dc28a21b59903df18c1&#34;&gt;التفكيك Destructuring&lt;/h2&gt;
+
+&lt;p&gt;ذكرنا في الجزء السابق أن اهتمامًا كبيرًا أُوليَ لتسهيل كتابة الشفرة وقراءتها في ECMAScript 6، و&lt;strong&gt;الإسناد بالتفكيك (Destructuring assignment)&lt;/strong&gt; لا يخرج عن هذا السياق، وهو ليس بالمفهوم الجديد في عالم البرمجة، فهو معروف في Python وفي Ruby. بعيدًا عن تعقيدات المصطلحات، إليك هذا المثال:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var [a, b, c] = [1, 2, 3];
+a == 1 // true
+b == 2 // true
+c == 3 // true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ما الذي يحدث هنا؟ بكل بساطة تسمح ECMAScript 6 بصياغة جديدة للتعريف عن المتغيرات أو إسناد قيم جديدة إليها جُملةً واحدة من خلال جمعها ضمن قوسي مصفوفة (Array) وسيقوم مُفسّر اللغة بإسناد قيمة مقابلة لكل متغيّر من المصفوفة الواقعة على يمين مُعامل الإسناد (&lt;code&gt;=&lt;/code&gt;). الأمر لا يقتصر على إسناد المصفوفات، بل يمكن أيضًا إسناد خصائص العناصر:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let person = { firstName: &amp;quot;John&amp;quot;, lastName: &amp;quot;Smith&amp;quot;, Age: 42, Country: &amp;quot;UK&amp;quot; };
+
+let { firstName, lastName } = person;
+
+console.log(`Hello ${ firstName } ${ lastName }!`); // Hello John Smith!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في هذا المثال لدينا متغيّرات تتبع للنطاق العامّ &lt;code&gt;firstName&lt;/code&gt; و&lt;code&gt;lastName&lt;/code&gt;، وقد أسندنا لها قيمًا من خصائص الكائن &lt;code&gt;person&lt;/code&gt;، حيث يبحث مفسّر اللّغة عن خصائص في الكائن &lt;code&gt;person&lt;/code&gt; يماثل اسمها اسم المتغيّر المفروض ويُسندها إلى المُتغيّرات. يمكن توضيح المقصود بصورة أفضل إذا أعدنا كتابة الشفرة لتتوافق مع الإصدار الحالي من JavaScript:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var person = { firstName: &amp;quot;John&amp;quot;, lastName: &amp;quot;Smith&amp;quot;, Age: 42, Country: &amp;quot;UK&amp;quot; };
+
+var firstName = person.firstName;
+var lastName = person.lastName;
+
+console.log(&amp;quot;Hello &amp;quot; + firstName + &amp;quot; &amp;quot; + lastName + &amp;quot;!&amp;quot;); // Hello John Smith!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;يشيع استخدام التفكيك في CoffeeScript (وهي لغة أقر Brendan Eich مُخترع JavaScript بأنّ الإصدار الأخير من JavaScript استوحى الكثير منها)، وخصوصًا عندما تُنظّم البرامج في وحدات كما في Node.js ويكون اهتمامًا مُقتصرًا على استيراد جزء مُحدّد من الوحدة المعنيّة:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;{ EventEmitter } = require &#39;events&#39;
+{ EditorView } = require &#39;atom&#39;
+{ compile } = require &#39;coffee-script&#39;
+
+
+compile(&#39;# coffeescript code here&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;عند تحويل هذا النص إلى JavaScript الحالية، سنحصل على:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var EventEmitter = require(&#39;events&#39;).EventEmitter;
+var EditorView = require(&#39;atom&#39;).EditorView;
+var compile = require(&#39;events&#39;).compile;
+
+compile(&#39;# coffeescript code here&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;من الاستخدامات المفيدة للإسناد بالتفكيك التبديل بين قيمتي متغيّرين بصورة سهلة، سنقتبس المثال من توثيق CoffeeScript ونُعيد كتابته بـJavaScript:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var theBait   = 1000;
+var theSwitch = 0;
+
+[theBait, theSwitch] = [theSwitch, theBait];
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;قبل ES6 كنا لنحتاج لكتابة مُتغيّر مؤقّت نخزن فيه قيمة إحدى المتغيّرين للاحتفاظ بها قبل التبديل بين القيمتين، وهو ما يفعله محوّل CoffeeScript بالفعل ليعطينا شفرة JavaScript متوافقة مع الإصدار الحالي (مع أنه يقوم بتخزين كلا القيمتين في مصفوفة، إلا أنّ الفكرة تبقى ذاتها):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var theBait, theSwitch, _ref;
+
+theBait = 1000;
+
+theSwitch = 0;
+
+_ref = [theSwitch, theBait], theBait = _ref[0], theSwitch = _ref[1];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;الم-كر-رات-iterators-وحلقة-for-of:6c363bc6c0986dc28a21b59903df18c1&#34;&gt;المُكرِّرات (Iterators) وحلقة &lt;code&gt;for... of&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;ما من لغة برمجة تخلو من وسيلة للمرور على عدد من القيم و&lt;strong&gt;تكرار&lt;/strong&gt; تنفيذ عمليّة معيّنة على هذه القيم، من أبسط هذه الوسائل حلقة &lt;code&gt;for&lt;/code&gt; التقليديّة الشّهيرة، وفي JavaScript يشيع استخدام حلقة &lt;code&gt;for... in&lt;/code&gt; إلى جانبها للمرور على أسماء خصائص العناصر، إذ يمكننا معرفة كل خصائص العنصر &lt;code&gt;document&lt;/code&gt; بسطرين فقط:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;for (var propertyName in document) {
+    console.log(propertyName);
+}
+
+// &amp;quot;body&amp;quot;
+// &amp;quot;addEventListener&amp;quot;
+// &amp;quot;getElementById&amp;quot;
+// ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;لاحظ أن حلقة &lt;code&gt;for... in&lt;/code&gt; تُعيد &lt;strong&gt;أسماء&lt;/strong&gt; خصائص العنصر (كسلسة نصيّة String)، والأمر لا يستثني المصفوفات، فهي ليست سوى كائنات بأسماء خصائص توافق رقم الفهرس (Index):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;for (var i in [1, 2, 3]) {
+  console.log(i);
+}
+
+// &amp;quot;0&amp;quot;
+// &amp;quot;1&amp;quot;
+// &amp;quot;2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;من عيوب حلقة &lt;code&gt;for... in&lt;/code&gt; أن لا شيء في تعريف اللغة يُجبر مُفسّر اللّغة على إخراج العناصر بترتيب ثابت بالضّرورة، وهذا يعني أنها تصبح مباشرة غير صالحة للمرور على المصفوفات - التي تستخدم لحفظ عناصر &lt;em&gt;مُرتّبة&lt;/em&gt; - بطريقة بديهيّة، ويحلّ محلّها حلقة &lt;code&gt;for&lt;/code&gt; التقليديّة عندئذٍ، وأمّا عند استخدامها للمرور على الكائنات، فإنّها لا تُعيد إلّا الخصائص الّتي تُعرّف على أنها قابلة للتعداد (enumerable)، وهو شيء يُحدّد عند تعريف الخاصّة، كما أنّها تُعيد الخصائص القابلة للتعداد التي ورثها الكائن عن &amp;ldquo;آباءه&amp;rdquo; ضمن سلسلة الوراثة، وهو تصرّف قد لا يكون مرغوبًا دومًا، وغالبًا سترى المطوّرين يُجرون فحصًا للخاصّة قبل متابعة تنفيذ الشفرة لمعرفة ما إذا كانت تخصّ العنصر ذاته أمّ أنّه ورثها:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var obj = { a: 1, b: 2, c: 3 }; // كائن جديد لا يرث سوى النموذج Object
+
+for (var prop in obj) {
+  console.log(&amp;quot;o.&amp;quot; + prop + &amp;quot; = &amp;quot; + obj[prop]);
+}
+
+// &amp;quot;o.a = 1&amp;quot;
+// &amp;quot;o.b = 2&amp;quot;
+// &amp;quot;o.c = 3&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في هذا المثال (المنقول عن &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in&#34;&gt;شبكة مطوّري موزيلا&lt;/a&gt;) فرضنا كائنًا جديدًا بثلاث خصائص، وعند المرور عليه بحلقة &lt;code&gt;for... in&lt;/code&gt; فإنّنا حصلنا على النتيجة المتوقّعة، ولم نحصل على خصائص إضافيّة لأنّ الكائن الذي فرضناه لا يرث أي كائن آخر سوى &lt;code&gt;Object&lt;/code&gt; (الذي ترثه كل الكائنات افتراضًا). أما في المثال التالي، فقد احتجنا لإجراء اختبار &lt;code&gt;hasOwnProperty&lt;/code&gt; على العنصر الوارث لكي لا تظهر سوى الخاصة &lt;code&gt;color&lt;/code&gt; التي يملكها بذاته ولم يرثها:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var triangle = {a: 1, b: 2, c: 3};
+
+function ColoredTriangle() {
+  this.color = &amp;quot;red&amp;quot;;
+}
+
+ColoredTriangle.prototype = triangle;
+
+var obj = new ColoredTriangle();
+
+for (var prop in obj) {
+  if (obj.hasOwnProperty(prop)) {
+    console.log(&amp;quot;o.&amp;quot; + prop + &amp;quot; = &amp;quot; + obj[prop]);
+  }
+}
+
+// Output:
+// &amp;quot;o.color = red&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;حسنًا، لقد أطلنا الحديث عن حلقة &lt;code&gt;for... in&lt;/code&gt; وهي ليست بالجديدة؛ لكنّنا أصبحنا نرى الحاجة لشيء جديد أكثر بساطة ومرونة، فهذا ما تبتغيه ES6 في النهاية، ولهذا نشأت فكرة المُكرّرات؛ التي تسمح لأي عنصر بأن يختار لنفسه الطّريقة التي يتصرّف بها عند المرور به في حلقة، ومع المُكرّرات لا بدّ من نوع جديد من الحلقات لتلبية هذه الحاجة والمحافظة على حلقة &lt;code&gt;for... in&lt;/code&gt; للتوافق مع الإصدارات القديمة. من هنا نشأت حلقة &lt;code&gt;for... of&lt;/code&gt; الجديدة.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;for (var num of [1, 2, 3]) {
+    console.log(num);
+}
+
+// 1
+// 2
+// 3
+
+
+for (var node of document.querySelectorAll(&#39;a&#39;)) {
+  console.log(node);
+}
+
+// &amp;lt;a class=&amp;quot;title&amp;quot; href=&amp;quot;/&amp;quot;&amp;gt;
+// &amp;lt;a class=&amp;quot;contact&amp;quot; href=&amp;quot;/contact/&amp;quot;&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;حصلنا في المثالين السابقين على &lt;strong&gt;قيمة&lt;/strong&gt; الخاصّة وليس اسم الخاصّة، لكنّ هذا لا يعني أنّ حلقة &lt;code&gt;for... of&lt;/code&gt; تُعيد قيم الخصائص دومًا، بل إنّها تستدعي &lt;strong&gt;مُكرّر&lt;/strong&gt; الكائن (&lt;code&gt;Iterator&lt;/code&gt;) وتطلب منه في كلّ دورة للحلقة تزويدها بشيء ما، وتترك للمُكرّر الحُريّة بإعادة أي قيمة يرغب بها، ولكن ولأنّنا نستدعي في مثالنا مصفوفة أولاً، وعنصر من نوع &lt;code&gt;NodeList&lt;/code&gt; ثانيًا، وكلا النّوعين يُعيد مُكرُّرهما قيمَ العناصر في المصفوفة، فإنّنا نحصل على تلك النتيجة البديهيّة. بإمكاننا إنشاء أصناف بمُكرّرات خاصّة نُنشئها بأنفسنا، ولنفترض أن لدينا نوعًا لصفّ ضمن مدرسة ابتدائية، ونريد أن نحصل على تفاصيل الطلّاب على هيئة نص مُنسّق عند المرور على الصّفّ في حلقة &lt;code&gt;for... of&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+function SchoolClass(students) {
+   this.students = students;
+}
+
+SchoolClass.prototype[Symbol.iterator] = function*() {
+    for (let i = 0; i &amp;lt; this.students.length; i++) {
+        let student = this.students[i];
+        yield `#${i+1} ${student.name} (${student.age} years old)`;
+    }
+}
+
+var ourClass = new SchoolClass([ { name: &amp;quot;Ahmed&amp;quot;, age: 10 }, { name: &amp;quot;Alaa&amp;quot;, age: 9 }/*, ...*/ ]);
+for (student of ourClass) {
+     console.log(student);
+}
+
+// &amp;quot;#1 Ahmed (10 years old)&amp;quot;
+// &amp;quot;#2 Alaa (9 years old)&amp;quot;
+// &amp;quot;#3 ...&amp;quot; ...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;استخدمنا الرمز الخاص &lt;code&gt;Symbol.iterator&lt;/code&gt; لإسناد دالّة مُولّد (Generator function) التي تُعطينا عند استدعائها نسخة من مُكرّر الصنف المُخصّص الذي أنشأناه. سنتعرف بعد قليل على المُولّدات (Generators) وكذلك على الرموز (Symbols) في وقت لاحق. لاحظ أنّنا استخدمنا حلقة &lt;code&gt;for... of&lt;/code&gt; للمرور على محتويات &lt;code&gt;ourClass&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;تذكّر أنّنا استخدمنا هذه الحلقة في الجزء السابق مع Array Comprehension، كما في المثال:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let people = [&amp;quot;Samer&amp;quot;, &amp;quot;Ahmed&amp;quot;, &amp;quot;Khalid&amp;quot;];
+console.log([`Hello ${person}` for (person of people)]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;إن كانت الفقرة الأخيرة غامضة بعض الشيء فلا تقلق، سنتوسّع بشرح المولّدات بعد قليل.&lt;/p&gt;
+
+&lt;p&gt;لكن دعونا نتوقّف قليلاً ولننتقل إلى الجانب الفلسفي لهذه الإضافات في JavaScript، قد تبدو للوهلة الأولى تعقيدات بلا طائل، خصوصًا وأنّ كثيرًا منها لا يهدف سوى للتسهيل، ولا يقدّم شيئًا يستحيل إنجازه بالإصدارات السابقة من اللغة؛ هنا يمكن الرّدّ بأنّ تطوّر اللغة متعلّق بكيفيّة استخدامها والخبرة التي تُكتسب مع مرور السّنين، حيث تظهر للمطوّرين حاجات جديدة وأفكار تطبّق مرارًا لدرجة أنها ترتقي لتصبح ضمن أساسات اللغة. سهولة كتابة الشفرة لم تعد رفاهية، بل هي ضرورة لإنجاز المشاريع الكبيرة لأنّها تتيح اختصار الوقت الذي كان سيضيع في كتابة متكرّرة ومُملّة، كما أنّها تُلبّي ما يتوقّعه المطوّرون من لغة أصبحت تؤخذ على محمل الجدّ وتُستخدم في تطوير تطبيقات ضخمة ومُعقّدة بعد أن كان جُلّ استخدامها تنفيذ بعض المهام البسيطة.&lt;/p&gt;
+
+&lt;h2 id=&#34;الم-ول-دات-generators:6c363bc6c0986dc28a21b59903df18c1&#34;&gt;المُولِّدات (Generators)&lt;/h2&gt;
+
+&lt;p&gt;المولدات (Generators) ببساطة هي دوال يمكن إيقافها والعودة إليها في وقت لاحق مع الاحتفاظ بسياقها دون تغيير، صياغة دوال المولدات لا تختلف كثيرًا عن صياغة الدوال التقليدية، كل ما عليك هو إضافة إشارة * بعد &lt;code&gt;function&lt;/code&gt; واستخدام &lt;code&gt;yield&lt;/code&gt; بدل &lt;code&gt;return&lt;/code&gt;، المثال التالي سيوضح فكرة المولدات أكثر:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function* getName() {
+  let names = [&#39;Muhammad&#39;, &#39;Salem&#39;, &#39;Abdullah&#39;];
+  for (name of names) {
+    yield name;
+  }
+}
+
+let nameGenerator = getName();
+nameGenerator.next().value; // &#39;Muhammad&#39;
+nameGenerator.next().value; // &#39;Salem&#39;
+nameGenerator.next().value; // &#39;Abdullah&#39;
+nameGenerator.next().value; // undefined
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ما الذي يحدث هنا؟ فرضنا دالّة مولّد (Generator function) (والتي تُميّز بإشارة النجمة &lt;code&gt;*&lt;/code&gt;) سمّيناها &lt;code&gt;getName&lt;/code&gt;، وفيها صرحنا عن مصفوفة فيها أسماء، وظيفة هذه الدالة أن تعطينا عند استدعائها نسخة من مُكرّر (Iterator) (الذي شرحناه لتوّنا)، يزوّدنا بالأسماء بالترتيب في كل مرة نستدعيه فيها ليعطينا النتيجة التالية (&lt;code&gt;next()&lt;/code&gt;)، أولاً يجب حفظ نسخة المُكرّر ضمن متغير لكي نسمح له بحفظ حالته، ودون ذلك سيعطينا استدعاء دالّة المولد مباشرةً &lt;code&gt;getName().next()&lt;/code&gt; دوماً النتيجة الأولى لأننا عملياً نُنشئ نسخة جديدة عنه في كل مرة نستدعيه، أما استدعاء نسخة عنه وحفظها في متغير مثل &lt;code&gt;myGenerator&lt;/code&gt; فيسمح لنا باستدعاء &lt;code&gt;.next()&lt;/code&gt; عليها كما هو متوقع. لا ترجع الدالة &lt;code&gt;.next()&lt;/code&gt; القيمة التي نرسلها عبر &lt;code&gt;yield&lt;/code&gt; فقط، بل ترجع كائناً يحوي القيمة المطلوبة ضمن الخاصة &lt;code&gt;value&lt;/code&gt;، وخاصة أخرى &lt;code&gt;done&lt;/code&gt; تسمح لنا بمعرفة ما إذا كان المولد قد أعطانا كل شيء.&lt;/p&gt;
+
+&lt;p&gt;لنُعِدْ ترتيب أفكارنا:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;المولّدات تسمح &lt;strong&gt;بتوقّف تنفيذها مع الاحتفاظ بحالة التنفيذ&lt;/strong&gt; (يحدث توقّف التنفيذ عند كلّ كلمة &lt;code&gt;yield&lt;/code&gt;). فلو أنّنا كتبنا دالّة تقليديّة في المثال أعلاه مع &lt;code&gt;return&lt;/code&gt; بدل &lt;code&gt;yield&lt;/code&gt; لحصلنا في كلّ مرّة على الاسم الأول (Muhammad). وهذه الميزة في المولّدات يمكن &lt;em&gt;استغلالها لإنشاء حلقات لا نهائية&lt;/em&gt; دون إعاقة متابعة البرنامج:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function* numberGenerator() {
+  for (let i = 0; true; i++) {
+     yield i;
+  }
+}
+
+
+let numGen = numberGenerator();
+numGen.next(); // { value: 0, done: false }
+numGen.next(); // { value: 1, done: false }
+numGen.next(); // { value: 2, done: false }
+numGen.next(); // { value: 3, done: false }
+// ...
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;دوالّ المولّدات تُعطي عند استدعاءها &lt;strong&gt;مُكرّرات&lt;/strong&gt;، وهذا يعني إمكانيّة استخدامها في حلقة &lt;code&gt;for... of&lt;/code&gt; (احذر من تطبيق مثال كهذا على مولّد غير منتهٍ كما في المثال السابق!):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;for (let name of getName()) {
+  console.log(name);
+}
+
+
+// &amp;quot;Muhammad&amp;quot;
+// &amp;quot;Salem&amp;quot;
+// &amp;quot;Abdullah&amp;quot;
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;لكلّ مُكرّر وظيفة &lt;code&gt;.next()&lt;/code&gt; مهمّتها بدء تنفيذ الدّالّة أو متابعة تنفيذها ثم إيقافها مؤقّتًا عند كلّ كلمة &lt;code&gt;yield&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;استدعاء &lt;code&gt;next()&lt;/code&gt; على المُكرّر يعيد لنا في كلّ مرة كائنًا ذا خاصّتين: الأولى &lt;code&gt;value&lt;/code&gt; وهي أيّ شيء نُعيده بكلمة &lt;code&gt;yield&lt;/code&gt;، والثّانية &lt;code&gt;done&lt;/code&gt; وهي قيمة منطقيّة (Boolean) تشير إلى حالة انتهاء تنفيذ الدّالة.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;تقبل الوظيفة &lt;code&gt;.next()&lt;/code&gt; للمُكرّرات مُعاملاً اختياريًّا تستقبله وتُرسله لدالّة المولّد بعد متابعة التنفيذ، ويمكن استخدامها لإرسال رسائل لدالّة المولّد بحيث نؤثّر في تنفيذه:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function* numberGenerator() {
+  for (let i = 0; true; i++) {
+     var reset = yield i;
+     if (reset) i = -1;
+  }
+}
+
+let numGen = numberGenerator();
+numGen.next(); // { value: 0, done: false }
+numGen.next(); // { value: 1, done: false }
+numGen.next(); // { value: 2, done: false }
+numGen.next(); // { value: 3, done: false }
+
+numGen.next(true); // { value: 0, done: false }
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في هذا المثال مرّرنا القيمة &lt;code&gt;true&lt;/code&gt; إلى الوظيفة &lt;code&gt;.next()&lt;/code&gt; على المُكرّر، والذي بدوره يُرسلها لدالّة المولّد كنتيجة &lt;code&gt;yeild i&lt;/code&gt; في الدّورة الموافقة للحلقة، لنقومَ بحفظها في متغيّر &lt;code&gt;reset&lt;/code&gt; ونُجريَ فحصًا عند متابعة التنفيذ لإعادة تعيين قيمة &lt;code&gt;i&lt;/code&gt;، التي ستزداد بمقدار واحد مع بدء الدورة التالية لحلقة &lt;code&gt;for&lt;/code&gt; جاعلةً قيمة &lt;code&gt;i&lt;/code&gt; مساوية للصّفر.&lt;/p&gt;
+
+&lt;p&gt;خصائص المولّدات تجعلها مناسبة جدًا لكتابة شيفرة غير متزامنة بصورة أسهل تكاد تبدو فيها وكأنها شيفرة متزامنة خالية من الاستدعاءات الراجعة المتداخلة (Nested callbacks)؛ هذه الفكرة تحتاج إلى تركيز لأنها أساس لعدد من المكتبات مثل &lt;a href=&#34;https://github.com/tj/co&#34;&gt;co&lt;/a&gt; و&lt;a href=&#34;https://github.com/jmar777/suspend&#34;&gt;suspend&lt;/a&gt; التي ظهرت مؤخّرًا وتصاعدت شعبيّتها بسرعة لأنّها تحلّ مشكلة جوهرية في استخدام JavaScript، ألا وهي التعامل مع الدوال غير المتزامنة (asynchronous functions) وذلك بالاعتماد كُليًّا على المُولّدات.&lt;/p&gt;
+
+&lt;p&gt;لنفترض أنّ لدينا موقعًا لقراءة الكتب يعرض ملفّ المستخدم الشّخصيّ مع عدد الكتب التي قرأها وعنوان آخر كتاب مع تقييم المستخدم له:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var list = document.querySelector(&amp;quot;#book-list&amp;quot;);
+
+getJSON(&amp;quot;http://reading-website.com/users/fwz.json&amp;quot;, function(err, user) {
+    if (err) return; // افعل شيئًا بما بخصوص الخطأ
+
+    var num_books = user.books.length;
+    var most_recent_book_id = user.books[num_books - 1];
+
+    getJSON(&amp;quot;http://reading-website.com/users/fwz/ratings/&amp;quot; + most_recent_book_id + &amp;quot;.json&amp;quot;, function(err, user_rating) {
+        getJSON(&amp;quot;http://reading-website.com/books/&amp;quot; + most_recent_book_id + &amp;quot;.json&amp;quot;, function(err, book) {
+            var fragment = document.createDocumentFragment();
+
+            var h2 = document.createElement(&amp;quot;h2&amp;quot;);
+            h2.textContent = user.full_name;
+
+            var h3 = document.createElement(&amp;quot;h3&amp;quot;);
+            h3.textContent = &amp;quot;الكتب التي قرأها&amp;quot;;
+
+            for (let book of books) {
+                let li = document.createElement(&amp;quot;li&amp;quot;);
+                li.textContent = book.title + (book.id == most_recent_book_id ? &amp;quot; &amp;quot; + user_rating : &amp;quot;&amp;quot;);
+                fragment.appendChild(li);
+            }
+
+            list.appendChild(fragment);
+        });
+    });
+
+})
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في المثال السابق احتجنا إلى إرسال 3 طلبات AJAX يعتمد أحدها على الآخر، ولأنّنا لا نستطيع إرسال طلب بتقييم المستخدم للكتاب قبل معرفة مُعرّف الكتاب، فلا بدّ من أن يرسل الطلب الخاصّ بتقييم الكتاب ضمن الاستدعاء الرّاجع لطلب معلومات المستخدم، ثمّ يمكن جلب عنوان الكتاب ضمن الاستدعاء الرّاجع للطلب السّابق، وهذا يعني زيادة تعقيد الشفرة مع تداخل الاستدعاءات الرّاجعة لتبدو أشبه بسباغيتي لا تُعرف بدايته من نهايته.&lt;/p&gt;
+
+&lt;p&gt;تخيّلوا -لغرض التّخيّل- لو أمكننا كتابة هذه الشفرة (وهي غير متزامنة) لتبدو لقارئها وكأنها نص برمجي يسير بترتيب متزامن وبديهيّ&amp;hellip; ألن يكون هذا أعظم شيء منذ اختراع JavaScript؟&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var list = document.querySelector(&amp;quot;#book-list&amp;quot;);
+
+try {
+   var user = getJSON(&amp;quot;http://reading-website.com/users/fwz.json&amp;quot;);
+
+   var num_books = user.books.length;
+   var most_recent_book_id = user.books[num_books - 1];
+
+   var user_rating = getJSON(&amp;quot;http://reading-website.com/users/fwz/ratings/&amp;quot; + most_recent_book_id + &amp;quot;.json&amp;quot;);
+   var book = getJSON(&amp;quot;http://reading-website.com/books/&amp;quot; + most_recent_book_id + &amp;quot;.json&amp;quot;);
+
+   var fragment = document.createDocumentFragment();
+
+   var h2 = document.createElement(&amp;quot;h2&amp;quot;);
+   h2.innerText = user.full_name;
+
+   var h3 = document.createElement(&amp;quot;h3&amp;quot;);
+   h3.innerText = &amp;quot;الكتب التي قرأها&amp;quot;;
+
+   for (let book of books) {
+       let li = document.createElement(&amp;quot;li&amp;quot;);
+       li.innerText = book.title + (book.id == most_recent_book_id ? &amp;quot; &amp;quot; + user_rating : &amp;quot;&amp;quot;);
+       fragment.appendChild(li);
+   }
+
+   list.appendChild(fragment);
+
+} catch (e) {
+   // افعل شيئًا بما بخصوص الخطأ
+   // Error
+}
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;نحن نعلم أن الأمور لا يمكن أن تكون بهذه الروعة، وأنّ الشفرة أعلاه لن تعمل&amp;hellip; نحن نعلم أن شيفرتنا تحتاج تفاصيل المستخدم للحصول على الكتب، وأننا نحتاج للكتاب لجلب عنوانه وتقييمه، وتنفيذ هذه المهمّات بشكل غير متزامن لا يعني أنّه ليس علينا &lt;strong&gt;انتظار&lt;/strong&gt; المهمّة الأولى قبل إطلاق الثانية - بل يعني فقط أن المتصفح يمكنه تنفيذ رسم العناصر الأخرى وعرض الصفحات وإرسال طلبات أخرى في هذا الوقت.&lt;/p&gt;
+
+&lt;p&gt;حسنًا، لدي خبر جيّد وآخر سيئ: أمّا الجيّد فهو أنّنا كتابة شيفرة شبيه بهذه أصبحت قريبة المنال مع الدّوالّ غير المتزامنة (Async Functions)، وأمّا الخبر السيّئ فهو أنّ علينا الانتظار إلى الإصدار 7 من ECMAScript لنستطيع كتابتها! (مع العلم أن المتصفّحات لم تنتهِ من تطبيق ES6!).&lt;/p&gt;
+
+&lt;p&gt;لكن هذا لا يعني أن نقف مكتوفي الأيدي إلى أن تصدر ES7، بل بإمكاننا إيجاد حلّ وسط لهذه المشكلة؛ لماذا نضطّر إلى تعقيد الأمور بالاستدعاءات الرّاجعة المتداخلة؟ ألا يتوفّر في اللّغة بنية برمجيّة تسمح بإيقاف شيفرتنا ريثما يتمّ أمر ما غير متزامن (&lt;strong&gt;الانتظار&lt;/strong&gt; لإكمال طلب AJAX) ثمّ &lt;strong&gt;المتابعة&lt;/strong&gt; بعد انتهاءه؟ يبدو هذا الحديث مألوفًا!&lt;/p&gt;
+
+&lt;p&gt;نعلم حتى الآن أننا بحاجة لاستخدام مولّد، ولذلك سنحيط شيفرتنا بدالّة مولّد كخطوة أولى:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var list = document.querySelector(&amp;quot;#book-list&amp;quot;);
+
+function* displayUserProfile() {
+    // شيفرتنا هنا
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;الآن نحتاج لتنفيذ طلب AJAX الأوّل والانتظار إلى انتهاءه قبل الانتقال إلى الطّلب الثّاني، نعلم أنّ &lt;code&gt;yield&lt;/code&gt; توقف تنفيذ المولّد:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var list = document.querySelector(&amp;quot;#book-list&amp;quot;);
+
+function* displayUserProfile() {
+    yield getJSON(&amp;quot;http://reading-website.com/users/fwz.json&amp;quot;);
+    // ...
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;عظيم! لكن كيف نُخبر المولّد بأنّ عليه متابعة التنفيذ؟&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var list = document.querySelector(&amp;quot;#book-list&amp;quot;);
+
+function* displayUserProfile() {
+    yield getJSON(&amp;quot;http://reading-website.com/users/fwz.json&amp;quot;, resume);
+    // ...
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;سنمرر دالة اسمها &lt;code&gt;resume&lt;/code&gt; للدّالة &lt;code&gt;getJSON&lt;/code&gt;، وهذه الدالة ستُستدعى عند انتهاء جلب جواب الطّلب الذي أرسلناه، وهي فرصتنا لإخبار المولّد بمتابعة التنفيذ&amp;hellip; فكيف سيكون محتواها؟&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var list = document.querySelector(&amp;quot;#book-list&amp;quot;);
+
+var resume = function(err, response) {
+     displayIterator.next(response);
+}
+
+function* displayUserProfile() {
+    var user = yield getJSON(&amp;quot;http://reading-website.com/users/fwz.json&amp;quot;, resume);
+    var num_books = user.books.length;
+    var most_recent_book_id = user.books[num_books - 1];
+
+    var user_rating = yield getJSON(&amp;quot;http://reading-website.com/users/fwz/ratings/&amp;quot; + most_recent_book_id + &amp;quot;.json&amp;quot;, resume);
+    var book = yield getJSON(&amp;quot;http://reading-website.com/books/&amp;quot; + most_recent_book_id + &amp;quot;.json&amp;quot;, resume);
+
+    var fragment = document.createDocumentFragment();
+
+    var h2 = document.createElement(&amp;quot;h2&amp;quot;);
+    h2.innerText = user.full_name;
+
+    var h3 = document.createElement(&amp;quot;h3&amp;quot;);
+    h3.innerText = &amp;quot;الكتب التي قرأها&amp;quot;;
+
+    for (let book of books) {
+        let li = document.createElement(&amp;quot;li&amp;quot;);
+        li.innerText = book.title + (book.id == most_recent_book_id ? &amp;quot; &amp;quot; + user_rating : &amp;quot;&amp;quot;);
+        fragment.appendChild(li);
+    }
+
+    list.appendChild(fragment);
+}
+
+var displayIterator = displayUserProfile();
+displayIterator.next();
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;حفظنا نسخة عن المكرّر في متغيّر ثم استدعينا وظيفته &lt;code&gt;next()&lt;/code&gt; في دالّة المتابعة، ممرّرين لها جواب الطّلب ليمكننا تخزينه ضمن المتغيّر &lt;code&gt;user&lt;/code&gt;. الدّالة resume تستطيع الوصول إلى &lt;code&gt;displayIterator&lt;/code&gt; لأنّه يكون معرّفًا قبل استدعاءها حتمًا، ولا ننسَ أن تعريف المتغيّرات في JavaScript يخضع لعملية &lt;a href=&#34;http://www.w3schools.com/js/js_hoisting.asp&#34;&gt;الرّفع إلى أعلى النّطاق (variable hoisting)&lt;/a&gt; ممّا يجعل المتغيّر &lt;code&gt;displayIterator&lt;/code&gt; موجودًا (وإن كان بلا قيمة) منذ بداية تنفيذ الشيفرة.&lt;/p&gt;
+
+&lt;p&gt;للتأكّد من فهم هذه الشيفرة، سنعيد تحليلها خطوة بخطوة: في طلب AJAX الأوّل تستدعى الدالة &lt;code&gt;resume&lt;/code&gt; ويمرّر إليها جواب الطّلب (&lt;code&gt;response&lt;/code&gt;)، الذي يمرّر بدوره إلى المُكرّر ليُحفظ في المتغيّر &lt;code&gt;user&lt;/code&gt; الذي سيُستخدم في الخطوة التّالية للمولّد لإرسال الطّلب الثّاني. تُكرّر العمليّة ذاتها للطلبين الآخرين ثمّ تُعرض النتائج في الصّفحة. الفائدة التي جنيناها من استخدام المولّدات هي التخلّص من تعقيد الاستدعاءات الرّاجعة نهائيًّا وتحويل شيفرة غير متزامنة وجعلها تبدو وكأنّها متزامنة. ذكرنا القليل عن مكتبات مثل co وsuspend، لكنّها باختصار تعمل بطريقة مماثلة جدًا لمثالنا الأخير:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var suspend = require(&#39;suspend&#39;),
+    resume = suspend.resume;
+
+suspend(function*() {
+    var data = yield fs.readFile(__filename, &#39;utf8&#39;, resume());
+    console.log(data);
+})();
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هذه المكتبات خطوة نحو مستقبل JavaScript، الذي بدأ يتشكل مع مشروع الدّوال غير المتزامنة باستخدام الكلمتين المفتاحيتين الجديدتين &lt;code&gt;async&lt;/code&gt; و&lt;code&gt;await&lt;/code&gt; اللّتان ستتوفّران في الإصدار السّابع وتستندان في عملهما إلى أرضيّة الوعود (Promises) الّتي تتوفّر اليوم في ES6. سيكون بإمكاننا كتابة هذه الشيفرة بدل الاعتماد على المولّدات:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;async function displayUserProfile() {
+   var user = await getJSON(&amp;quot;http://reading-website.com/users/fwz.json&amp;quot;);
+
+   var num_books = user.books.length;
+   var most_recent_book_id = user.books[num_books - 1];
+
+   var user_rating = await getJSON(&amp;quot;http://reading-website.com/users/fwz/ratings/&amp;quot; + most_recent_book_id + &amp;quot;.json&amp;quot;);
+   var book = await getJSON(&amp;quot;http://reading-website.com/books/&amp;quot; + most_recent_book_id + &amp;quot;.json&amp;quot;);
+
+   var fragment = document.createDocumentFragment();
+
+   var h2 = document.createElement(&amp;quot;h2&amp;quot;);
+   h2.innerText = user.full_name;
+
+   var h3 = document.createElement(&amp;quot;h2&amp;quot;);
+   h2.innerText = &amp;quot;الكتب التي قرأها&amp;quot;;
+
+   for (let book of books) {
+       let li = document.createElement(&amp;quot;li&amp;quot;);
+       li.innerText = book.title + (book.id == most_recent_book_id ? &amp;quot; &amp;quot; + user_rating : &amp;quot;&amp;quot;);
+       fragment.appendChild(li);
+   }
+
+   list.appendChild(fragment);
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في هذا المثال يجب على &lt;code&gt;getJSON&lt;/code&gt; أن تُعيد وعدًا &lt;code&gt;Promise&lt;/code&gt; ليستطيع مُفسّر اللّغة انتظاره إلى أن يُحقّق (resolve) أو يُرفض (reject)، والقيمة الّتي تُحقّق تُحفظ ضمن المُتغيّر &lt;code&gt;user&lt;/code&gt;، وأما عند رفض الوعد يُرمى خطأ (&lt;code&gt;throw&lt;/code&gt;) يمكن تلقّيه (&lt;code&gt;catch&lt;/code&gt;) كما في الشيفرة غير المتزامنة.&lt;/p&gt;
+
+&lt;h2 id=&#34;م-عام-ل-البقي-ة-rest-parameter-والناشرة-spread:6c363bc6c0986dc28a21b59903df18c1&#34;&gt;مُعامِل البقيّة (Rest parameter) والناشرة (Spread)&lt;/h2&gt;
+
+&lt;p&gt;بعد كلّ هذا الكلام المُعقّد عن الأشياء غير المتزامنة التي نريد جعلها تبدو متزامنة وما إلى ذلك، سنختم الجزء الثّاني بفكرتين بسيطتين أُضيفتا إلى ECMAScript في الإصدار السّادس وتحلّان مشكلتين شائعتين في كثير من اللّغات البرمجيّة:&lt;/p&gt;
+
+&lt;p&gt;أمّا الأولى فهي الحاجة إلى تنفيذ نصّ برمجيّ ضمن دالة على عدد غير معروف من المُعاملات، فلنفترض أنّ لدينا دالة تجمع عددين:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function add(n1, n2) {
+    return n1 + n2;
+}
+
+add(1)
+// 1
+add(1, 2)
+// 3
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ونظرًا لكوننا مبرمجين أذكياء فقد قرّرنا جعل الدّالة تقبل أي عددين أو ثلاثة أو أكثر&amp;hellip; لنجعلها تقبل عددًا لا نهائيًّا من الأعداد؛ في الإصدار الحالي سنلجأ إلى استخدام الكائن الخاصّ &lt;code&gt;arguments&lt;/code&gt; المتوفّر ضمن نطاق كلّ دالّة تلقائيًا:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function add() {
+   return [].reduce.call(arguments, function(memo, n) { return memo + n; });
+}
+
+add(1)
+// 1
+add(1, 2)
+// 3
+add(1, 2, 3)
+// 6
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;حسنًا لقد اضطررنا إلى &amp;ldquo;استعارة&amp;rdquo; دالة الاختزال من مصفوفة فارغة لتطبيقها على الكائن الخاص &lt;code&gt;arguments&lt;/code&gt; الذي يُعتبر &amp;ldquo;شبيه مصفوفة&amp;rdquo; ولا يملك ما تمتلكه المصفوفة من دوالّ، لماذا لا يمكننا كتابة هذا فحسب:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function add(...numbers) {
+    return numbers.reduce(function(memo, n) { return memo + n; });
+}
+
+add(1)
+// 1
+add(1, 2)
+// 3
+add(1, 2, 3)
+// 6
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;وأمّا الفكرة الثّانية فهي تكاد تكون عكس السّابقة، فإذا كانت الأولى تجمع بقيّة المعاملات في كائن مُفرَد، فإنّ هذه &amp;ldquo;تَنشر&amp;rdquo; محتويات المصفوفة إلى عناصرها المكوّنة لها، ماذا لو لم نكن أذكياء وعجزنا عن الإتيان بدالة تجمع عددًا غير منتهٍ من الأرقام:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function addThreeNumbers(n1, n2, n3) {
+     return n1 + n2 + n3;
+}
+
+var myNumbers = [1, 2, 3];
+addThreeNumbers(...myNumbers);
+
+// 6
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;لاحظ أن صياغة النشر (Spread) تطابق تمامًا صياغة البقيّة (Rest)، والاختلاف في السّياق فقط. لاحظ أيضًا أنّ معامل البقيّة، وكما يوحي اسمه، يمكن استخدامه لتجميع &lt;em&gt;ما تبقى&lt;/em&gt; من مُعاملات الدّالة فقط:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function addThreeOrMoreNumbers(n1, n2, ...numbers) {
+    return n1 + n2 + numbers.reduce(function(memo, n) { return memo + n; });
+}
+
+addThreeOrMoreNumbers(1, 2, 3);
+// 6
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في الجزء القادم سنتعرف بمشيئة الله على الوحدات (Modules) التي تُعتبر طريقة جديدة لتنظيم الشفرة اُستلهمَت من عالم Node.js وrequire.js، وسُنلقي نظرة على الأصناف (Classes)، المكوّن البرمجيّ الذي وجد طريقه أخيرًا إلى JavaScriptّ!&lt;/p&gt;
+
+&lt;h3 id=&#34;المصادر:6c363bc6c0986dc28a21b59903df18c1&#34;&gt;المصادر&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.mozilla.org&#34;&gt;شبكة مطوّري موزيلّا&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://davidwalsh.name/async-generators&#34;&gt;Going Async With ES6 Generators&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://modernweb.com/2014/02/10/replacing-callbacks-with-es6-generators&#34;&gt;Replacing callbacks with ES6 Generators &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://jakearchibald.com/2014/iterators-gonna-iterate/&#34;&gt;Iterators gonna iterate&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JavaScript تستطيع أن تُنظّف أطباقك!</title>
+      <link>http://forabi.net/post/2014-08-10-javascript-all-the-things/</link>
+      <pubDate>Sun, 10 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://forabi.net/post/2014-08-10-javascript-all-the-things/</guid>
+      <description>
+
+&lt;p&gt;كما هو الحال كل بضع عقود، تطفو إلى السطح لغة برمجة ما ويعدنا متعصبوها بأنها ستفعل لنا كل شيء، بدءًا من تطبيقات الحاسوب مرورًا بالهواتف الذكية وليس انتهاءً بالتعامل مع الجمادات من حولنا بطرق رائعة &lt;a href=&#34;https://www.youtube.com/watch?v=7b_epE3XG34&#34;&gt;كالتحكم بطائرة بلا طيّار باستخدام قبضة Xbox 360&lt;/a&gt;! لم يكن هذا الحماس يومًا أشدّ منه مع JavaScript، والأمر يعود لعدّة أسباب:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;كونها تعمل في المتصفح جعلها &lt;strong&gt;عابرة للمنصات&lt;/strong&gt;، فكل حاسوب وكلّ هاتف ذكي (أو حتى متوسّط الذكاء!) اليوم يأتي مزوّدًا بمتصفّح قادر على تشغيل JavaScript،&lt;/li&gt;
+&lt;li&gt;وبما أنّها لغة الويب الوحيدة التي يمكن استعمالها لبرمجة المواقع من جهة المتصفّح، فلك أن تتخيّل &lt;strong&gt;عدد مطوّري الويب الذي يتقنونها&lt;/strong&gt; حول العالم!&lt;/li&gt;
+&lt;li&gt;كذلك كون JavaScript بطبيعتها لغة &lt;strong&gt;فائقة المرونة&lt;/strong&gt; لدرجة أن كل شيء فيها هو في الحقيقة كائن &lt;code&gt;Object&lt;/code&gt; حتى الدّوال (functions)! ولا يوجد شيء اسمه أصناف (classes) بالمعنى التّقليديّ، وإنما توجد وراثة أنموذجية (Prototypal inheritance) فكل كائن يستطيع أن يرث كل كائن آخر، ولا أنواع محدّدة للكائنات، فما تفرضه في البداية كسلسلة نصيّة يمكنك أن تغيّره فيما بعد ليصبح رقمًا، وبإمكانك توسعة الأنماط البدئية. هذه المرونة التي يألفها من يبتدئ البرمجة بـJavaScript تجعله يُصاب بصدمة عندما ينتقل إلى لغة أخرى تفرض عليه قيودًا في التصريح عن الأنواع ووراثة الأصناف&amp;hellip;&lt;/li&gt;
+&lt;li&gt;الأمر الثالث الذي يجعل JavaScript متفوّقة هو التحسّن الممتاز في أدائها الذي لا يبدو أن سيتوقّف عند حدّ ما قريبًا، منذ بضع سنوات عندما ظهر Google Chrome مع محرّك JavaScript الجديد V8 والذي اعتمد على &lt;a href=&#34;https://en.wikipedia.org/wiki/Just-in-time_compilation&#34;&gt;JIT compilation&lt;/a&gt; بدأت ثورة في عالم التطوير للويب جعلت JavaScript موضع اهتمام وأخذ المطوّرون ينظرون في إمكانيّة استعمالها في تطوير &amp;ldquo;تطبيقات ويب&amp;rdquo; بدل &amp;ldquo;مواقع ويب&amp;rdquo;، ثم توسّع الأمر مع ظهور &lt;a href=&#34;http://nodejs.org&#34;&gt;Node.js&lt;/a&gt; التي قامت على محرّك V8 ذاته لتصبح JavaScript مواطنًا من الدّرجة الأولى على الخوادم مثلها مثل Ruby on Rails وPHP. الأمور ليست ورديّة تمامًا لكنك تستطيع استيعاب سرعة التطوّر الذي تشهده JavaScript وخاصّة أنّه أصبح لدينا أنظمة تشغيل ليست سوى متصفّح ويب في حقيقتها (Chrome OS وFirefox OS). بإمكانك استضافة تطبيقات Node.js مجّانًا على منصّة &lt;a href=&#34;https://www.heroku.com&#34;&gt;Heroku&lt;/a&gt; أو &lt;a href=&#34;https://openshift.redhat.com/&#34;&gt;OpenShift&lt;/a&gt; من RedHat مثلها مثل تطبيقات Java وPython وRuby.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;باختصار، تحوّلت JavaScript إلى لغة عامّة الأغراض (general-purpose) بعد أن كانت تستخدم بشكل بسيط لإضفاء القليل من التأثيرات السخيفة (Blink! Blink!) على صفحات الويب.&lt;/p&gt;
+
+&lt;p&gt;الآن أريد أن أوضّح شيئًا، في الحقيقة أنا لست مُبرمجًا مُختصًّا، وJavaScript هي اللغة الوحيدة التي أزعم أنّني متوسّط إلى خبير بها، ومنذ عام أو أكثر لم أكتب تقريبًا أي شيء بلغة أخرى (بالطّبع &lt;a href=&#34;http://coffeescript.org/&#34;&gt;CoffeeScript&lt;/a&gt; لا تُعتبر لغة مستقلّة، هي فقط لغة تُحوّل إلى JavaScript ومهمّتها تبسيط الكتابة)، مع أنّني بدأت تعلّم البرمجة مع PHP، إلا أنّني كرهت كل إشارات الدولار تلك (&lt;code&gt;$variable&lt;/code&gt;) وعدم انسجام الواجهات البرمجيّة فيها. لا شيء يمنعك من استخدام PHP، وفي الحقيقة إطار العمل &lt;a href=&#34;http://laravel.com/&#34;&gt;Laravel&lt;/a&gt; ممتاز ومنسّق بشكل جيّد، لكنّ ما يعيبها هو أنها تحاول أن تفعل كلّ شيء من الوصول لنظام الملفّات إلى دوال للتعامل مع مُعاملات طلبات HTTP إلخ&amp;hellip; وهذا بالضّبط ما تحاول بيئات البرمجة الجديدة أن تتجنّبه، ففي Node.js، وعلى الرّغم من أنّ باستطاعتك أن تصل إلى نظام الملفّات وأن تُنشئ خادمًا يستمع إلى الطلبات على أحد المنافذ؛ إلّا أنّ كلّ شيء مُنظّم في وحدات (modules) مستقلّة وعليك أن تُصرح علانيًّة برغبتك باستعمال وحدة نظام الملفّات مثلاً، وكذلك الأمر بالنسبة للوحدات التي يكتبها مبرمجون آخرون. نظام الوحدات هذا والتصريح عنها ضمن ملفّ وعدم تلويث نطاق الأسماء العامّ (Global scope) هي بعضٌ من الأشياء التي نفّذها مُطوّروا Node.js على وجه صحيح، وأزعم أنه واحد من الأشياء التي جعلت JavaScript تُؤخذ على محمل الجدّ. هناك الكثير من المحاولات لتقليد هذا النظام بعد أن أثبت تفوّقه، انظر مثلاً إلى &lt;a href=&#34;http://www.webtuts.me/php-composer/&#34;&gt;Composer&lt;/a&gt; بالنسبة لـPHP، و&lt;a href=&#34;http://pip-installer.org/&#34;&gt;Pip&lt;/a&gt; مع &lt;a href=&#34;https://pypi.python.org/pypi/virtualenv&#34;&gt;virtualenv&lt;/a&gt; في Python؛ لكنّ محاولة إدخال هذه الأنظمة على لغات ناضجة لا تبدو موفّقة كثيرًا، وأما في لغة Go فتعتبر &lt;a href=&#34;http://golang.org/pkg/&#34;&gt;الحُزم&lt;/a&gt; شيئًا من أساس اللغة. أيًّا يكن، لقد وصلنا إلى مرحلة يمكن بها إنجاز أيّة تطبيق بأيّة لغة، ويبقى الفارق هو التنظيم والسرعة والأمان وأنماط التّصميم المُتّبعة، وأهمّ من ذلك كلّه المجتمع الّذي يوفّر الدّعم والمساعدة للمبتدئين (في النّقطة الأخيرة لا شكّ أن JavaScript متفوّقة على كلّ اللّغات).&lt;/p&gt;
+
+&lt;p&gt;لكن دعونا لا نُهين قدرتنا العقلية ونتجاهل وجود لغات برمجة أخرى فقط لأنّنا ألِفنا لغة برمجة واحدة، مهما كانت محبوبة! هناك أشياء في JavaScript لا يمكن التّغاضي عنها ولا يُمكن في أحسن الأحوال أن نعتبرها مزايا:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;فهي أوّلاً &lt;strong&gt;بطيئة&lt;/strong&gt; رغم تحسّن أدائها بأضعاف ما كانت عليه منذ سنوات، وما تزال أبطأ بكثير من لغات أخرى. هناك من يجادل (وأنا أؤيّد هذا الرأي) أن السّرعة ليست كلّ شيء، فيكفي لتطبيقات الويب أن تكون سريعة بما يكفي، وليس عليها أن تكون خارقة السرعة، الفارق بين كتابة تطبيق بسيط يؤدي مهمّة محدّدة بـJavaScript وتوزيعه ليعمل على كلّ منصّات الهواتف الذكية أمر يستحق التضحية بالقليل (والقليل فقط، أي إلى حدّ معقول) من السّرعة في مقابل كتابة تطبيق منفصل بـJava (لن تتخيّل عدد السّطور المُرعب الذي تحتاجه!) وآخر بـObjective C (أو Swift) وآخر بلغة ما لـWindows Phone (إن كان هناك من يُطوّر لهذا النظام! ونعم أنا جاهل به لدرجة أنّني لا أعرف شيئًا عن اللّغة التي تُستخدم لتطوير تطبيقاته!). لكن بعد تجاوز هذا الحد المعقول من التضحية، يجدر بك أن تُعيد النظر في صلاحية هذه اللّغة إذا ما أردت تطبيقًا ينفّذ مهمّة تتطلّب سرعة فائقة، دعك من أنّ هناك تطبيقات تحتاج إلى التعامل مع النظام بطريقة لا توفّرها بيئة تطبيقات الويب على هذه الأجهزة.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;وثانيًا JavaScript هي &lt;strong&gt;عالم من الفوضى&lt;/strong&gt; إن تغاضينا عن التنظيم الممتاز في Node.js ونظرنا إلى بيئة المتصفّحات&amp;hellip; كم مرّة عانى مطوّرو الويب من عدم التوافق&amp;hellip; المتصفّح الفلاني يوفّر الميزة الفلانية&amp;hellip; رائع! هذا بالضبط ما أحتاجه! لكن للأسف المتصفح الآخر لا يوفّرها، وستحتاج إلى مكتبة بديلة (&lt;a href=&#34;https://en.wikipedia.org/wiki/Polyfill&#34;&gt;polyfill&lt;/a&gt;) لسدّ هذا الفراغ، حسنًا سأضيف هذا الـpolyfill وسيمكنني التطوير لكل المتصفّحات&amp;hellip; نعم، باستثناء أنّ هذا الـpolyfill يسدّ الفراغ بنسخة قديمة من معيار هذه الميزة التي تحتاجها - فكما تعرف أعضاء منظّمة &lt;a href=&#34;http://www.w3.org/&#34;&gt;W3C&lt;/a&gt; لا يتوقّفون عن تغيير الواجهات البرمجيّة للأشياء التجريبية في المتصفّحات&amp;hellip; ألم نُحذّرك من استخدام هذه الميزة غير المُستقرّة؟ كان يجدر بك أن تبحث عن حلّ بديل!&amp;hellip; وهذا هو بالضّبط السّبب الذي يجعلني أكره التطوير للواجهات (front-end development) ولهذا قرّرت الاعتزال في عالم Node.js والتطوير للنهاية الخلفيّة (backend)! لا شيء من أحلامك الورديّة يتحقّق بسهولة في عالم المتصفّحات! أعرف أن الأمور في تحسّن دائم، وهناك الكثير من الأشياء الرائعة القادمة&amp;hellip; مثل &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache&#34;&gt;&lt;code&gt;applicationCache&lt;/code&gt;&lt;/a&gt; و&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API&#34;&gt;&lt;code&gt;indexedDb&lt;/code&gt;&lt;/a&gt; و&lt;a href=&#34;http://www.html5rocks.com/en/tutorials/es7/observe/&#34;&gt;&lt;code&gt;Object.observe&lt;/code&gt;&lt;/a&gt; و&lt;a href=&#34;http://toddmotto.com/web-components-concepts-shadow-dom-imports-templates-custom-elements/&#34;&gt;Web Components وHTML Imports&lt;/a&gt;&amp;hellip; لكنّ المشكلة أنها جميعها ليست مستقرّة أو غير مُتبنّاة في كلّ المتصفّحات بعد؛ ويبدو أن هذه الفوضى لن تنتهي يومًا، ولا حلّ لها سوى المزيد من فوضى المكتبات البديلة، هل قلت يومًا إنّ الويب هو مستقبل التطوير الموحّد لكلّ المنصّات؟ لقد كنت ساذجًا!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;هناك الكثير من عيوب التصميم في JavaScript، بعضها يعود لكونها لغة صُمّمت لإنجاز مهام بسيطة وعلى عجَلَ (في الحقيقة &lt;a href=&#34;https://twitter.com/BrendanEich&#34;&gt;Brendan Eich&lt;/a&gt; صمّمها خلال 10 أيام لمتصفّح Netscape)، فمثلاً لا يُمكنك إنشاء خيوط (&lt;a href=&#34;https://en.wikipedia.org/wiki/Thread_%28computing%29&#34;&gt;threads&lt;/a&gt;) لأنّها تعمل ضمن خيط واحد (single-threaded)، هناك الكثير من الحلول الالتفافيّة (workarounds) في Node.js والمتصفّحات تعدنا بحل محدود الفعاليّة (&lt;a href=&#34;https://developer.mozilla.org/en/docs/Web/Guide/Performance/Using_web_workers&#34;&gt;Web Workers&lt;/a&gt;) لكنّها إيّاك أن تُخبر مُبرمج Java بأنّه لا يُمكنك إنشاء threads في JavaScript ثمّ تدعي أنّها لغة قويّة! أيضًا لا تستغرب إن قضيت ساعات تشرح لمطوّري اللّغات الأخرى عن حلقة الأحداث (&lt;a href=&#34;https://vimeo.com/96425312&#34;&gt;event loop&lt;/a&gt;) وكيف تعمل ولماذا عليك إمرار استدعاءات راجعة (callbacks) عندما تُنفّذ طلبات &lt;code&gt;XMLHttpRequest&lt;/code&gt; وما هو جحيم الاستدعاءات (&lt;a href=&#34;http://callbackhell.com/&#34;&gt;callback hell&lt;/a&gt;) ولماذا ظهرت بدائل عنها مثل الوعود (&lt;code&gt;Promise&lt;/code&gt;) التي تحوّل جحيم الاستدعاءات إلى جحيم &lt;code&gt;then&lt;/code&gt;!&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;asynctask1(function(err1, data1) {
+  if (err1) {
+    throw err1;
+    return;
+  }
+  asynctask2(data1, function(err2, data2) {
+    if (err2) {
+      throw err2;
+      return;
+    }
+    asynctask3(data2, function(err3, data3) {
+      // ... WELCOME TO JAVASCRIPT!
+    })
+  })
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;أخيرًا أرجوك لا تنسى بديهيّة أن JavaScript بحدّ ذاتها لغة تُفسّر بمحرّك مكتوب بـC++ أو لغة أخرى أعرق وأقوى أداءً، النّواة Linux مكتوبة بخليط من C وC++ وبرامج تشغيل الأجهزة (drivers) غالبًا تُكتب بـ&lt;a href=&#34;https://en.wikipedia.org/wiki/Assembly_language&#34;&gt;Assembly&lt;/a&gt;. نعم، صدّقني JavaScript ليست اللّغة الوحيدة ضمن المجموعة الشّمسيّة!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ضحكت كثيرًا عندما شاهدت هذه الصورة منذ بضعة أسابيع، التي تُعبّر بالضّبط عن موضوع هذه التدوينة:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://forabi.net/images/javascript-all-the-things.jpg&#34; alt=&#34;JavaScript كل الأشياء!&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;تسخر هذه الصّورة بشدّة من تعصّب بعض مبرمجي JavaScript الذي يدعوهم إلى الظنّ بأنّ على كل تطبيق جديد في الكرة الأرضية أن يستخدم JavaScript من اليوم فصاعدًا، وأنّ لغات أخرى ستصبح طيّ النسيان ولا يستخدمها إلّا المبرمجون القدامى الذين عفى عليهم الدهر؛ الأمر ليس مقتصرًا على متعصّبي JavaScript وحدهم، فلكلّ لغة برمجة أنصارها ومتعصّبوها، لكن JavaScript بالذّات هي أكثر اللغات التي تترافق بهذه الظاهرة، للأسباب التي ذكرتها سابقًا.&lt;/p&gt;
+
+&lt;h2 id=&#34;ما-خ-لاصة-هذا-الحديث:78f14572e229c0ed094f4196139618a5&#34;&gt;ما خُلاصة هذا الحديث؟&lt;/h2&gt;
+
+&lt;p&gt;ما أريد قوله من هذه التدوينة السّريعة أن أنصح المتعصّبين للغة برمجية أيًّا كانت أن يتوقّفوا عن إهانة قدرتهم العقليّة على التّعلّم وتقبّل الكتابة بلغة أخرى يرون أنّها للفاشلين فقط أو للقادمين من العصر الحجري&amp;hellip; لم أتعلّم هذا إلا بالطّريقة الصّعبة، وأعتقد أنّ السّبب الّذي جعلني أتقبّل هذه الحقيقة هو كوني غير مختصّ، تعلّمي للبرمجة غير مرهون بعملٍ أو بربح مادّيٍّ، أنا فقط أُبرمج على سبيل التّسلية، وكلّ مشاريعي التي كتبتها (&lt;a href=&#34;https://github.com/forabi/forabi.github.io&#34;&gt;هذه المدوّنة&lt;/a&gt; بنيتها من الصّفر، وتطبيق &lt;a href=&#34;https://github.com/forabi/aQuran&#34;&gt;aQuran&lt;/a&gt;، و&lt;a href=&#34;https://github.com/forabi/refeed&#34;&gt;تطبيق جديد أكتبه لتوليد خلاصات RSS&lt;/a&gt;&amp;hellip;) كلّها كانت مجرّد تجربة ومحاولة لاستكشاف أنماط التصميم (design patterns) ومفاهيم برمجيّة أخرى. نعم تعلّمت الكثير عن البرمجة عمومًا من خلال JavaScript، لكنّها لن تكون اللّغة الوحيدة التي أكتب بها لبقيّة حياتي بالطّبع! يبدو أن هدفي التالي سيكون لغة &lt;a href=&#34;https://en.wikipedia.org/wiki/Go_%28language%29&#34;&gt;Go&lt;/a&gt; الحديثة العهد.
+البرمجة أوسع من صياغة اللّغة (syntax) لذا فلا يعتبر انتقالي لتعلّم لغة أخرى خسارة، والكثير من المفاهيم البرمجية &lt;a href=&#34;http://www.rwaq.org/courses/test-driven-development&#34;&gt;كالبرمجة المُقادة بالاختبارات&lt;/a&gt; (test-driven development) والتّعامل مع الاستثناءات (exception handling) ومكوّنات اللغة كالأصناف (classes) والواجهات (interfaces) والدّوالّ (functions) هي أشياء توجد بعضها أو كلّها في كلّ اللّغات.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>5 أسباب دفعتني لترك فيس بوك</title>
+      <link>http://forabi.net/post/2014-07-20-closing-facebook/</link>
+      <pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://forabi.net/post/2014-07-20-closing-facebook/</guid>
+      <description>
+
+&lt;p&gt;ملاحظة: أنا هنا أتحدث عن &lt;strong&gt;&lt;a href=&#34;https://www.facebook.com/help/224562897555674&#34;&gt;حذف الحساب&lt;/a&gt;&lt;/strong&gt; وليس تعطيله مؤقّتًا (deactivating).&lt;/p&gt;
+
+&lt;p&gt;منذ أن أغلقت حسابي على فيس بوك منذ قرابة شهرين، وأنا أفكر كيف سأشرح الدوافع التي جعلتني أتّخذ هذا القرار، لأنني أريد أن أساعد المتردّدين في اتخاذ قرار كهذا وعليّ أن أكون واضحًا ومفصّلاً. هناك الكثير من الأشياء التي قد تُعجبك في فيس بوك، فهو بالأساس مُلتقى للعائلة (خصوصًا للمغتربين) ومصدر للأخبار ومكان لمناقشة الأمور الدراسية مع زملائك ومراسلة أصدقائك وإنجاز بعض الأعمال الجادّة ويمكنه كذلك أن يُساعدك في &amp;ldquo;قتل الوقت&amp;rdquo;.&lt;/p&gt;
+
+&lt;h2 id=&#34;5-التشتت:bbed500b09fbdee29253b4c3398045b5&#34;&gt;#5 التشتت&lt;/h2&gt;
+
+&lt;p&gt;عندما نظرت إلى هذه الخصائص بتأنٍّ، اكتشفت على الفور أنها السبب الذي يجعلني أترك فيس بوك؛ فهذا الخليط من المنشورات المؤلّف من أخبار عالمية وأخرى محلية ثم شخصية ودراسية المرتبة وفق خوارزمية غامضة -لا يبدو أنها تفهم النفس البشرية بقدر ما تفهمهما خوارزميات الإعلانات في فيس بوك- لا يمكن أن يجتمع إلا في فيس بوك، وهو في النهاية يسبب لك مقدارًا من التشتت الذي لا تدرك عواقبه إلا بعد فوات الأوان. ما العلاقة التي تجمع فيديو دعوي مع أغنية لمطرب ما مع كون أصدقائك يأكلون شيئًا ما في مكان ما؟ هل يستطيع عقلك ربط هذه الأحداث التي تقرأها متتالية في سياق ما؟ هل الرابط فعلاً هو العنصر الاجتماعي؟ هل يمكن أن يحدث هذا في الحياة الواقعية؟ أعتقد أن التعرض المستمر لهذا الضغط الذي يسببه تنوع المحتوى الذي تتابعه سيؤثر سلبًا على خلايا دماغك، فإما أن يُفقدها القدرة على ربط أحداث متناسقة، أو أن يجعلها ترى روابط بين أشياء لا يُفترض أن تكون ذات صلة، والنتيجة ستكون تغيرًا في القدرة على التفكير وبالتالي السلوك الذي يخضع له.&lt;/p&gt;
+
+&lt;h2 id=&#34;4-النفاق-الاجتماعي:bbed500b09fbdee29253b4c3398045b5&#34;&gt;#4 النفاق الاجتماعي&lt;/h2&gt;
+
+&lt;p&gt;فيس بوك ببساطة لم يعد شبكة اجتماعية، بل أصبح واقع الحياة الاجتماعية، فكلّ ما في حياتنا الواقعية ينتهي في نشرة أخبار فيس بوك بل إننا كثيرًا ما نفعل أشياء في حياتنا الواقعية لغرض المشاركة على فيس بوك أو على الأقل يكون ذلك دافعًا من الدوافع. كم مرة التقطت مع أصدقائك صورة جماعية، وكان الهدف من التقاطها هو مجرد الاحتفاظ بها كذكرى، دون أن تفكر في نشرها على فيس بوك؟ كم مرة خطرت على بالك فكرة وقاومت ذلك الدافع الخفيّ الذي يجعلك تنشرها على الفور في فيس بوك وسط جمهور قد لا يبالي على الإطلاق بما قد تفكّر؟&lt;/p&gt;
+
+&lt;p&gt;فيس بوك يدفعك لأن تشارك كل اللحظات السعيدة في حياتك، وينزع من نفسك أي رغبة بالخصوصية، في الوقت نفسه ستلاحظ نفسك تُخفي عن الآخرين لحظاتك الحزينة لأنك تعتقد أنها غير ملائمة للنشر بين هذا الكم من المنشورات السعيدة في نشرة أخبارك، وحتى عندما تنشر شيئًا سلبيًا، فإن الدافع هو فقط مشاركة المزيد، وجلب المزيد من الإعجابات التي تُعوّضك عن شعور الحزن! هو أمر سأناقشه حالًا.&lt;/p&gt;
+
+&lt;p&gt;من السُخرية أن يؤدي استخدامك الطويل لشبكة اجتماعية تزعم أنها تربط الناس ببعضهم إلى أن تصبح شخصًا غير اجتماعي. لكن هذا أمر حقيقيّ وأعتقد أن لديّ نظرية تُفسّر الآلية التي يحدث ذلك من خلالها: عندما لا تنخرط بشكل كافٍ في النشاطات الاجتماعية لأصدقائك على فيس بوك، لأنك لا تراها تستحق أي تعليق أو إعجاب (هل يهمك حقًا ما الذي يستمع إليه صديقك أو ما الذي يأكله؟ هل تجد الأمر مثيرًا &lt;em&gt;للإعجاب&lt;/em&gt; أو يستحق *التعليق*؟) فإن خوارزمية فيس بوك تُنقص من أهمّيّة المنشور بالنسبة لك وتقرّر أن منشورًا كهذا أقل أهمية من غيره في نشرة الأخبار، ولذا سيبدأ فيس بوك بإخفاء المنشورات التي يعتقد أنها مشابهة له في المستقبل، وعندها ولأنك لا تتفاعل مجدّدًا مع هذه المنشورات (باعتبار أنك لا تراها) فإن أهمّيّتها ستستمر بالانحدار، وشيئًا فشيئًا يُصبح كل ما ينشره شخص ما غير مهمّ في نظر هذه الخوارزمية، لأنها تأخذ في الحسبان تواصلك مع صاحب المنشور (بالإضافة إلى تفاعلك من خلال الإعجابات والتعليقات). وهذا يعني أن كثرة المنشورات غير المهمة في فيس بوك (وهي الغالبية العظمى من المنشورات) ستؤثّر أيضًا على احتمال ظهور منشورات قد تراها مهمّة من الشّخص ذاته، وعليه فإنك عندما تشعر بصدق أنك لا ترى منشورًا ما مهمًّا، فإن فيس بوك يُعاقبك على عدم تفاعلك بأن يحرمك من منشورات قد تكون مهمّة لك؛ بالطّبع، ليس هذا مقصودًا، لكنها الحواسيب التي تفشل في تفسير الدوافع النفسية! المطلوب منك في نظر خوارزميات فيس بوك أن تُعلّق وتشارك على كل شيء يصادفك، وإلا فإن نشرة أخبارك ستصبح كصحراء مُقفرة، وستعود مرارًا لتجد أن نشرة أخبارك لا تتغيّر. فيس بوك لا يحترم صدقك في الإعجاب بمنشور أو تجاهله، كل ما يهمه أن تكون نشيطًا دومًا بحيث تضمن لهم مزيدًا من ساعات الاستخدام التي تنعكس على أرباح الموقع! الآن راقب انعكاس ذلك على حياتك الحقيقية، لطالما سألني بعض أصدقائي: لماذا لا تشارك في منشوراتي؟ (ظنًّا منهم أنني لا أرغب بأن أكون صديقًا لهم فعلاً)؛ الجواب دومًا يكون: إما أن يكون المنشور غير مهم، أو عليكم أن تسألوا خوارزمية فيس بوك!&lt;/p&gt;
+
+&lt;h2 id=&#34;3-الإدمان:bbed500b09fbdee29253b4c3398045b5&#34;&gt;#3 الإدمان&lt;/h2&gt;
+
+&lt;p&gt;أعرف أنه لا يمكن للكيمياء تفسير كل الدوافع النفسية للإنسان، لكنني على الأقل أصدّق أن شعور السعادة يترافق مع إفراز مادة الدوبامين بأمر من الدماغ، وهي المادة ذاتها المسؤولة عن &lt;em&gt;&amp;ldquo;شعور المكافأة&amp;rdquo;&lt;/em&gt; بعدد الإعجابات التي نالتها تلك الصورة التي نشرتها على فيس بوك. إفراز الدوبامين يدفع إلى الحاجة للمزيد منه، في الوقت ذاته ترتفع العتبة اللازمة لإحداث شعور الابتهاج مع التعرض لنفس المُثير، بكلمات أبسط: يصبح الإنسان مُدمنًا، ويحتاج دومًا إلى جرعة إضافية لتُعيد له شعور السعادة. إدمان فيس بوك لا يختلف من ناحية المبدأ عن إدمان المخدرات أو أي عادة أخرى؛ يكون في البداية أمرًا نفعله بكامل وعينا، ثم يصبح أمرًا خارجًا عن السيطرة.&lt;/p&gt;
+
+&lt;p&gt;كم مرة وجدت نفسك تفتح صفحة فيس بوك في المتصفح بشكل روتيني دون انتباه؟ هل لاحظت أن هذه العادة تتكرر بتواتر أكبر عند شعورك باليأس أو بالفراغ؟
+مع الوقت ستصبح كل انفعالاتك ومشاعرك ودوافعك متمحورة حول &amp;ldquo;كيف أحصل على إعجابات أكثر؟&amp;rdquo; لاستعادة هذا الشعور؛ الأسوأ أن هذا يحدث بلا وعيٍ منك إلى أن تقرّر أن تفعل شيئًا ما وتبدأ بمراقبة نفسك.&lt;/p&gt;
+
+&lt;h2 id=&#34;2-الخصوصية:bbed500b09fbdee29253b4c3398045b5&#34;&gt;#2 الخصوصية&lt;/h2&gt;
+
+&lt;p&gt;وهي واحدة من أكثر الأشياء التي أصبحت مؤخرًا أوليها اهتمامًا، خاصّة بعد انتقالي الكامل إلى Linux؛ فالبرامج الحرّة والخصوصية أمران مرتبطان بشدّة، فالحرص على الخصوصية ساهم في نشأة حركة البرامج الحرّة، والانتقال إلى استعمال نظام حرّ ويحمي خصوصيّتي ثم الاستمرار في الاعتماد على خدمة تنمو وتتغذّى على بيانات مستخدميها وتحوّلها إلى مُدخلات في آلات توليد الإعلانات أمران لا يتفقان. هاك الصفقة التي تعقدها مع فيس بوك ضمنيًّا عندما تبدأ باستخدامه:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;من حقنا أن نسرق بيانات، ونستخدمها لتوجيه الإعلانات نحوك، وإعطاءها للحكومة الأمريكية عندما تطلب ذلك، ومن حقنا أن نعاملك كفأر تجارب &lt;a href=&#34;http://www.avclub.com/article/facebook-tinkered-users-feeds-massive-psychology-e-206324&#34;&gt;لنجري عليك اختبارات نفسية بدعوى البحث العلمي&lt;/a&gt;، ومن حقنا أن نفعل أي شيء لم نذكره هنا وقد نحتاج لفعله يومًا بأن نغيّر اتفاقية الاستخدام متى شئنا&amp;hellip; آه&amp;hellip; تسأل عن حقوقك؟ ببساطة فيس بوك &lt;strong&gt;مجاني&lt;/strong&gt;!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;وكلّنا نعلم أن &lt;em&gt;&amp;ldquo;مجاني&amp;rdquo;&lt;/em&gt; هنا (وفي أغلب خدمات الشركات العملاقة على الوِب) تعني أنك &lt;a href=&#34;http://abdulla79.blogspot.ae/2012/07/blog-post_27.html&#34;&gt;أنت السّلعة&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;المشكلة أن أكثر الناس الذين أعرفهم في حياتي الواقعية، لا يُعيرون اهتمامًا لخصوصيتهم على الويب، ببساطة لأنهم لا يستطيعون إدراك مفهوم البيانات الرقمية ويعتقدون أنها شيء منعزل لا يستطيع التأثير في حياتهم الحقيقيّة (المُضحك المبكي أن البيانات هي بالضبط ما تسعى وكالات الاستخبارات حول العالم لجمعه)، يفعلون ما يشاءون على الويب وينشرون كل تفاصيل حياتهم لأنهم مطمئنون إلى أن الوِب ليس شيئًا ملموسًا، ويبدو أن على الأشياء الخطرة أن تكون مادّيّة وملموسة قبل أن تستطيع إقناعك بأنها خطرة. هل يمكن لإنسان أن ينشر ما يأكل وما يشرب ومتى يخرج من بيته وماذا يحب وماذا يكره وماذا يفعل كل بضع ساعات على الملأ؟ سيقول لك شخص ما أن هناك خيارات خصوصيّة لا تسمح للآخرين بالاطلاع على هذه التفاصيل، وبهذا يمكنك مشاركة المحتوى المناسب مع مجموعة الأشخاص المناسبة، المعرفة البسيطة حول كيف تعمل خدمات الوِب وكيف تخزن هذه المنشورات في قواعد بيانات تجعلك أي شخص يدرك أن خيارات الخصوصية ليست سوى بضع عشرات من السطور البرمجية التي تُنشئ حاجزًا وهميًّا بين المُشاهد والمنشور، أما المنشورات فيمكن الوصول إليها عبر طلب مباشر من قواعد البيانات دون الحاجة للمرور بطبقة الخصوصية تلك، أعني أنك تخفي عن بعض أصدقائك منشورات معينة، لكنها مرئية بسهولة لمن يستطيع الوصول إلى قواعد البيانات، بما فيها الحكومات (وهذا لم يعد سرًّا) والموظفين (&lt;a href=&#34;http://gawker.com/5637234/gcreep-google-engineer-stalked-teens-spied-on-chats&#34;&gt;وهذا حدث مع Google&lt;/a&gt;) وربما مجموعات من المخترقين الذين لا تعرف أين هم أو من هم.&lt;/p&gt;
+
+&lt;p&gt;إليك الملخص: خيارات الخصوصية تدفعك لمشاركة المزيد من المعلومات عن نفسك وعن حياتك التي ربما لم تكن لتشاركها قبل أن تتوفّر هذه الخيارات.&lt;/p&gt;
+
+&lt;h2 id=&#34;1-هذه:bbed500b09fbdee29253b4c3398045b5&#34;&gt;#1 هذه&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://forabi.net/images/i-dont-want-to-live-on-this-planet-anymore.jpg&#34; alt=&#34;لا أريد الحياة على هذا الكوكب بعد اليوم&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;لا شيء لدي أقوله عن هذه الصورة!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ما الجديد في الإصدار القادم من JavaScript (الجزء الأول)؟</title>
+      <link>http://forabi.net/post/2014-05-28-whats-new-in-es6/</link>
+      <pubDate>Wed, 28 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://forabi.net/post/2014-05-28-whats-new-in-es6/</guid>
+      <description>
+
+&lt;p&gt;Harmony هو الاسم الرمزي للإصدار السادس من لغة ECMAScript وهي اللغة القياسية التي تقوم عليها JavaScript، والإصدار الجديد يأتي بميزات جديدة تتناول العديد من جوانب اللغة بما فيها الصياغة (syntax) وأسلوب البناء وأنواع جديدة من المكونات المدمجة في اللغة. في هذا المقال نتعرف على بعض من المميزات التي ستجعل كتابة شيفرة JavaScript أكثر اختصاراً وفعالية.&lt;/p&gt;
+
+&lt;h2 id=&#34;متغيرات-نطاقها-القطعة-البرمجية-block-scoped-variables:c424985418bd1d2c92af83f369944234&#34;&gt;متغيرات نطاقها القطعة البرمجية (Block-scoped Variables)&lt;/h2&gt;
+
+&lt;p&gt;في الإصدار الحالي من JavaScript، تُعامل كل المتغيرات المفروضة ضمن دالة (&lt;code&gt;function&lt;/code&gt;) على أنها تابعة لهذه الدالة (Function-scoped) أي يمكن الوصول إليها من أي موقع ضمن هذه الدالة، حتى وإن كانت هذه المتغيرات قد فُرضِت ضمن قطعة برمجية فرعية ضمن هذه الدالة (كحلقة &lt;code&gt;for&lt;/code&gt; أو جملة شرطية &lt;code&gt;if&lt;/code&gt;)، وهذا يخالف ما تتبناه بعض من أشهر لغات البرمجة، وقد يسبب بعض الارتباك لمن لم يعتد عليه.
+لنوضح أكثر في هذا المثال:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+var numbers = [1, 2, 3];
+var doubles = [];
+
+for (var i = 0; i &amp;lt; numbers.length; i++) {
+   var num = numbers[i];
+   doubles[i] = function() {
+     console.log(num * 2);
+   }
+}
+
+for (var j = 0; j &amp;lt; doubles.length; j++) {
+  doubles[j]();
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;عند تنفيذ هذا المثال، سنحصل على الرقم &lt;code&gt;6&lt;/code&gt; ثلاث مرات، وهو أمر غير متوقع ما لم نكن على معرفة بطبيعة مجالات JavaScript، ولو طبق ما يشبه هذا المثال في لغة أخرى، لحصلنا على النتيجة &lt;code&gt;2&lt;/code&gt; ثم &lt;code&gt;4&lt;/code&gt; ثم &lt;code&gt;6&lt;/code&gt;، وهو ما يبدو النتيجة المنطقية لشيفرة كهذه.
+ما الذي يحدث هنا؟ يتوقع المبرمج أن المتغير &lt;code&gt;num&lt;/code&gt; محصور ضمن حلقة &lt;code&gt;for&lt;/code&gt; وعليه فإن الدالة التي ندخلها في المصفوفة &lt;code&gt;doubles&lt;/code&gt; ستعطي عند استدعائها القيمة التي ورثتها عن مجال حلقة &lt;code&gt;for&lt;/code&gt; إلا أن الحقيقة هي أن المتغير &lt;code&gt;num&lt;/code&gt; يتبع للمجال العام، لأن حلقة &lt;code&gt;for&lt;/code&gt; لا تُنشئ مجالًا فرعيًّا وعليه فإن القيمة العامة &lt;code&gt;num&lt;/code&gt; تتغير ضمن حلقة &lt;code&gt;for&lt;/code&gt; من &lt;code&gt;2&lt;/code&gt; إلى &lt;code&gt;4&lt;/code&gt; إلى &lt;code&gt;6&lt;/code&gt; وعند استدعاء أي دالة ضمن المصفوفة &lt;code&gt;doubles&lt;/code&gt; فإنها ستعيد إلينا القيمة العامة &lt;code&gt;num&lt;/code&gt;، وبما أن الاستدعاء يحدث بعد إسناد آخر قيمة للمتغير &lt;code&gt;num&lt;/code&gt;، فإن قيمته في أي لحظة بعد انتهاء الحلقة الأولى ستكون آخر قيمة أسندت إليه ضمن هذه الحلقة، وهي القيمة &lt;code&gt;6&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;يعطينا الإصدار القادم طريقة لحل هذا الارتباك باستخدام الكلمة المفتاحية &lt;code&gt;let&lt;/code&gt; بدلاً عن &lt;code&gt;var&lt;/code&gt;، وهي تقوم بخلق مجال ضمن القطعة البرمجية التي تُستخدم فيها، بمعنى آخر: ستكون &lt;code&gt;let&lt;/code&gt; هي بديلنا عن &lt;code&gt;var&lt;/code&gt; من الآن فصاعدًا، لأنها ببساطة تعطينا النتائج البديهية التي نتوقعها. لنُعِد كتابة المثال السابق باستبدال &lt;code&gt;var num&lt;/code&gt; بـ&lt;code&gt;let num&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var numbers = [1, 2, 3];
+var doubles = [];
+
+for (var i = 0; i &amp;lt; numbers.length; i++) {
+   let num = numbers[i];
+   doubles[i] = function() {
+     console.log(num * 2);
+   }
+}
+
+for (var j = 0; j &amp;lt; doubles.length; j++) {
+  doubles[j]();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;عند تطبيق هذا المثال (يمكنك تطبيقه في Firefox وChrome لأن كلا المتصفحين بدأا بدعم &lt;code&gt;let&lt;/code&gt;) سنحصل على النتيجة البديهية &lt;code&gt;2&lt;/code&gt; ثم &lt;code&gt;4&lt;/code&gt; ثم &lt;code&gt;6&lt;/code&gt;. بالطبع بإمكاننا تحسين الشيفرة باعتماد &lt;code&gt;let&lt;/code&gt; عند التصريح عن كل المتغيرات السابقة، وهو الأمر الذي يجب أن تعتاد فعله من اليوم!&lt;/p&gt;
+
+&lt;h2 id=&#34;شيفرة-أقصر-وأسهل-للقراءة:c424985418bd1d2c92af83f369944234&#34;&gt;شيفرة أقصر وأسهل للقراءة&lt;/h2&gt;
+
+&lt;p&gt;لعل أكثر ما أُحبّه في JavaScript مرونتها الفائقة، وبالذات القدرة على إمرار دوال مجهولة (Anonymous Functions) لدوال أخرى، الأمر الذي يسمح لنا بكتابة شيفرة ما كان من الممكن كتابتها بلغات أخرى إلا بضعفي عدد الأسطر وربما أكثر. لاحظ هذا المثال:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var people = [&#39;Ahmed&#39;, &#39;Samer&#39;, &#39;Khaled&#39;];
+var greetings = people.map(function(person) { return &#39;Hello &#39; + person + &#39;!&#39;; });
+
+console.log(greetings); // [&#39;Hello Ahmed!&#39;, &#39;Hello Samer!&#39;, &#39;Hello Khaled!&#39;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;لو أردنا تنفيذ هذه المهمة في لغة أخرى، فلربما احتجنا إلى حلقة &lt;code&gt;for&lt;/code&gt; لنمرّ من خلالها على كل عنصر ضمن المصفوفة ثم إدخال العبارات الجديدة ضمن مصفوفة أخرى، وهذا يعني أن مهمة يمكن كتابتها بسطرين في JavaScript قد تتطلب 5 سطور في لغة أخرى. لو لم تمتلك JavaScript القدرة على إمرار الدالة المجهولة &lt;code&gt;function(person) {...}&lt;/code&gt; أعلاه، لفقدت جزءًا كبيرة من مرونتها.&lt;/p&gt;
+
+&lt;p&gt;لكن الإصدار القادم من JavaScript تذهب أبعد من ذلك، وتختصر علينا كتابة الكثير من النص البرمجي. لُنعد كتابة المثال السابق:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let people = [&#39;Ahmed&#39;, &#39;Samer&#39;, &#39;Khaled&#39;];
+let greetings = people.map(person =&amp;gt; &#39;Hello &#39; + person + &#39;!&#39;);
+
+console.log(greetings); // [&#39;Hello Ahmed!&#39;, &#39;Hello Samer!&#39;, &#39;Hello Khaled!&#39;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في هذا المثال استخدمنا ما اصطلح على تسميته &lt;strong&gt;دوال الأسهم (Arrow Functions)&lt;/strong&gt;، وهي طريقة أكثر اختصارًا لكتابة الدوال المجهولة، لن تحتاج لكتابة &lt;code&gt;return&lt;/code&gt;، فهي ستضاف تلقائيًا عند التنفيذ. من الآن فصاعداً اعتمد دوال الأسهم عندما تريد تنفيذ دالة مجهولة بسيطة بسطر واحد.&lt;/p&gt;
+
+&lt;p&gt;بمناسبة الحديث عن الشيفرة المختصرة&amp;hellip; ما رأيكم لو جعلنا الشيفرة أعلاه _أكثر اختصارًا_؟!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let people = [&#39;Ahmed&#39;, &#39;Samer&#39;, &#39;Khaled&#39;];
+let greetings = [&#39;Hello &#39; + person + &#39;!&#39; for (person of people)];
+
+console.log(greetings); // [&#39;Hello Ahmed!&#39;, &#39;Hello Samer!&#39;, &#39;Hello Khaled!&#39;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;قد تبدو الصياغة غريبة بعض الشيء، لكنها تتيح لنا فهم النص بسهولة أكبر، وتغنينا عن الحاجة لدالة مجهولة (الأمر الذي قد يؤثر على الأداء، وإن كان بأجزاء من الثواني). الصياغة التي استخدمناها أعلاه تُسمى &lt;strong&gt;Array Comprehensions&lt;/strong&gt;، وإن كنت قادرًا على ترجمتها إلى العربية بطريقة واضحة، فلا تبخل بها علينا!&lt;/p&gt;
+
+&lt;p&gt;لكن&amp;hellip; ألا ترون أنه يمكن تحسين هذه الشيفرة قليلاً؟&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let people = [&#39;Ahmed&#39;, &#39;Samer&#39;, &#39;Khaled&#39;];
+let greetings = [`Hello ${ person }!` for (person of people)];
+
+console.log(greetings); // [&#39;Hello Ahmed!&#39;, &#39;Hello Samer!&#39;, &#39;Hello Khaled!&#39;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هنا استبدلنا إشارات الاقتباس (&lt;code&gt;&#39;&lt;/code&gt; أو &lt;code&gt;&amp;quot;&lt;/code&gt;) بالإشارة ` الأمر الذي أتاح لنا إحاطة المتغير &lt;code&gt;person&lt;/code&gt; بقوسين معكوفين مسبوقين بإشارة &lt;code&gt;$&lt;/code&gt;، وهذه الصياغة تدعى &lt;strong&gt;&amp;ldquo;السلاسل النصية المقولبة&amp;rdquo;&lt;/strong&gt; أو Template Strings، والتي تسمح -بالإضافة إلى القولبة- بالعديد من الأشياء الرائعة، كالعبارات على عدة أسطر:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let multilineString = `I am
+a multiline
+string`;
+
+console.log(multilineString);
+// I am
+// a multiline
+// string
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;del&gt;للأسف لن تعمل الشفرة السابقة في أي من المتصفحات الحالية، لأن السلاسل النصية المقولبة ما تزال غير معتمدة ضمن أي منها&lt;/del&gt;. &lt;strong&gt;تحديث:&lt;/strong&gt; &lt;a href=&#34;http://firefoxnightly.tumblr.com/post/92234218909/ecmascript-6-template-strings-are-now-supported-in&#34;&gt;بدأ Firefox Nightly باعتمادها&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;من المميزات الجديدة كذلك إمكانية اختصار بناء الكائنات ذات الخصائص بالشكل التالي:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;حاليًا، نقوم بكتابة شيفرة مثل هذه:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;    var createPerson = function(name, age, location) {
+      return {
+        name: name,
+        age: age,
+        location: location,
+        greet: function() {
+          console.log(&#39;Hello, I am &#39; + name + &#39; from &#39; + location + &#39;. I am &#39; + age + &#39;.&#39;);
+        }
+      }
+    };
+
+    var fawwaz = createPerson(&#39;Fawwaz&#39;, 21, &#39;Syria&#39;);
+    console.log(fawwaz.name); // &#39;Fawwaz&#39;
+    fawwaz.greet(); // &amp;quot;Hello, I am Fawwaz from Syria. I am 21.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;في الإصدار القادم، سيكون بالإمكان كتابة الشيفرة كالتالي:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;    let createPerson = function(name, age, location) {
+      return {
+        name,
+        age,
+        location,
+        greet() {
+          console.log(&#39;Hello, I am &#39; + name + &#39; from &#39; + location + &#39;. I am &#39; + age + &#39;.&#39;);
+        }
+      }
+    };
+
+    let fawwaz = createPerson(&#39;Fawwaz&#39;, 21, &#39;Syria&#39;);
+    console.log(fawwaz.name); // &#39;Fawwaz&#39;
+    fawwaz.greet(); // &amp;quot;Hello, I am Fawwaz from Syria. I am 21.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;بما أن اسم المُعامل (parameter) يماثل اسم الخاصة (property)، فإن هذا يتم تفسيره على أن قيمة الخاصة توافق قيمة المعامل، بمعنى: &lt;code&gt;name: name&lt;/code&gt;، بالإضافة إلى كتابة &lt;code&gt;greet() {...}&lt;/code&gt; بدل &lt;code&gt;greet: function() {...}&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;كذلك سيكون بإمكاننا تحسين هذا النص أكثر من ذلك باستخدام &lt;strong&gt;الأصناف (Classes)&lt;/strong&gt;، نعم! سيكون لدينا أصناف أخيرًا! (سنستعرضها لاحقاً)&lt;/p&gt;
+
+&lt;h2 id=&#34;الثوابت-constants:c424985418bd1d2c92af83f369944234&#34;&gt;الثوابت (Constants)&lt;/h2&gt;
+
+&lt;p&gt;سيداتي وسادتي&amp;hellip; رحبوا بالثوابت&amp;hellip; نعم إنها أخيرًا متوفرة في JavaScript، إحدى المكونات الأساسية لأي لغة برمجية التي لم تكن متوفرة في JavaScript، أصبحت الآن متوفرة. والآن نأتي للسؤال البديهي: لماذا أحتاج للثوابت؟ أليس بإمكاني التصريح عن متغير دون أن أغير قيمته بعد إعطاءه القيمة الأولية؟ نعم بالطبع بإمكانك ذلك، لكن هذا لا يعني بالضرورة أن المستخدم أو نصاً برمجيًا من طرف ثالث ليس بإمكانه تغيير قيمة هذا المتغير في سياق التنفيذ، وطالما أن المتغير &amp;ldquo;متغير&amp;rdquo; بطبيعته، فإننا دومًا بحاجة إلى شيء من أصل اللغة يحمينا من تغييره خطأ. عند التصريح عن ثابت فإننا نعطيه قيمة أولية ثم ستتولى الآلة البرمجية لـJavaScript حماية هذا الثابت من التغيير، وسُيرمى خطأ عند محاولة إسناد قيمة جديدة لهذا الثابت.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const myConstant = &#39;Never change this!&#39;;
+
+myConstant = &#39;Trying to change your constant&#39;;
+// TypeError: redeclaration of const myConstant
+
+console.log(myConstant); // &amp;quot;Never change this!&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;الم-عاملات-الافتراضية-default-parameters:c424985418bd1d2c92af83f369944234&#34;&gt;المُعاملات الافتراضية (Default Parameters)&lt;/h2&gt;
+
+&lt;p&gt;غياب دعم المُعاملات الافتراضية في JavaScript واحد من أكثر الأشياء التي تزعجني، لأنها تجبرني على كتابة شيفرة مثل هذه:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function SayHello (user) {
+  if (typeof user == &#39;undefined&#39;) {
+    user = &#39;User&#39;;
+  }
+
+  console.log(&#39;Hello &#39; + user);
+}
+
+SayHello(&#39;Fawwaz&#39;); // Hello Fawwaz!
+SayHello(); // Hello User!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;لو كان عندي 3 متغيرات غير إجبارية، فهذا يعني أنني سأحتاج 3 جمل شرطية، الأمر الذي يتطلب الكثير من الكتابة المُملة. بفضل الإصدار القادم من JavaScript، سيكون بالإمكان كتابة شيفرة أبسط بكثير:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function SayHello (user=&#39;User&#39;) {
+  console.log(&#39;Hello &#39; + user);
+}
+
+SayHello(&#39;Fawwaz&#39;); // Hello Fawwaz!
+SayHello(); // Hello User!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;الوعود-promises:c424985418bd1d2c92af83f369944234&#34;&gt;الوعود (Promises)&lt;/h2&gt;
+
+&lt;p&gt;الوعود هي الحل الذي تأتينا به JavaScript لحل مشكلة هرم الموت (Pyramid of Death) الذي نواجهه عند تنفيذ مهمات غير متزامنة تعتمد إحداها على الأخرى:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function getFullPost(url, callback) {
+
+  var getAuthor = function(post, callback) {
+    $.ajax({ method: &#39;GET&#39;, url: &#39;/author/&#39; + post.author_id }, callback);
+  };
+
+  var getRelatedPosts = function(post, callback) {
+    $.ajax({ method: &#39;GET&#39;, url: &#39;/related/&#39; + post.id }, callback);
+  };
+
+  $.ajax({ method: &#39;GET&#39;, url: url }, function(post) {
+    getAuthor(post, function(res) {
+      post.author = res.data.author;
+      getRelatedPosts(post, function(res) {
+        post.releated = res.data.releated;
+        callback(post);
+      });
+    });
+  });
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هل تلاحظ أن الشيفرة تتجه نحو اليمين؟ لو أردنا تنفيذ هذه المهمات غير المتزامنة واحدة بعد الأخرى وكان عددها 10 مثلًا فستصبح الشيفرة شديدة التعقيد، كما أن هذه الطريقة ليست بديهية، ولا يمكن لك أن تفهم ماذا تفعل هذه الدالة المجهولة (المعامل الثاني في كل دالة) ما لم تألفها. ماذا لو أمكننا كتابة هذه الشيفرة بصورة أفضل؟&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function getFullPost(url) {
+  var post = { };
+  var getPost = function(url) {
+    return $http.get(url);
+  };
+
+  var getAuthor = function(post) {
+    return $http.get(&#39;/author/&#39; + post.author_id).then(function(res) {
+      post.author = res.data.author;
+    });
+  };
+
+  var getRelatedPosts = function(post) {
+    return $http.get(&#39;/related/&#39; + post.id).then(function(res) {
+        post.related = res.data.related;
+    });
+  };
+
+  return getPost().then(getAuthor).then(getRelatedPosts).catch(function(err) {
+    console.log(&#39;We got an error:&#39;, err);
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في الجزء القادم سنتعرّف على المكوّنات الجديدة الأكثر إثارة، كالمولّدات التي ستجعلنا نغير من طريقة تعاملنا مع البيانات اللامتزامنة كليًّا!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>الإصدار الجديد من aQuran</title>
+      <link>http://forabi.net/post/2014-04-04-aquran-1.0-beta-announcement/</link>
+      <pubDate>Fri, 04 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://forabi.net/post/2014-04-04-aquran-1.0-beta-announcement/</guid>
+      <description>
+
+&lt;p&gt;استكمالاً &lt;a href=&#34;https://arabia.io/webdev/5902-مشروع-تطبيق-للقرآن-الكريم-للهواتف-الذكية-مبني-بلغات-الويب&#34;&gt;للموضوع السابق&lt;/a&gt;، قمت للتو برفع نسخة تجريبية من التطبيق على GitHub Pages بعد محاولة الاستضافة على عدة مواقع أخرى باءت بالفشل :)&lt;/p&gt;
+
+&lt;h2 id=&#34;ما-الجديد-منذ-الموضوع-السابق:3dba6dd50a1622f8635e37597d765c74&#34;&gt;ما الجديد منذ الموضوع السابق؟&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;تم الانتقال إلى &lt;em&gt;قواعد بيانات IndexedDB&lt;/em&gt; ضمن المتصفح، وهي من الميزات الحديثة ضمن المتصفحات، حيث يتم تخزين قاعدة بيانات النص القرآني والترجمات ومعلومات التلاوات ضمن المتصفح، وبهذا لا داعي لأي شيء من جهة الخادم، سوى تقديم الملفات الثابتة static، ولا داعي أيضًا لإبقاء كامل قاعدة البيانات ضمن الذاكرة، وهو ما كنت أفعله في السابق.&lt;/li&gt;
+&lt;li&gt;التطبيق يعمل بلا اتصال بعد اكتمال تحميل كافة الملفات أول مرة، يمكنك زيارة الرابط نفسه حتى لو كنت غير متصل بالإنترنت (يعتمد على ميزة &lt;em&gt;AppCache&lt;/em&gt;).&lt;/li&gt;
+&lt;li&gt;يتم تحميل النص القرآني مرة واحدة وتخزينه ضمن المتصفح، مما يسمح بتحسين الأداء بشكل رائع.&lt;/li&gt;
+&lt;li&gt;يتم تحميل الترجمة عند تفعيلها فقط، ثم تخزينها في المتصفح ضمن قاعدة بيانات IndexedDB.&lt;/li&gt;
+&lt;li&gt;الترجمات تعمل، تعرض ترجمة كل آية تحتها، ويمكن اختيار أكثر من ترجمة، وبأكثر من لغة.&lt;/li&gt;
+&lt;li&gt;طبعاً مع إمكانية إخفاء الترجمات بالكامل والاكتفاء بالنص القرآني&lt;/li&gt;
+&lt;li&gt;بدل الحاجة للتنقل بين الصفحات أثناء القراءة، كل ما عليك هو متابعة التمرير للأسفل لتحميل الصفحة التالية (infinte scrolling)&lt;/li&gt;
+&lt;li&gt;البحث يعمل&lt;/li&gt;
+&lt;li&gt;النقر على إحدى نتائج البحث ينقلك مباشرة إلى هذه الآية، في السابق كان ينقلك إلى بداية الصفحة التي فيها الآية&lt;/li&gt;
+&lt;li&gt;التلاوات تعمل بشكل تجريبي (هناك بعض المشاكل تؤدي لتكرار تلاوة الصفحة بدل الانتقال للصفحة التالية، أعمل على حلها)&lt;/li&gt;
+&lt;li&gt;جودة التلاوات قابلة للتكيف مع سرعة الاتصال (لا يوجد متصفح حالياً يتبنى الواجهة البرمجية لمعلومات الاتصال Network Information API سوى Firefox OS على حد علمي، وعلى هذا ستحصل دوماً على أعلى دقة للتلاوة على بقية المتصفحات)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;صور-التطبيق-http-imgur-com-a-pvpew:3dba6dd50a1622f8635e37597d765c74&#34;&gt;&lt;a href=&#34;http://imgur.com/a/PvPEW&#34;&gt;صور التطبيق&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://forabi.net/images/aquran-beta/1/&#34; alt=&#34;1&#34; /&gt;
+&lt;img src=&#34;http://forabi.net/images/aquran-beta/2.png&#34; alt=&#34;2&#34; /&gt;
+&lt;img src=&#34;http://forabi.net/images/aquran-beta/3.png&#34; alt=&#34;3&#34; /&gt;
+&lt;img src=&#34;http://forabi.net/images/aquran-beta/4.png&#34; alt=&#34;4&#34; /&gt;
+&lt;img src=&#34;http://forabi.net/images/aquran-beta/5.png&#34; alt=&#34;5&#34; /&gt;
+&lt;img src=&#34;http://forabi.net/images/aquran-beta/6.png&#34; alt=&#34;6&#34; /&gt;
+&lt;img src=&#34;http://forabi.net/images/aquran-beta/7.png&#34; alt=&#34;7&#34; /&gt;
+&lt;img src=&#34;http://forabi.net/images/aquran-beta/8.png&#34; alt=&#34;8&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;متطلبات-التشغيل:3dba6dd50a1622f8635e37597d765c74&#34;&gt;متطلبات التشغيل&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;أحدث نسخة من Chrome أو Firefox على Android 4.0+&lt;/li&gt;
+&lt;li&gt;أحدث نسخة Chrome على iOS 7+ (لم أقم بالتجربة ولكن المفترض أن يعمل)&lt;/li&gt;
+&lt;li&gt;Firefox OS 1.2+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;شكر-خاص:3dba6dd50a1622f8635e37597d765c74&#34;&gt;شكر خاص&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;أحب أن أتقدم بالشكر الجزيل للدكتور &lt;a href=&#34;https://arabia.io/u/خالد-حسني&#34;&gt;&lt;em&gt;خالد حسني&lt;/em&gt;&lt;/a&gt; لمساهمته الكبيرة في تطوير المشروع، حيث قدم لي نسخًا معدلة من خط أميري قرآن، كما تم اعتماد &lt;a href=&#34;https://bitbucket.org/khaledhosny/quran&#34;&gt;النص القرآني الذي يعمل عليه&lt;/a&gt;، وهو يتبع معايير&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arabia.io/u/louy&#34;&gt;&lt;em&gt;لؤي العقاد&lt;/em&gt;&lt;/a&gt; لنصائحه ولاقتراحه نشر التطبيق كتطبيق ويب بدل الاعتماد على منصة Cordova (هذا سهل المهمة أكثر :))&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;مجتمع Arabia I/O&lt;/em&gt; لتشجيعهم لي على المتابعة&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;مشاكل-معروفة:3dba6dd50a1622f8635e37597d765c74&#34;&gt;مشاكل معروفة&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;بطء التحميل للمرة الأولى: الأمر يعتمد على سرعة اتصالك، في المرات القادمة التي يتم فتح التطبيق فيها، المفترض أن تستخدم النسخة المخزنة ضمن AppCache، وهذا يعني أنه لا حاجة للاتصال بعد ذلك (باستثناء عند تشغيل التلاوات بالطبع).&lt;/li&gt;
+&lt;li&gt;النص القرآني تجريبي، ومبني على عمل الدكتور خالد حسني. لاحظت بعض الأخطاء في إشارات الوقف، وسأعمل على التبليغ عنها ثم تحديث المشروع، في الوقت الحالي بإمكانك استخدام النص القرآني من مشروع الفانوس كبديل، وذلك عند بناء التطبيق بالأمر التالي:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gulp --production --experimental 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;تُرجى التجربة على &lt;strong&gt;هاتف ذكي&lt;/strong&gt; أو &lt;strong&gt;جهاز لوحي&lt;/strong&gt;، ليس على desktop أو laptop. السبب هو أن التطبيق مصمم لشاشات اللمس ومبني على إطار عمل للهواتف الذكية.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;متصفح Chrome لا يعرض النص القرآني بشكل صحيح&lt;/strong&gt;، السبب في Chrome، لن أعمل على إيجاد حلول ترقيعية الآن. لإصلاح المشكلة يمكنك تعطيل تلوين النص القرآني في إعدادات التطبيق، مع ذلك ستبقى إشارة الآية تسبق الرقم، لكن النتيجة ستكون أفضل بالطبع.&lt;/li&gt;
+&lt;li&gt;Firefox يعرض النصوص بطريقة صحيحة، لكن لسبب ما لا يمكن النقر على زر تبديل وضع الخيار ضمن الإعدادات.&lt;/li&gt;
+&lt;li&gt;تكرار تلاوة الصفحة بدل الانتقال للصفحة التالية (أعمل على حلها)&lt;/li&gt;
+&lt;li&gt;تقطع التلاوة: بما أن التطبيق يعتمد على Network Information API لتقدير سرعة اتصالك بالإنترنت، فلا يمكن الاستفادة من هذه الميزة إلا على Firefox (وربما على Firefox OS فقط)، إذا واجهت تقطعاً بالتلاوات، فالسبب هو بطء اتصالك بالإنترنت وفشل التطبيق في تقدير سرعته لجلب تلاوة بدقة مناسبة. سأبحث عن حلول أخرى لتقدير سرعة الاتصال.&lt;/li&gt;
+&lt;li&gt;النسخة المستضافة على GitHub Pages لا توفر سوى الترجمات باللغتين العربية والإنكليزية حالياً.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;الخطوات-التالية:3dba6dd50a1622f8635e37597d765c74&#34;&gt;الخطوات التالية&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;حل المشاكل السابقة&lt;/li&gt;
+&lt;li&gt;تعريب التطبيق، وتوفير إمكانية ترجمته لأية لغة&lt;/li&gt;
+&lt;li&gt;لتقليل استهلاك الذاكرة، حذف الصفحات القديمة في قائمة التمرير عند الابتعاد عنها لمسافة معينة&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://forabi.github.io/aQuran&#34;&gt;جرب التطبيق!&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;المساهمات:3dba6dd50a1622f8635e37597d765c74&#34;&gt;المساهمات&lt;/h2&gt;
+
+&lt;p&gt;هل تجيد تطوير تطبيقات الويب؟ &lt;a href=&#34;https://github.com/forabi/aQuran&#34;&gt;ساعدني على GitHub&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>الدليل الكامل لتعلم Angular JS في يوم واحد</title>
+      <link>http://forabi.net/post/2014-03-29-angular-guide/</link>
+      <pubDate>Sat, 29 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://forabi.net/post/2014-03-29-angular-guide/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;هذه ترجمة (بتصرف) &lt;a href=&#34;http://toddmotto.com/ultimate-guide-to-learning-angular-js-in-one-day/&#34;&gt;لمقالة Todd Motto على مدوّنته&lt;/a&gt; وإليه يعود ضمير المتكلم في المقالة. نُشرت للمرة الأولى على &lt;a href=&#34;http://www.webtuts.me/ultimate-guide-to-learning-angular-js-in-one-day/&#34;&gt;مدوّنة دروس الويب&lt;/a&gt;، وأعيدُ نشرها هنا.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://forabi.net/images/AngularJS-medium.png&#34; alt=&#34;شعار Angular JS&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ما-هو-angularjs:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;ما هو AngularJS؟&lt;/h2&gt;
+
+&lt;p&gt;هو إطار عمل JavaScript لطرف العميل يتبع بنية Model-View-Controller/Model-View-View-Model، ويعتبر اليوم مهماً لبناء تطبيقات ويب وحيدة الصفحة (SAP) أو حتى المواقع العادية. يُعتبر Angular JS قفزة كبيرة نحو مستقبل HTML وما يجلبه الإصدار الخامس منها (مع التطورات على صعيد JavaScript بالطبع!)، ويبعث الحياة من جديد في تعاملنا مع الويب الحديث. هذا المقال جولة شاملة في Angular JS مستخلصة من تجاربي ونصائح وممارسات تعلمتها خلال استخدامي.&lt;/p&gt;
+
+&lt;h2 id=&#34;المصطلحات:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;المصطلحات&lt;/h2&gt;
+
+&lt;p&gt;ليس عليك أن تبذل جهداً كبيراً لتعلم Angular، وأهم ما يجب معرفته معاني المصطلحات وتبني طريقة MVC، وMVC اختصار لـ_Model-View-Controller_، أي &lt;em&gt;نموذج-طريقة عرض-مُتحكِّم&lt;/em&gt;. فيما يلي بعض المصطلحات والواجهات البرمجية الأساسية التي تزوّدنا بها Angular.&lt;/p&gt;
+
+&lt;h3 id=&#34;mvc:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;MVC&lt;/h3&gt;
+
+&lt;p&gt;ربما سمعت بهذا الاختصار من قبل، وهو مستخدم في لغات برمجة عديدة كوسيلة لبناء هيكل التطبيقات أو البرامج. وهاك تلخيص سريع لمعناه:
+  - &lt;em&gt;النموذج&lt;/em&gt; (&lt;em&gt;Model&lt;/em&gt;): بنية البيانات التي تقوم عليها أجزاء التطبيقات، غالباً ما تمثل بصيغة JSON. يفضل أن تكون لديك معرفة مسبقة بـJSON قبل تعلم Angular، لأنها ضرورية للتواصل بين الخادم وطريقة العرض (سنأتي على شرحها في النقطة التالية). على سبيل المثال، لنفترض أن لدينا مجموعة من المستخدمين، يمكن تمثيل &lt;em&gt;بيانات تعريفهم&lt;/em&gt; كما يلي:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;        {
+        &amp;quot;users&amp;quot; : [{
+            &amp;quot;name&amp;quot;: &amp;quot;أحمد&amp;quot;,
+            &amp;quot;id&amp;quot;: &amp;quot;82047392&amp;quot;
+          },{
+            &amp;quot;name&amp;quot;: &amp;quot;سامر&amp;quot;,
+            &amp;quot;id&amp;quot;: &amp;quot;65198013&amp;quot;
+          }]
+        }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;عادة تُجلب هذه المعلومات من خادم بطلب &lt;code&gt;XMLHttpRequest&lt;/code&gt;، ويقابله في jQuery الإجراء &lt;code&gt;$.ajax&lt;/code&gt;، وفي Angular الكائن &lt;code&gt;$http&lt;/code&gt;. وقد تكون هذه المعلومات مكتوبة ضمن النص البرمجي أثناء تفسير الصفحة (من قاعدة بيانات أو مخزن بيانات). بعد ذلك يكون بإمكانك تعديل هذه المعلومات وإعادة إرسالها.
+  - &lt;em&gt;طريقة العرض&lt;/em&gt; (&lt;em&gt;View&lt;/em&gt;): وهو أمر سهل التفسير، فهي ببساطة المُخرج النهائي أو صفحة HTML التي تعرض البيانات (النموذج) على المستخدم مثلاً. باستخدام إطار عمل MVC، تُجلب البيانات من النموذج وتُعرض المعلومات المناسبة في صفحة HTML.
+  - &lt;em&gt;المُتحكِّم&lt;/em&gt; (&lt;em&gt;Controller&lt;/em&gt;): وله من اسمه نصيب، فهو يتحكم بالأشياء! ولكن أية أشياء؟ البيانات. المُتحكمات هي الطريقة التي تصل من خلالها بين &lt;em&gt;الخادم&lt;/em&gt; و_طريقة العرض_، فتسمح بتحديث البيانات سريعاً من خلال التواصل مع كلا الخادم والعميل.&lt;/p&gt;
+
+&lt;h2 id=&#34;إعداد-مشروع-angular-js-الأساسيات:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;إعداد مشروع Angular JS (الأساسيات)&lt;/h2&gt;
+
+&lt;p&gt;يجب أولاً تهيئة الأساسيات التي يقوم عليها مشروعنا. يجب أن نبدأ بتطبيق (&lt;code&gt;ng-app&lt;/code&gt;) الذي يُعرِّف التطبيق (و&lt;code&gt;ng&lt;/code&gt; هي بادئة تعني Angular وتسبق عادة كل مكونات Angular JS)، ثم متحكم (Controller) ليتواصل مع طريقة العرض، ثم ربط DOM ولا ننسى تضمين Angular بالطبع! إليك الأساسيات:&lt;/p&gt;
+
+&lt;h2 id=&#34;نص-html-مع-تصريحات-ng:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;نص HTML مع تصريحات &lt;code&gt;ng-*&lt;/code&gt;:&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-app=&amp;quot;myApp&amp;quot;&amp;gt;
+  &amp;lt;div ng-controller=&amp;quot;MainCtrl&amp;quot;&amp;gt;
+    &amp;lt;!-- محتويات المتحكم --&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;وحدة-angular-مع-متحكم:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;وحدة Angular مع متحكم:&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myApp = angular.module(&#39;myApp&#39;, []);
+
+myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+  // أوامر المتحكم
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;قبل أن نستبق الأمور، نحتاج لإنشاء &lt;em&gt;وحدة Angular&lt;/em&gt; (أو &lt;em&gt;Angular module&lt;/em&gt;)، التي ستتضمن كل النص البرمجي المتعلق بالمشروع. هناك أكثر من طريقة للتصريح عن الوحدات، إحداها سَلسلة كل النص البرمجي معاً (لا أفضل هذه الطريقة):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;angular.module(&#39;myApp&#39;, [])
+       .controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {...}])
+       .controller(&#39;NavCtrl&#39;, [&#39;$scope&#39;, function ($scope) {...}])
+       .controller(&#39;UserCtrl&#39;, [&#39;$scope&#39;, function ($scope) {...}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ولكن الطريقة التي أفضلها، والتي أثبتت أنها الأفضل لكل مشاريع Angular التي صمّمتها هي تعريف الوحدة العامة بشكل منفصل. الطريقة التي تعتمد على تسلسل التصريحات قد تجعلك تنسى إغلاق بعض الأقواس وتجعل قراءة النص البرمجي وتصحيحه أكثر تعقيداً. لذا أُفضّل هذا الأسلوب:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myApp = angular.module(&#39;myApp&#39;, []);
+myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {...}]);
+myApp.controller(&#39;NavCtrl&#39;, [&#39;$scope&#39;, function ($scope) {...}]);
+myApp.controller(&#39;UserCtrl&#39;, [&#39;$scope&#39;, function ($scope) {...}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;بهذه الطريقة أُقسّم النص البرمجي على عدة ملفات، وفي كل ملف أربط مكوّناً من المكونات مع فضاء الأسماء myApp فيصبح تلقائياً جزءاً من تطبيقي. نعم، الأمر كما فهمت، أفضل أن أنشئ ملفاً مستقلاً لكل متحكم ومُرشِد (directive) ومعمل (factory) وأي شيء آخر (ستشكرني على هذا!). فيما بعد يمكنك دمجها معاً وتقليصها لتصبح ملفاً واحدًا (مستخدماً مدير مهام مثل Grunt أو Gulp) فتدفعَه إلى &lt;code&gt;DOM&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;الم-تحك-مات-controllers:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;المُتحكّمات (Controllers)&lt;/h3&gt;
+
+&lt;p&gt;أصبحت تعرف الآن مفهوم MVC وتعلمت طريقة إعداد مشروع جديد، فلنطّلع الآن على الكيفية التي يُطبِّق فيها Angular JS العمل بالمتحكّمات.
+بناء على المثال السابق، بإمكاننا الآن أن نخطو خطوة بسيطة نحو عرض بعض البيانات ضمن طريقة العرض مستخدمين متحكّماً. يستخدم Angular تركيب &lt;em&gt;&amp;ldquo;مقود الدراجة (handlebars)&amp;rdquo;&lt;/em&gt; لقولبة HTML. ببساطة يعني هذا أن بإمكان المتحكمات أن تعرض البيانات في صفحة HTML بأن تستبدل كل عبارة فيها مكتوبة ضمن الأقواس المزدوجة هكذا: &lt;code&gt;{{ data }}&lt;/code&gt; قيمة يُعينها المتحكم. في الحالة المثالية يجب أن لا تحوي صفحة HTML نصاً حقيقيًا أو قيماً مدرجة مسبقاً، ويجب أن تترك هذه المهمة لمتحكمات Angular. فيما يلي مثال يبيّن كيف يمكن عرض نص أو سلسلة حروف &lt;code&gt;String&lt;/code&gt; بسيطة ضمن الصفحة:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-app=&amp;quot;myApp&amp;quot;&amp;gt;
+  &amp;lt;div ng-controller=&amp;quot;MainCtrl&amp;quot;&amp;gt;
+    {{ text }}
+  &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;في ملف JavaScript:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myApp = angular.module(&#39;myApp&#39;, []);
+
+myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+
+  $scope.text = &#39;مرحباً بمعجبي Angular!&#39;;
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;والناتج النهائي:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/mN7QB/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;أهم مفهوم هنا مفهوم النطاق (&lt;code&gt;$scope&lt;/code&gt;) والذي ستربطه بكل الوظائف ضمن متُحكّم مُعيّن. يُشير &lt;code&gt;$scope&lt;/code&gt; إلى العنصر أو المنطقة الحالية في DOM (فهو لا يساوي &lt;code&gt;this&lt;/code&gt; ضمن النص البرمجي) وبهذا يخلق نطاقاً يحيط بكل البيانات والوظائف ضمن العناصر (DOM elements)، ويعزلها عن العناصر الأخرى، فيبدو وكأنه ينقل مجالات JavaScript العامة/الخاصة إلى DOM، وهذا شيء رائع!
+قد يبدو مفهوم النطاق مخيفاً للوهلة الأولى، لكنه طريقك الواصل بين الخادم (أو حتى البيانات المحلية) من جهة وDOM من الجهة الأخرى. يعطيك هذا المثال فكرة عن الطريقة التي &amp;ldquo;تُدفع&amp;rdquo; بها البيانات إلى DOM.&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/425KU/embedded/js,html,result&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;لنٌلقِ نظرة على بيانات حقيقية نفترض أننا جلبناها من خادم لنعرض تفاصيل تسجيل دخول المستخدم، سنكتفي في هذه المرحلة باستخدام بيانات جاهزة، وسنتعلم كيفية جلبها من الخادم على هيئة JSON لاحقاً.
+أولاً سنكتب نص JavaScript:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myApp = angular.module(&#39;myApp&#39;, []);
+
+myApp.controller(&#39;UserCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+
+  // لنجعل معلومات المستخدم ضمن عنصر فرعي
+  $scope.user = {};
+  $scope.user.details = {
+    &amp;quot;username&amp;quot;: &amp;quot;Todd Motto&amp;quot;,
+    &amp;quot;id&amp;quot;: &amp;quot;89101112&amp;quot;
+  };
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ثم ننتقل إلى DOM لعرض هذه البيانات:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-app=&amp;quot;myApp&amp;quot;&amp;gt;
+    &amp;lt;div ng-controller=&amp;quot;UserCtrl&amp;quot;&amp;gt;
+        &amp;lt;p class=&amp;quot;username&amp;quot;&amp;gt;Welcome, {{ user.details.username }}&amp;lt;/p&amp;gt;
+        &amp;lt;p class=&amp;quot;id&amp;quot;&amp;gt;User ID: {{ user.details.id }}&amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;الناتج:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/425KU/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;من المهمّ أن تتذكر أن المتحكمات تستخدم فقط &lt;em&gt;للبيانات&lt;/em&gt; ولإنشاء وظائف تتواصل مع الخادم وتجلب أو ترسل بيانات JSON. لا تستخدم المتحكمات لمعالجة DOM (كأن تنقل عنصراً ضمن الصفحة أو تخفيه أو تظهره&amp;hellip;)، فمعالجة DOM مهمة المُرشِدات (directives)، وهي ما سنشرحه لاحقاً، المهم أن تتذكر أن موضع jQuery وغيرها من المكتبات التي تتعامل مع DOM ليس ضمن المتحكّمات.&lt;/p&gt;
+
+&lt;p&gt;نصيحة من محترف: خلال اطلاعك على وثائق Angular الرسمية، ستلاحظ أن الأمثلة المقدمة تعتمد الأسلوب التالي لإنشاء المتحكمات:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myApp = angular.module(&#39;myApp&#39;, []);
+
+function MainCtrl ($scope) {
+  //...
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;لا تفعل هذا! هذا سيجعل كل الوظائف المُصرّحة تابعةً للنطاق العامّ (global scope) ولا يربطها بشكل جيد مع التطبيق. هذا يعني كذلك أن عمليات التقليص للنص البرمجي والتجارب ستكون أكثر صعوبة. لا تلوّث فضاء الاسماء العام، بل اجعل المتحكمات &lt;em&gt;ضمن&lt;/em&gt; التطبيق.&lt;/p&gt;
+
+&lt;h3 id=&#34;الم-رش-دات-directives:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;المُرشِدات (Directives)&lt;/h3&gt;
+
+&lt;p&gt;الُمرشد في أبسط صوره هو نص HTML مٌقولَب، يفضل أن يكون استخدامه متكررًا ضمن التطبيق. توفر المرشدات طريقة سهلة لإدخال أجزاء DOM ضمن التطبيق دون عناء. تعلم استخدام المرشدات ليس أمراً سهلاً على الإطلاق، وإتقانها يتطلب جهداً، ولكن الفقرات التالية ستضعك على بداية الطريق.&lt;/p&gt;
+
+&lt;p&gt;إذن، ما فائدة المرشدات؟ إنها مفيدة في عدة أمور، منها إنشاء عناصر DOM، مثل علامات التبويب (tabs) وقوائم التصفح - ففائدتها تعتمد على ما يفعله تطبيقك في الواجهة. لتسهيل الشرح، سأقول ببساطة: إن كنت استعملت &lt;code&gt;ng-show&lt;/code&gt; و&lt;code&gt;ng-hide&lt;/code&gt; من قبل، فقد استعملت المرشدات (حتى وإن كان هذان لا يُدرجان أية عناصر DOM).
+على سبيل التمرين، سنُنشئ نوعاً خاصًّا من الأزرار ونسميه _&lt;code&gt;customButton&lt;/code&gt;_، يُدرج هذا العنصر بعض العناصر الفرعية التي لا نريد كتابتها في كل مرة. تتنوع طرق التصريح عن المرشدات في DOM، وهي مبينة في النص البرمجي التالي:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- 1: تصريح عن مُرشد كخاصّة (attribute) --&amp;gt;
+&amp;lt;a custom-button&amp;gt;انقرني&amp;lt;/a&amp;gt;
+
+&amp;lt;!-- 2: كعنصر مخصص (custom elements) --&amp;gt;
+&amp;lt;custom-button&amp;gt;انقرني&amp;lt;/custom-button&amp;gt;
+
+&amp;lt;!-- 3: كصنف (class) (للتوافق مع النسخ القديمة من IE) --&amp;gt;
+&amp;lt;a class=&amp;quot;custom-button&amp;quot;&amp;gt;انقرني&amp;lt;/a&amp;gt;
+
+&amp;lt;!-- 4: كتعليق (comment) (ليس ملائماً لهذا التمرين) --&amp;gt;
+&amp;lt;!-- directive: custom-button --&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;أفضّل استخدام المرشدات كخواصّ (attributes)، أما العناصر المخصصة (custom elements) فقادمة في النسخ المستقبلية من HTML باسم Web Components، يوفر Angular ما يشبهها، ولكنها قد تنطوي على بعض العيوب والعلل في المتصفحات القديمة.
+الآن نعرف كيف نصرح عن المرشدات ضمن الصفحة، سننتقل إلى إنشائها ضمن JavaScript. لاحظ أنني سأربطه مع فضاء الأسماء العام myApp؛ في صيغته الأبسط يُكتب المرشد كما يلي:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.directive(&#39;customButton&#39;, function () {
+  return {
+    link: function (scope, element, attrs) {
+      // هنا اكتب التعليمات التي تعالج DOM أو تتعامل مع أحداثه
+    }
+  };
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;عرّفنا المرشد باستخدام الطريقة _&lt;code&gt;.directive()&lt;/code&gt;_، مُرسلين إليها اسم المرشد &lt;code&gt;&#39;customButton&#39;&lt;/code&gt;. عندما تكتب حرفاً كبيراً بالإنكليزية في اسم المُرشد، فإنه ينبغي استخدام اسم المرشد ضمن DOM بصيغته التي يُفصل بها باستخدام الشرطة (-) بين الحروف الكبيرة (كما في المثال السابق: استخدمنا &lt;code&gt;&#39;customElement&#39;&lt;/code&gt; في JavaScript و&lt;code&gt;&amp;quot;custom-button&amp;quot;&lt;/code&gt; في HTML).
+يُرجع المُرشد كائناً (Object) له عدد من الخصائص. أهم ما يجب تعلّمه منها: &lt;code&gt;restrict&lt;/code&gt; و&lt;code&gt;replace&lt;/code&gt; و&lt;code&gt;transclude&lt;/code&gt; و&lt;code&gt;template&lt;/code&gt; و&lt;code&gt;templateUrl&lt;/code&gt; وأخيراً &lt;code&gt;link&lt;/code&gt;. لنضف بعضها إلى نصنا البرمجي:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.directive(&#39;customButton&#39;, function () {
+  return {
+    restrict: &#39;A&#39;,
+    replace: true,
+    transclude: true,
+    template: &#39;&amp;lt;a href=&amp;quot;&amp;quot; class=&amp;quot;myawesomebutton&amp;quot; ng-transclude&amp;gt;&#39; +
+                &#39;&amp;lt;i class=&amp;quot;icon-ok-sign&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&#39; +
+              &#39;&amp;lt;/a&amp;gt;&#39;,
+    link: function (scope, element, attrs) {
+      // هنا اكتب التعليمات التي تعالج DOM أو تتعامل مع أحداثه
+    }
+  };
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;الناتج:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/VC4H2/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;تأكد من فحص العنصر (من الأمر Inspect element في المتصفح) لرؤية العناصر الجديدة التي أُدخلت في الصفحة. أعلم أن الرمز لم يظهر ضمن العنصر الجديد، ببساطة لأنني لم أُضمّن Font Awesome ضمن المشروع، ولكن يمكنك فهم كيف تعمل المرشدات. لنتعرف الآن ما تعنيه كل واحدة من خصائص المرشد السابقة الذكر:
+  * الخاصة &lt;em&gt;&lt;code&gt;restrict&lt;/code&gt;&lt;/em&gt;: تُقيّد هذه الخاصة كيفية استخدام المُرشد، كيف نريد أن نستخدمه؟ إن كنت تبني مشروعاً يتطلب دعم النسخ القديمة من IE، فعليك استخدامه كخاصّة (attribute) أو صنف (class). القيمة &lt;code&gt;&#39;A&#39;&lt;/code&gt; تعني حصر استخدام المرشد بالخواص (attributes) فقط. &lt;code&gt;&#39;E&#39;&lt;/code&gt; تعني Element و&lt;code&gt;&#39;C&#39;&lt;/code&gt; صنف و&lt;code&gt;&#39;M&#39;&lt;/code&gt; تعليق. القيمة الافتراضية هي &lt;code&gt;&#39;EA&#39;&lt;/code&gt; (أي عنصر وخاصة).
+  * الخاصة &lt;em&gt;&lt;code&gt;replace&lt;/code&gt;&lt;/em&gt;: تعني استبدال HTML العنصر المصرّح عن المُرشد ضمن الصفحة بالقالب (template) الذي يُحدد في الخاصة &lt;code&gt;template&lt;/code&gt; (مشروحة أدناه).
+  * الخاصة _&lt;code&gt;transclude_&lt;/code&gt;: تسمح بنسخ المحتوى الأصلي للعنصر المُصرّح عن المُرشد في الصفحة ودمجه ضمن المرشد (عند التنفيذ، ستلاحظ أن العبارة &amp;ldquo;انقرني&amp;rdquo; انتقلت إلى المُرشد).
+  * الخاصة &lt;em&gt;&lt;code&gt;template&lt;/code&gt;&lt;/em&gt;: قالب (كذلك المستخدم في المثال) يُدخل إلى الصفحة. يفضّل استخدام القوالب الصغيرة فقط. تُعالج القوالب وتبنى من قبل Angular مما يسمح باستخدام صيغة مقود الدراجة ضمنها.
+  * الخاصة &lt;em&gt;&lt;code&gt;templateUrl&lt;/code&gt;&lt;/em&gt;: مشابهة للسابقة، ولكنها تُجلب من ملف أو من وسم &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; بدل كتابتها ضمن تعريف المُرشد. كل ما عليك هو تعيين مسار الملف الذي يحوي القالب. يكون هذا الخيار مناسباً عندما تريد الاحتفاظ بالقوالب خارج النص البرمجي لملفات JavaScript:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;   myApp.directive(&#39;customButton&#39;, function () {
+     return {
+       templateUrl: &#39;templates/customButton.html&#39;
+       // directive stuff...
+
+   });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;وضمن الملف، نكتب:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;   &amp;lt;!-- inside customButton.html --&amp;gt;
+   &amp;lt;a href=&amp;quot;&amp;quot; class=&amp;quot;myawesomebutton&amp;quot; ng-transclude&amp;gt;
+     &amp;lt;i class=&amp;quot;icon-ok-sign&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+   &amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ملاحظة: يمكن أن يكون اسم الملف أي شيء وليس من الضروري أن يوافق اسمَ المُرشد.
+   عند استخدام الأسلوب السابق، سيحتفظ المتصفح بنسخة مُخبأة (cached) من ملف HTML، وهو أمر رائع! الخيار البديل الذي استخدام قالب ضمن وسم &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; وهنا لا تُخبأ نسخة منه في المتصفح:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;  &amp;lt;script type=&amp;quot;text/ng-template&amp;quot; id=&amp;quot;customButton.html&amp;quot;&amp;gt;
+  &amp;lt;a href=&amp;quot;&amp;quot; class=&amp;quot;myawesomebutton&amp;quot; ng-transclude&amp;gt;
+    &amp;lt;i class=&amp;quot;icon-ok-sign&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+  &amp;lt;/a&amp;gt;
+  &amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هنا أخبرنا Angular بأن وسم &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; هذا هو قالب (&lt;em&gt;&lt;code&gt;ng-template&lt;/code&gt;&lt;/em&gt;) وأعطيناه المُعرف. سيبحث Angular عن القالب أو عن ملف html، فاستخدم ما تراه مناسباً. شخصياً، أفضّل إنشاء ملفات html لسهولة تنظيمها ولتحسين الأداء وإبقاء DOM نظيفاً، فقد يستخدم مشروعك مع الوقت عشرات المُرشدات، وترتيبها في ملفات مستقلة يجعل مراجعتها أسهل.&lt;/p&gt;
+
+&lt;h3 id=&#34;الخدمات-services:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;الخدمات (Services)&lt;/h3&gt;
+
+&lt;p&gt;كثيراً ما تثير الخدمات في Angular ارتباك المطورين؛ ومن خبرتي وأبحاثي، أعتقد أن الخدمات وُضعت كنمط وأسلوب للتصميم أكثر من اختلافها بالوظيفة التي تؤديها. بعد التنقيب في مصدر Angular، وجدت أنها تُعالج وتبنى باستخدام المُجمّع (compiler) ذاته، وكذلك فهي تقدم العديد من الوظائف المشابهة. أنصح باستخدام الخدمات لبناء &lt;em&gt;الكائنات المُتفرِّدة&lt;/em&gt; (&lt;em&gt;singletons&lt;/em&gt;)، واستخدام المعامل (Factories) لبناء وظائف أكثر تعقيداً كالكائنات الحرفيّة (Object Literals).
+فيما يلي مثال لاستخدام خدمة توجد ناتج الضرب لعددين:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.service(&#39;Math&#39;, function () {
+  this.multiply = function (x, y) {
+    return x * y;
+  };
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;يمكنك بعد هذا استخدامها ضمن مُتحكم كما يلي:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+    var a = 12;
+    var b = 24;
+
+    // الناتج: 288
+    var result = Math.multiply(a, b);
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;نعم بالطبع إيجاد ناتج الضرب سهل ولا يحتاج خدمة، لكننا نستخدمه لإيصال الفكرة فحسب.
+عندما ننشئ خدمة (أو معملاً) نحتاج إلى إخبار Angular عن متطلبات هذه الخدمة، وهو ما يسمى &amp;ldquo;حقن المتطلبات Dependency Injection&amp;rdquo; - إن لم تُصرّح عن المتطلبات فلن يعمل المتحكم المعتمد على الخدمة، ويقع خطأ عند التجميع. ربما لاحظت الجزء &lt;code&gt;function ($scope)&lt;/code&gt; ضمن التصريح عن المتحكم أعلاه، وهذا هو ببساطة حقن المتطلبات! ستلاحظ أيضًا &lt;code&gt;[$scope]&lt;/code&gt; قبل الجزء &lt;code&gt;function ($scope)&lt;/code&gt;، وهو ما سأشرحه لاحقاً. فيما يلي طريقة استخدام حقن المتطلبات لإخبار Angular أنك تحتاج إلى الخدمة التي أنشأتها للتو:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// مرر الخدمة Math
+myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, &#39;Math&#39;, function ($scope, Math) {
+    var a = 12;
+    var b = 24;
+
+    // يُعطي 288
+    var result = Math.multiply(a, b);
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;المعامل-factories:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;المعامل (Factories)&lt;/h3&gt;
+
+&lt;p&gt;إيضاح فكرة المعامل سهل إذا كنت قد استوعبت فكرة الخدمات، بإمكاننا إنشاء كائن حرفي (Object Literal) ضمن المعمل أو طرائق أكثر تعقيداً:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function ($http) {
+  return {
+    get: function(url) {
+      return $http.get(url);
+    },
+    post: function(url) {
+      return $http.post(url);
+    },
+  };
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هنا أنشأت مُغلفات (wrappers) مخصصة لخدمة &lt;code&gt;$http&lt;/code&gt; في Angular المسؤولة عن طلبات &lt;code&gt;XHR&lt;/code&gt;. بعد حقن المتطلبات ضمن المتحكم يمكننا استخدام هذا المعمل بسهولة:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, &#39;Server&#39;, function ($scope, Server) {
+    var jsonGet = &#39;http://myserver/getURL&#39;;
+    var jsonPost = &#39;http://myserver/postURL&#39;;
+    Server.get(jsonGet);
+    Server.post(jsonPost);
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;إذا أرت طلب التحديثات من الخادم، بإمكانك إنشاء طريقة &lt;code&gt;Server.poll&lt;/code&gt; أو إن كنت تستخدم مقبساً (ٍSocket)، فربما ترغب بإنشاء الطريقة &lt;code&gt;Server.socket&lt;/code&gt; وهكذا&amp;hellip; المعامل تسمح لك بتنظيم نصك البرمجي ضمن وحدات يمكن إدراجها ضمن المتحكمات منعاً لتكرار النص البرمجي فيها والحاجة المتكررة لصيانته.&lt;/p&gt;
+
+&lt;h3 id=&#34;الم-رش-حات:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;المُرشّحات&lt;/h3&gt;
+
+&lt;p&gt;تستخدم المرشحات مع مصفوفات (arrays) من البيانات وخارج الحلقات (loops). إن احتجت للمرور على عناصر من مصفوفة بيانات والحصول على بعض منها فقط، فأنت في المكان الصحيح! يمكنك أيضًا استخدام المرشحات لتصفية ما يكتبه المستخدم ضمن حقل إدخال &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; مثلاً. هناك عدة طرق لاستخدام المرشحات: ضمن متحكم، أو كطريقة مُعرفة. فيما يلي الطريقة الأخيرة:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.filter(&#39;reverse&#39;, function () {
+    return function (input, uppercase) {
+        var out = &#39;&#39;;
+        for (var i = 0; i &amp;lt; input.length; i++) {
+            out = input.charAt(i) + out;
+        }
+        if (uppercase) {
+            out = out.toUpperCase();
+        }
+        return out;
+    }
+});
+
+// Controller included to supply data
+myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+    $scope.greeting = &#39;Todd Motto&#39;;
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;وفي HTML:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-app=&amp;quot;myApp&amp;quot;&amp;gt;
+    &amp;lt;div ng-controller=&amp;quot;MainCtrl&amp;quot;&amp;gt;
+        &amp;lt;p&amp;gt;No filter: {{ greeting }}&amp;lt;/p&amp;gt;
+        &amp;lt;p&amp;gt;Reverse: {{ greeting | reverse }}&amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;الناتج:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/pmh4s/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;وهنا نستخدم المُرشح ضمن حلقة &lt;code&gt;ng-repeat&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;ul&amp;gt;
+  &amp;lt;li ng-repeat=&amp;quot;number in myNumbers |filter:oddNumbers&amp;quot;&amp;gt;{{ number }}&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;مثال عن مُرشح ضمن متحكم:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+
+    $scope.numbers = [10, 25, 35, 45, 60, 80, 100];
+
+    $scope.lowerBound = 42;
+
+    // Does the Filters
+    $scope.greaterThanNum = function (item) {
+        return item &amp;gt; $scope.lowerBound;
+    };
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;واستخدامه حلقة &lt;code&gt;ng-repeat&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;li ng-repeat=&amp;quot;number in numbers | filter:greaterThanNum&amp;quot;&amp;gt;
+  {{ number }}
+&amp;lt;/li&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;الناتج:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/cZbCf/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;كان هذا القسم الأكبر مما تحتاج لمعرفته عن AngularJS وواجهاتها البرمجية، ومع أن ما تعلمناه كافٍ لبناء تطبيق Angular، ولكننا إلى الآن لم نسكتشف أغوراها!&lt;/p&gt;
+
+&lt;h3 id=&#34;ربط-البيانات-ثنائي-الاتجاه:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;ربط البيانات ثنائي الاتجاه&lt;/h3&gt;
+
+&lt;p&gt;عندما سمعت للمرة الأولى عن &lt;strong&gt;ربط البيانات ثنائي الاتجاه&lt;/strong&gt; لم أفهم ما يعنيه. باختصار يمكن القول إنه حلقة متصلة من البيانات المُزامنة: حدّث النموذج (Model) لتُحدَّث طريقة العرض (View)، أو حدّث طريقة العرض ليُحدَّث النموذج (Model). هذا يعني أن البيانات تبقى محدثة دوماً دون عناء. إن ربطت نموذج &lt;code&gt;ng-model&lt;/code&gt; مع حقل إدخال &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; وكتبت فيه، فهذا يُنشئ (أو يُحدِّث) نموذجاً في الوقت ذاته.
+فيما يلي نقوم بإنشاء حقل &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; ونربطه بنموذج نسميه &lt;code&gt;myModel&lt;/code&gt;، يمكنني الآن استخدام صياغة مقود الدراجة لعكس هذا النموذج وما يطرأ عليه من تحديثات في طريقة العرض في الوقت ذاته:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-app=&amp;quot;myApp&amp;quot;&amp;gt;
+    &amp;lt;div ng-controller=&amp;quot;MainCtrl&amp;quot;&amp;gt;
+        &amp;lt;input type=&amp;quot;text&amp;quot; ng-model=&amp;quot;myModel&amp;quot; placeholder=&amp;quot;Start typing...&amp;quot; /&amp;gt;
+        &amp;lt;p&amp;gt;My model data: {{ myModel }}&amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+    // Capture the model data
+    // and/or initialise it with an existing string
+    $scope.myModel = &#39;&#39;;
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;الناتج:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/qrr3q/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;طلبات-xhr-ajax-http-وربط-json:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;طلبات &lt;code&gt;XHR&lt;/code&gt;/Ajax/&lt;code&gt;$http&lt;/code&gt; وربط &lt;code&gt;JSON&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;نعرف الآن كيف نرسل بيانات بسيطة ضمن المجال (&lt;code&gt;$scope&lt;/code&gt;)، ونعرف ما يكفي عن كيفية عمل النماذج وربط البيانات ثنائي الجانب، والآن حان الوقت لمحاكاة طلبات &lt;code&gt;XHR&lt;/code&gt; حقيقية للخادم. ليس هذا ضرورياً لمواقع الويب العادية، لكنه مناسب جداً لجلب البيانات في تطبيقات الويب.
+عندما تطور تطبيقك على جهازك المحلي، فغالباً ما تستخدم شيئاً مثل Java أو ASP.NET أو PHP أو غيرها لتشغيل خادم محلي. وسواء كنا نتصل بقاعدة بيانات محلية أم بخادم بعيد كواجهة برمجية، فإننا نتبع نفس الخطوات بالضبط.&lt;/p&gt;
+
+&lt;p&gt;هنا يأتي دور &lt;code&gt;$http&lt;/code&gt;، صديقك المخلص من اليوم فصاعداً! الطريقة &lt;code&gt;$http&lt;/code&gt; هي مُغلّف &lt;code&gt;wrapper&lt;/code&gt; تقدمه Angular للوصول إلى البيانات من الخادم، وهو سهل الاستخدام للغاية ولا يحتاج لأي خبرة. فيما يلي مثال عن طلب &lt;code&gt;GET&lt;/code&gt; لجلب البيانات من الخادم. الصياغة مشابهة جداً لصياغة jQuery، وهذا يُسهل الانتقال من الأخيرة إلى Angular:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, &#39;$http&#39;, function ($scope, $http) {
+  $http({
+    method: &#39;GET&#39;,
+    url: &#39;//localhost:9000/someUrl&#39;
+  });
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;يُعيد Angular إلينا شيئاً يُصطلح على تسميته &lt;strong&gt;الوعد (Promise)&lt;/strong&gt; ، وهو بديل أسهل استخداماً من الاستدعاءات الراجعة (callbacks). يمكن تركيب الوعود في سلسلة باستخدام النقطة، ويمكننا ربطها مع مستقبلات النجاح والفشل:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+  $http({
+    method: &#39;GET&#39;,
+    url: &#39;//localhost:9000/someUrl&#39;
+  })
+  .success(function (data, status, headers, config) {
+    // successful data retrieval
+  })
+  .error(function (data, status, headers, config) {
+    // something went wrong :(
+  });
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;سهلة الاستخدام والقراءة. هنا نربط طريقة العرض والخادم بربط نموذج أو تحديثه. لنفترض أن لدينا خادمًا مُعدًّا ولنقم بدفع اسم المستخدم إلى طريقة العرض عن طريق طلب &lt;code&gt;AJAX&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;علينا &amp;ndash;لو كنا حريصين على المثالية&amp;ndash; أن نصمم بيانات &lt;code&gt;JSON&lt;/code&gt; التي نريدها أولاً. دعونا الآن نُبسط الأمور، ولندع هذا الأمر ليتولاه من يفهم في أمور النهاية الخلفية (backend)، ولكن لنقل أننا تفترض أن نستقبل بيانات مثل هذه:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;user&amp;quot;: {
+    &amp;quot;name&amp;quot;: &amp;quot;Todd Motto&amp;quot;,
+    &amp;quot;id&amp;quot;: &amp;quot;80138731&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هذا يعني أننا سنحصل على كائن &lt;code&gt;Object&lt;/code&gt; من الخادم (سنسميه &lt;code&gt;data&lt;/code&gt;، وسترى أنه يُمرر إلى مستقبلات الوعد الذي أنشأناه).
+علينا الآن أن نربط هذا الكائن بالخاصة &lt;code&gt;data.user&lt;/code&gt;، وضمنها لدينا &lt;code&gt;name&lt;/code&gt; و&lt;code&gt;id&lt;/code&gt;.
+يمكن ببساطة الوصول إلى هذه القيم باستخدام &lt;code&gt;data.user.name&lt;/code&gt; للحصول على &amp;ldquo;Todd Motto&amp;rdquo; مثلاً.&lt;/p&gt;
+
+&lt;p&gt;فيما يلي النص البرمجي (اطلع على التعليقات المضمنة):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;UserCtrl&#39;, [&#39;$scope&#39;, &#39;$http&#39;, function ($scope, $http) {
+
+  // create a user Object
+  $scope.user = {};
+
+  // Initiate a model as an empty string
+  $scope.user.username = &#39;&#39;;
+
+  // نريد أن نرسل طلباً ونحصل على اسم المستخدم
+  $http({
+    method: &#39;GET&#39;,
+    url: &#39;//localhost:9000/someUrlForGettingUsername&#39;
+  })
+  .success(function (data, status, headers, config) {
+    // عند نجاح الطلب، نُسنِد الاسم إلى النموذج الذي أنشأناه
+    $scope.user.username = data.user.name;
+  })
+  .error(function (data, status, headers, config) {
+    // وقع خطأ ما! :(
+  });
+}]);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;الآن ضمن الصفحة يمكننا ببساطة كتابة:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-controller=&amp;quot;UserCtrl&amp;quot;&amp;gt;
+  &amp;lt;p&amp;gt;{{ user.username }}&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هذا سيعرض اسم المستخدم. لننتقل الآن إلى خطوة أبعد بفهم &lt;strong&gt;ربط البيانات التصريحي (Declarative data-binding)&lt;/strong&gt; حيث تصبح الأمور أكثر إثارة!&lt;/p&gt;
+
+&lt;h3 id=&#34;ربط-البيانات-التصريحي:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;ربط البيانات التصريحي&lt;/h3&gt;
+
+&lt;p&gt;تقوم فلسفة Angular على إنشاء نصوص HTML ديناميكية قادرة على القيام بوظائف بنفسها لم نكن نتوقع أنها ممكنة ضمن المتصفح. هذه هي المهمة التي تقوم بها Angualar على خير وجه.
+لنتخيل أننا أرسلنا طلب AJAX لجلب قائمة بعناوين البريد الإلكتروني وسطر الموضوع فيها مع تاريخ إرسالها، ولنفترض أننا نريد عرضها ضمن الصفحة. في هذا المكان بالضبط تذهلنا Angular بقدراتها. لننشئ أولاً متحكماً بالبريد الإلكتروني:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;yApp.controller(&#39;EmailsCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+
+  // نُنشئ كائناً يدعاً `emails`
+  $scope.emails = {};
+
+  // لنفترض أننا حصلنا على هذه البيانات من الخادم
+  // هذه **مصفوفة** من **الكائنات**
+  $scope.emails.messages = [{
+        &amp;quot;from&amp;quot;: &amp;quot;Steve Jobs&amp;quot;,
+        &amp;quot;subject&amp;quot;: &amp;quot;I think I&#39;m holding my phone wrong :/&amp;quot;,
+        &amp;quot;sent&amp;quot;: &amp;quot;2013-10-01T08:05:59Z&amp;quot;
+    },{
+        &amp;quot;from&amp;quot;: &amp;quot;Ellie Goulding&amp;quot;,
+        &amp;quot;subject&amp;quot;: &amp;quot;I&#39;ve got Starry Eyes, lulz&amp;quot;,
+        &amp;quot;sent&amp;quot;: &amp;quot;2013-09-21T19:45:00Z&amp;quot;
+    },{
+        &amp;quot;from&amp;quot;: &amp;quot;Michael Stipe&amp;quot;,
+        &amp;quot;subject&amp;quot;: &amp;quot;Everybody hurts, sometimes.&amp;quot;,
+        &amp;quot;sent&amp;quot;: &amp;quot;2013-09-12T11:38:30Z&amp;quot;
+    },{
+        &amp;quot;from&amp;quot;: &amp;quot;Jeremy Clarkson&amp;quot;,
+        &amp;quot;subject&amp;quot;: &amp;quot;Think I&#39;ve found the best car... In the world&amp;quot;,
+        &amp;quot;sent&amp;quot;: &amp;quot;2013-09-03T13:15:11Z&amp;quot;
+    }];
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;علينا الآن دفعها ضمن الصفحة. هنا نستخدم الربط التصريحي لنُعلن عما سيفعله تطبيقنا: إنشاء أول جزء من عناصر HTML الحيوية. سنستخدم مُرشد &lt;code&gt;ng-repeat&lt;/code&gt; المبني ضمن Angular، والذي سوف يمر على البيانات ويعرض الناتج دون عناء الاستدعاءات الرجعية أو تغيير الحالة، بهذه السهولة:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;ul&amp;gt;
+  &amp;lt;li ng-repeat=&amp;quot;message in emails.messages&amp;quot;&amp;gt;
+    &amp;lt;p&amp;gt;From: {{ message.from }}&amp;lt;/p&amp;gt;
+    &amp;lt;p&amp;gt;Subject: {{ message.subject }}&amp;lt;/p&amp;gt;
+    &amp;lt;p&amp;gt;{{ message.sent | date:&#39;MMM d, y h:mm:ss a&#39; }}&amp;lt;/p&amp;gt;
+  &amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;الناتج:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/TAVQc/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;قمت أيضاً باستخدام مُرشّح التاريخ لأبين لك كيف يمكن أن تعرض تواريخ UTC.&lt;/p&gt;
+
+&lt;p&gt;اطلع على المُرشدات التي توفرها Angular لتتعرف على القدرات الكاملة للربط التصريحي. بهذا نكون قد عرفنا كيف نصل البيانات بين الخادم وطريقة العرض.&lt;/p&gt;
+
+&lt;h3 id=&#34;وظائف-المجال-scope-functions:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;وظائف المجال (Scope functions)&lt;/h3&gt;
+
+&lt;p&gt;تعتبر وظائف المجال الخطوة التالية في بناء وظائف التطبيق واستكمالاً للربط التصريحي. فيما يلي وظيفة بسيطة تحذف إحدى الرسائل:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+
+  $scope.deleteEmail = function (index) {
+    $scope.emails.messages.splice(index, 1)
+  };
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;نصيحة من محترف: من الهم أن تفكر في حذف البيانات من النموذج، لا تحذف العناصر أو أي شيئ من الصفحة، دع Angular يتولى هذا بربطه ثنائي الجانب للبيانات، فقط فكر بذكاء واكتب نصاً يستجيب لبياناتك!&lt;/p&gt;
+
+&lt;p&gt;ربط الوظائف مع طريقة العرض يمر عبر المُرشدات، هذه المرة نستخدم مُرشد &lt;code&gt;ng-click&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&amp;lt;a ng-click=&amp;quot;deleteEmail($index)&amp;quot;&amp;gt;Delete email&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هذا يختلف تمامًا عن مستقبلات النقر التقليدية في JavaScript، لأسباب عديدة نشرحها لاحقاً.
+لاحظ أنني أيضًا أمرر فهرس العنصر &lt;code&gt;$index&lt;/code&gt;، إذ يعرف Angualr ما العنصر المُراد حذفه (كم يوفر هذا من العناء!؟)&lt;/p&gt;
+
+&lt;p&gt;الناتج (احذف بعض الرسائل):&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/BgZmt/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;طرائق-dom-التصريحية:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;طرائق DOM التصريحية&lt;/h3&gt;
+
+&lt;p&gt;ننتقل الآن لطرائق DOM، وهي أيضًا مُرشدات تؤدي وظيفة ضمن الصفحة بدونها كنا سنكتب الكثير من النص البرمجي. إحدى الأمثلة المناسبة لإيضاح الفكرة هنا هي إظهار أو إخفاء قسم التنقل ضمن الصفحة باستخدام &lt;code&gt;ng-show&lt;/code&gt; و&lt;code&gt;ng-click&lt;/code&gt;، لنرَ بساطة هذا:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;a href=&amp;quot;&amp;quot; ng-click=&amp;quot;toggle = !toggle&amp;quot;&amp;gt;Toggle nav&amp;lt;/a&amp;gt;
+  &amp;lt;ul ng-show=&amp;quot;toggle&amp;quot;&amp;gt;
+    &amp;lt;li&amp;gt;Link 1&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;Link 2&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;Link 3&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;هنا ندخل عالم MVVM (اختصار Model-View-View-Model)، لاحظ أننا لم نستخدم متحكماً، وسنشرح فكرة MVVM بعد قليل.&lt;/p&gt;
+
+&lt;p&gt;الناتج (جرب الإظهار والإخفاء):&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/ZUyW5/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;التعبيرات-expressions:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;التعبيرات (Expressions)&lt;/h3&gt;
+
+&lt;p&gt;من أفضل ما يقدمه Angular، يقدم بديلاً عن الحاجة لكتابة الكثير من JavaScript والنصوص المكررة.&lt;/p&gt;
+
+&lt;p&gt;هل قمت يوماً بكتابة شيء كهذا؟&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;elem.onclick = function (data) {
+  if (data.length === 0) {
+    otherElem.innerHTML = &#39;No data&#39;;
+  } else {
+    otherElem.innerHTML = &#39;My data&#39;;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ربما يكون هذا استدعاءً راجعًا عن طلب GET، ونحتاج لنغير محتوى في الصفحة بناء على البيانات، يقدم Angular هذا بدون الحاجة لكتابة حرف JavaScript!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;p&amp;gt;{{ data.length &amp;gt; 0 &amp;amp;&amp;amp; &#39;My data&#39; || &#39;No data&#39; }}&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;سيقوم هذا بتحديث الصفحة تلقائياً دون استدعاءات عند وصول البيانات أو ما شابه. إن لم تتوفر البيانات، سيظهر هذا واضحاً، وإن وجدت فسيظهر كذلك. هناك حالات كثيرة جدًا يممكن فيها لـAngular أن يتولاها عبر ربطه ثنائي الجانب للبيانات الذي يعمل كالسحر!&lt;/p&gt;
+
+&lt;p&gt;الناتج:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/XCwcr/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;طرق-العرض-الديناميكية-والتوجيه-routing:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;طرق العرض الديناميكية والتوجيه (Routing)&lt;/h3&gt;
+
+&lt;p&gt;هي ما تقوم عليه فلسفة تطبيقات الويب (والمواقع) أحادية الصفحة: لديك قسم الترويسة وقسم التذييل وشريط جانبي ثم المحتوى الذي يُحدث تلقائياً بناءً على الرابط الحالي.&lt;/p&gt;
+
+&lt;p&gt;يجعل Angular إعداد هذا في منتهى السهولة. تحقن طرق العرض الديناميكة طرقاً معينة بناء على الرابط، عبر استخدام &lt;code&gt;$routeProvider&lt;/code&gt;. فيما يلي إعداد بسيط:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.config([&#39;$routeProvider&#39;, function ($routeProvider) {
+
+  /**
+   * $routeProvider
+   */
+  $routeProvider
+  .when(&#39;/&#39;, {
+    templateUrl: &#39;views/main.html&#39;
+  })
+  .otherwise({
+    redirectTo: &#39;/&#39;
+  });
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;لاحظ أنه عندما (&lt;code&gt;when&lt;/code&gt;) يكون الرابط &lt;code&gt;/&lt;/code&gt; فقط (الصفحة الرئيسية)، ستعرض الصفحة &lt;code&gt;main.html&lt;/code&gt;. من المفيد تسمية طريقة العرض الأساسية &lt;code&gt;main.html&lt;/code&gt; وليس &lt;code&gt;index.html&lt;/code&gt; لأنه سيكون لدينا مسبقاً الصفحة &lt;code&gt;index.html&lt;/code&gt; وهي الصفحة التي تحوي طرق العرض الديناميكية وبقية الأجزاء.
+يمكن ببساطة إضافة المزيد من طرق العرض:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.config([&#39;$routeProvider&#39;, function ($routeProvider) {
+
+  /**
+   * $routeProvider
+   */
+  $routeProvider
+  .when(&#39;/&#39;, {
+    templateUrl: &#39;views/main.html&#39;
+  })
+  .when(&#39;/emails&#39;, {
+    templateUrl: &#39;views/emails.html&#39;
+  })
+  .otherwise({
+    redirectTo: &#39;/&#39;
+  });
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;بإمكاننا الآن تحميل الصفحة &lt;code&gt;emails.html&lt;/code&gt; ببساطة لتقوم بعرض قائمة الرسائل الإلكترونية. الخلاصة أننا استطعنا أن نبني تطبيقاً معقداً للغاية بجهد ضئيل جداً.
+توفر الخدمة &lt;code&gt;$routerProvider&lt;/code&gt; المزيد من الخيارات، لكن ما تعلمناه عنها كافٍ في البداية. هناك أيضاً أشياء مثل مُعترِضات &lt;code&gt;$http&lt;/code&gt; التي تبدأ أحداثاً خلال مسير طلب AJAX، فتتيح لنا عرض مقدار التقدم على سبيل المثال أثناء جلب البيانات.&lt;/p&gt;
+
+&lt;h3 id=&#34;البيانات-الثابتة-العامة:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;البيانات الثابتة العامة&lt;/h3&gt;
+
+&lt;p&gt;في تطبيق Gmail للويب، تُكتب بيانات كثيرة بصيغة JSON ضمن الصفحة (انقر باليمين واختر عرض المصدر في صفحة Gmail). إن قمنا بخطوة مشابهة، أي كتابة البيانات ضمن الصفحة، فهذا سيجعل وقت عرضها أقل وسيبدو التطبيق أكثر سرعة.&lt;/p&gt;
+
+&lt;p&gt;عندما أطور تطبيقات مؤسستنا، تُدرج وسوم Java ضمن الصفحة وعندما تُعرض، تُرسل البيانات من الخادم (لا خبرة لدي في Java لذا سأكتب فيما يلي تصريحات وهمية، يمكنك استخدام أي لغة على الخادم إن أحببت). النصوص التالية توضح كيف يمكنك كتابة JSON ضمن الصفحة ثم تمريرها إلى المتحكم لربطها مباشرة:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- ضمن index.html (في نهاية الصفحة بالطبع) --&amp;gt;
+&amp;lt;script&amp;gt;
+window.globalData = {};
+globalData.emails = &amp;lt;javaTagHereToGenerateMessages&amp;gt;;
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;سيُنشئ وسم Java الذي اختلقته البينات بينما سيعالج Angular الرسائل فوراً. كل ما عليك هو إعطاؤه البيانات عبر المتحكم:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;EmailsCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
+
+    $scope.emails = {};
+
+    // Assign the initial data!
+    $scope.emails.messages = globalData.emails;
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;تقليص-الملفات-minification:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;تقليص الملفات (Minification)&lt;/h3&gt;
+
+&lt;p&gt;سنتحدث قليلاً عن تقليص حجم النصوص البرمجية التي كتبناها. ربما تكون قد جربت تقليص نصوصك البرمجية التي كتبتها لـAngular وصادفت خطأ.
+ليس هناك أمور خاصة يتطلبها تقليص حجم هذه الملفات، باستثناء الحاجة لإدراج أسماء المتطلبات ضمن مصفوفة قبل الطريقة المُصرّح عنها، لنوضح أكثر:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;,
+[&#39;$scope&#39;, &#39;Dependency&#39;, &#39;Service&#39;, &#39;Factory&#39;,
+function ($scope, Dependency, Service, Factory) {
+
+  // code
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;بعد التقليص:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;myApp.controller(&#39;MainCtrl&#39;,
+[&#39;$scope&#39;, &#39;Dependency&#39;, &#39;Service&#39;, &#39;Factory&#39;,
+function (a,b,c,d) {
+
+  // a = $scope
+  // b = Dependency
+  // c = Service
+  // d = Factory
+
+  // $scope alias usage
+  a.someFunction = function () {...};
+
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;عليك أن تحافظ على ترتيب المتطلبات المحقونة في المصفوفة &lt;code&gt;[&#39;_one&#39;, &#39;_two&#39;]&lt;/code&gt; وضمن مُعاملات الطريقة &lt;code&gt;function(_one, _two)&lt;/code&gt;، وإلا ستسبب لنفسك ولفريق العمل معك مشاكل كثيرة!&lt;/p&gt;
+
+&lt;h3 id=&#34;الاختلافات-بين-mvc-وmvvm:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;الاختلافات بين MVC وMVVM&lt;/h3&gt;
+
+&lt;p&gt;سننهي مقالتنا العملاقة الآن بشرح سريع يشمل الفروق بين MVC وMVVM:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;MVC: التواصل يعتمد على المتحكم (Controller)، لذلك نقول Model-View-Controller&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;MVVM: يشمل ربط البيانات التصريحي الذي يتواصل، بالمفهوم التقني، مع نفسه؛ أي Model-View-View-Model. يتواصل النموذج مع طريقة العرض، وتتواصل هذه الأخيرة مع النموذج ثانية. يسمح هذا للبيانات بأن تبقى محدّثة على الجانبين دون الحاجة لفعل أي شيء. لا داعي هنا للمتحكم.
+مثال على هذا: إنشاء حلقة &lt;code&gt;ng-repeat&lt;/code&gt; دون أن نعتمد على بيانات يُرسلها متحكم:&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;li ng-repeat=&amp;quot;number in [1,2,3,4,5,6,7,8,9]&amp;quot;&amp;gt;
+  {{ number }}
+&amp;lt;/li&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;يبدو هذا مناسباً للتجارب السريعة، ولكنني أنصح دوماً باستخدام متحكم للحفاظ على تنظيم النص البرمجي.&lt;/p&gt;
+
+&lt;p&gt;الناتج:&lt;/p&gt;
+
+&lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/C9GHF/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;مكونات-الويب-في-html5:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;مكونات الويب في HTML5&lt;/h3&gt;
+
+&lt;p&gt;قد تبدو هذه الفكرة مكررة، ولكنني سأعيدها هنا لنتحدث عن مكونات الويب.
+يسمح Angular بإنشاء عناصر (elements) مخصصة مثل: &lt;code&gt;&amp;lt;myCustomElement&amp;gt;&amp;lt;/myCustomElement&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;في الحقيقة هذا أشبه ما يكون بمستقبل HTML5 التي تقدم فكرة جديدة تُسمى مكونّات الويب (Web Components)، والتي تتركب من عناصر مخصصة ضمن HTML مترافقة مع نص JavaScript ديناميكي، وهذا أمر مثيرٌ للغاية - والأكثر إثارة أنه ممكن اليوم باستخدام Angular! فريق Angular بعيد النظر - شكراً لكم!&lt;/p&gt;
+
+&lt;h3 id=&#34;تعليقات-المجال-scope:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;تعليقات المجال (Scope)&lt;/h3&gt;
+
+&lt;p&gt;أعتقد أن تعليقات المجال إضافة جميلة لسياق العمل، فبدل الحاجة لكتابة التعليقات ضمن HTML بالطريقة التالية:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- header --&amp;gt;
+&amp;lt;header&amp;gt;
+  Stuff.
+&amp;lt;/header&amp;gt;
+&amp;lt;!-- /header --&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;أصبحنا نتحدث عن طرق العرض والمجالات بدل الصفحة، البيانات ضمن مجال ما لا تُشارك مع مجالات أخرى إلا إن قمت بفعل ذلك عن عمدٍ. لنستغل هذا في تحسين كتابة النص البرمجي بتقسيمه إلى مناطق تسبقها تعليقات:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- scope: MainCtrl --&amp;gt;
+&amp;lt;div class=&amp;quot;content&amp;quot; ng-controller=&amp;quot;MainCtrl&amp;quot;&amp;gt;
+
+&amp;lt;/div&amp;gt;
+&amp;lt;!-- /scope: MainCtrl --&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;تصحيح-العلل-في-angular:085923ab3936dfa8787a29d9ae4a4a7e&#34;&gt;تصحيح العلل في Angular&lt;/h3&gt;
+
+&lt;p&gt;تتوفر إضافة جميلة للغاية لمتصفح Chrome ينصح بها فريق Angular، وتسمى &lt;a href=&#34;https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en&#34;&gt;Batarang&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;برمجة سعيدة!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>عن Google Reader وRSS</title>
+      <link>http://forabi.net/post/2013-03-23-google-reader-rss/</link>
+      <pubDate>Sat, 02 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://forabi.net/post/2013-03-23-google-reader-rss/</guid>
+      <description>
+
+&lt;p&gt;أنا غاضبٌ جدًّا، على الرغم من أنّ هذا كان متوقّعًا، فإنني لم أتوقّع أن يحدث بهذه السرعة! منذ بدأت Google بتطوير تطبيق Currents كان هذا إحدى الإشارات التي تنذر بقرب موت Reader، وقبله فإن تطبيق Reader على Android بالكاد حصل على تحديث يمنحه واجهة Holo، ولم يطوّر بعد ذلك مطلقًا، وربّما هذا ما كان غرّني بالاستمرار في استخدامه: إنّه يعمل فحسب (It just works كما يُقال)؛ فلا داعي للتحديثات، ولا ميزات تنقصه، ولا عيوب تشوبه.&lt;br /&gt;
+إن صيغة RSS صيغة قياسية تعطي أصحاب المواقع إمكانية تقديم محتوياتهم المتجددة بأسلوب موحّد ومعتمد ويمكن تطويعه لاستخدامه كما يشاء المستخدم، إما في برامج على الحاسوب، أو قارئ على الويب، أو تطبيق على الهواتف الذكية، أو مجلات رقمية تركز على المحتوى المرئي المرافق، أو بطرقٍ أذكى من ذلك لتصفية الأخبار وتنسيقها وتجميعها حسب نوعها&amp;hellip; وسبب هذا أنه &amp;ldquo;قياسي&amp;rdquo; فحسب، هنا ندرك أهمية وجود معايير قياسية لكل ما نستخدمه.&lt;br /&gt;
+لكن يبدو أن اهتمام Google بالمحافظة على شعارها غير الرسمي &amp;ldquo;لا تكن شريرًا&amp;rdquo; يتراجع، ويبدو كذلك أنّها تكذب في مصطلح &amp;ldquo;Open Web&amp;rdquo; الذي تستخدمه كثيرًا، وتحاول الدفع بصيغتها الخاصة لجلب محتويات المواقع عبر Currents بما يضمن لها مصالح أكبر ويربط مستخدميها بمنتجاتها، ويجعل تصدير الاشتراكات للانتقال بها من مكان لآخر أكثر صعوبة، خصوصًا مع عدم توفر واجهة برمجية API لاشتراكات Currents.&lt;br /&gt;
+دليل آخر على هذا اعتمادها لواجهة برمجية مملوكة لها في Calendar وتخليها عن دعم المعيار القياسي CalDav، فهي بهذا تصبح أسوأ من Microsoft، التي لا تدعي أنها حريصة على &amp;ldquo;انفتاح الويب&amp;rdquo;!&lt;br /&gt;
+من المؤسف حقًا أن تستطيع شركة تجارية أن تتحكم بمصير &amp;ldquo;معايير&amp;rdquo; متّفق على استخدامها باستمرار تهميشها وتقديم بدائل مملوكة غير قياسية بما يحقق مصالحها التجارية.&lt;br /&gt;
+إحدى الادّعاءات التي طرحتها Google لقتل Reader كانت &amp;ldquo;تراجع استخدامه&amp;rdquo;، فهلّا نشرت تقريرًا يوضح مقدار التراجع الذي ادّعت وجوده؟ هل تحقق Google+ في المقابل تصاعدًا في الاستخدام؟ ولماذا لم توقف Google شبكتها الاجتماعية Orkut إذا كان عدد المستخدمين هو ما يحدد مصير الخدمة؟&lt;br /&gt;
+هناك من يزعم أيضًا أن موت RSS حتميّ لأن هذا المعيار غير اجتماعيّ بما يكفي، باعتبار أن الصفة الاجتماعية لأي شيء هي الدارج في هذا العصر من الويب، لكن يبقى RSS معيارًا يمكن تطويعه كما يشاء المبرمجون، إما في تطبيقات اجتماعية أو فرديّة؛ وليس على معيار ما أن يتبع الصفات الدارجة.&lt;br /&gt;
+لا تحتاج قراءة الأخبار لأن تكون اجتماعية، ولن تشكل الشبكات الاجتماعية بالنسبة لي مصدرًا للأخبار أو بديلاً عن قارئ RSS &amp;ldquo;غير اجتماعي&amp;rdquo;، لأنني ببساطة لدي اهتمامات خاصة قد تختلف عن اهتمامات من أتابعهم، وقد لا يهتمون هم بما أتابعه. كما أن الشبكات الاجتماعية آنية وتتغير من لحظة لأخرى (خصوصًا Twitter الذي يصر البعض على اعتباره بديل Reader)، أما قارئ RSS فهو يسمح بمتابعة ما يُنشر بغض النظر عن الوقت، وليس عليك أن تتبع ما ينشر لحظة بلحظة، بل على العكس تمامًا، فإن الشبكات الاجتماعية تبدو مصدرًا للقلق وإرهاق الأعصاب عندما تنتقل بين خبر محلي وآخر عالمي وآخر يخص فئة محدودة من أصدقائك، بعكس قارئ RSS الذي يمكنك التحكم بمصادره تمامًا وبمعزل عن علاقتك بالمصدر.&lt;br /&gt;
+ما أعنيه أن لا يمكن أن يحدد شخصٌ أعرفه في حياتي ما أقرأه من مصادر ومتى أقرأه، وهذه هي المشكلة الرئيسية في اعتبار الشبكات الاجتماعية بديلاً لقارئات RSS. فكون فلان صديقك لا يمنحه حق قولبة معرفتك ضمن ما يراه مناسبًا، بل من حقك أن تحدد بالضبط من أين تقرأ ومتى تقرأ.&lt;/p&gt;
+
+&lt;h3 id=&#34;إذن-ما-مصير-rss-بعد-موت-reader:0d331a5e2b3464cf135aadefbb7f44b9&#34;&gt;إذن ما مصير RSS بعد موت Reader؟&lt;/h3&gt;
+
+&lt;p&gt;هذا الجزء مقتبس من &lt;a href=&#34;http://3gc.r2.ly/?id=15648&#34;&gt;تدوينة لـDave Winer&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;إما أن يموت هذا المعيار بموت Reader لتحل محله بدائل مملوكة غير قياسية (وهو ما تسعى إليه Google)&lt;/li&gt;
+&lt;li&gt;ظهور بدائل يهيمن أحدها على المشهد ويربط RSS بمصيره بحيث يقيد تطوره وقد يؤدي إلى القضاء عليه.&lt;/li&gt;
+&lt;li&gt;ظهور بديل قوي يدفع تطوير RSS للأمام (وهو ما يبدو مستبعدًا)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;ليس-للمستخدمين-حيلة:0d331a5e2b3464cf135aadefbb7f44b9&#34;&gt;&amp;ldquo;ليس للمستخدمين حيلة&amp;rdquo;&lt;/h3&gt;
+
+&lt;p&gt;في &lt;a href=&#34;http://www.marco.org/2013/03/21/thursday-sandwich&#34;&gt;تدوينة أعجبتني لـMarco Arment&lt;/a&gt; مؤسس Instapaper وأحد مؤسسي Tumblr، يقول:
+&amp;gt;
+&amp;gt; في هذا السوق، لا يمكنك الاعتماد على دوام أي شيء، عليك أن تتجنب كل منتج تقني لكي تتجنب احتمال أن يتوقف؛ فالمنتجات والخدمات التي تدوم أكثر من بضع سنوات هي الاستنثاء، لا القاعدة.&lt;br /&gt;
+&amp;gt; [&amp;hellip;] ليس للمستخدمين حيلة. بإمكاننا أن نشتكي من إغلاق Google Reader ونطلق عرائض على الويب نعتقد أنها قد تصنع الفرق، لكننا جميعًا ذاكرتنا قصيرة وليس بإمكاننا مقاومة المنتجات المجانية.&lt;br /&gt;
+&amp;gt; [&amp;hellip;] إذا كنت مستخدمًا لـGmail، ما الذي سيحدث إذا أغلقت Google حسابك؟ (&lt;a href=&#34;http://ehsanakhgari.org/blog/2012-04-13/how-i-lost-access-my-google-account-today&#34;&gt;وهذا يحدث&lt;/a&gt;.) ما الذي سيحدث إذا أوقفوا دعم IMAP وكنت تعتمد عليه؟ أو إذا أصبحوا ببساطة &amp;ldquo;سيئين&amp;rdquo;؟ هل سيكون الانتقال إلى مزود بريد إلكتروني آخر أمرًا سهلاً؟ كم سيؤثر هذا على عملك؟ كيف سينتهي عنوانك بـ @gmail.com؟ ما الذي كان سيحدث لو أننا جميعًا انتقلنا إلى Wave؟ ما الذي يحدث عندما تحل رسائل Facebook محل البريد الإلكتروني لعامّة الناس؟&lt;/p&gt;
+
+&lt;p&gt;الخلاصة أنني سأتجنب من اليوم فصاعدًا الاعتماد على خدمات Google، والتوجه نحو خدمات مثل Evernote وDropbox حيث تكون الخدمة هي العمل الرئيسي للشركة، وليست مشروعًا ثانويًّا يمكن التخلي عنه ببساطة، هذا يطيل احتمال بقاء الخدمة وإن كان لا ينفي احتمال توقفها تمامًا.&lt;br /&gt;
+ملاحظة: بدأت بكتابة هذه التدوينة &lt;a href=&#34;http://www.omgchrome.com/google-pulls-rss-extension-from-chrome-web-store/&#34;&gt;قبل أن تسحب Google إضافة الاشتراك عبر خلاصات RSS&lt;/a&gt; للمواقع في Chrome، وهي الإضافة التي كنت أستخدمها أساسًا للاشتراك في موقع عبر Google Reader بسرعة دون الحاجة لنسخ الرابط ولصقه في Reader، وهذا الخبر يؤكد مساعي Google للقضاء على RSS.&lt;br /&gt;
+ملاحظة (2): &lt;a href=&#34;http://www.omgchrome.com/and-its-back-google-reinstate-rss-subscription-extension-for-chrome/&#34;&gt;أعادت Google الإضافة بعد أن &amp;ldquo;حذفتها بالخطأ&amp;rdquo;&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

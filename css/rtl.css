@@ -1,0 +1,24 @@
+html {
+  direction: rtl;
+}
+
+code {
+  font-family: 'Consolas', 'Courier New', Thabit, monospace;
+}
+code[class*="language-"] {
+  direction: ltr;
+}
+
+code::before {
+  display: inline;
+  content: '\200e';
+}
+
+code::after {
+  content: '\200e';
+  display: inline;
+}
+
+.hljs-comment {
+  direction: reset;
+}
