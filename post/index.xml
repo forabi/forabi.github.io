@@ -17,6 +17,8 @@
       <guid>http://forabi.net/post/whats-new-in-es6-p2/</guid>
       <description>
 
+&lt;p&gt;مُلاحظة: نُشر [هذا المقال على أكاديمية حسوب]&lt;a href=&#34;https://academy.hsoub.com/programming/javascript/%D9%85%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85-%D9%85%D9%86-%D8%AC%D8%A7%D9%81%D8%A7%D8%B3%D9%83%D8%B1%D8%A8%D8%AA-ecmascript-6-%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-r26/)&#34;&gt;https://academy.hsoub.com/programming/javascript/%D9%85%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85-%D9%85%D9%86-%D8%AC%D8%A7%D9%81%D8%A7%D8%B3%D9%83%D8%B1%D8%A8%D8%AA-ecmascript-6-%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-r26/)&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;التفكيك-destructuring:e6a141d149c2e03f19b615655a2b05dd&#34;&gt;التفكيك Destructuring&lt;/h2&gt;
 
 &lt;p&gt;ذكرنا في الجزء السابق أن اهتمامًا كبيرًا أُوليَ لتسهيل كتابة الشفرة وقراءتها في ECMAScript 6، و&lt;strong&gt;الإسناد بالتفكيك (Destructuring assignment)&lt;/strong&gt; لا يخرج عن هذا السياق، وهو ليس بالمفهوم الجديد في عالم البرمجة، فهو معروف في Python وفي Ruby. بعيدًا عن تعقيدات المصطلحات، إليك هذا المثال:&lt;/p&gt;
@@ -578,6 +580,8 @@ addThreeOrMoreNumbers(1, 2, 3);
       <guid>http://forabi.net/post/javascript-all-the-things/</guid>
       <description>
 
+&lt;p&gt;مُلاحظة: نُشر &lt;a href=&#34;https://academy.hsoub.com/programming/javascript/javascript-%D8%AA%D8%B3%D8%AA%D8%B7%D9%8A%D8%B9-%D8%A3%D9%86-%D8%AA%D9%8F%D9%86%D8%B8%D9%91%D9%81-%D8%A3%D8%B7%D8%A8%D8%A7%D9%82%D9%83-%D8%A3%D9%8A%D8%B6%D8%A7-r13/&#34;&gt;هذا المقال على أكاديمية حسوب&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;كما هو الحال كل بضع عقود، تطفو إلى السطح لغة برمجة ما ويعدنا متعصبوها بأنها ستفعل لنا كل شيء، بدءًا من تطبيقات الحاسوب مرورًا بالهواتف الذكية وليس انتهاءً بالتعامل مع الجمادات من حولنا بطرق رائعة &lt;a href=&#34;https://www.youtube.com/watch?v=7b_epE3XG34&#34;&gt;كالتحكم بطائرة بلا طيّار باستخدام قبضة Xbox 360&lt;/a&gt;! لم يكن هذا الحماس يومًا أشدّ منه مع JavaScript، والأمر يعود لعدّة أسباب:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -695,6 +699,8 @@ addThreeOrMoreNumbers(1, 2, 3);
       
       <guid>http://forabi.net/post/whats-new-in-es6/</guid>
       <description>
+
+&lt;p&gt;مُلاحظة: نُشر &lt;a href=&#34;https://academy.hsoub.com/programming/javascript/%D9%85%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85-%D9%85%D9%86-%D8%AC%D8%A7%D9%81%D8%A7%D8%B3%D9%83%D8%B1%D8%A8%D8%AA-ecmascript-6-%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%A3%D9%88%D9%84-r12/&#34;&gt;هذا المقال على أكاديمية حسوب&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Harmony هو الاسم الرمزي للإصدار السادس من لغة ECMAScript وهي اللغة القياسية التي تقوم عليها JavaScript، والإصدار الجديد يأتي بميزات جديدة تتناول العديد من جوانب اللغة بما فيها الصياغة (syntax) وأسلوب البناء وأنواع جديدة من المكونات المدمجة في اللغة. في هذا المقال نتعرف على بعض من المميزات التي ستجعل كتابة شيفرة JavaScript أكثر اختصاراً وفعالية.&lt;/p&gt;
 
@@ -1034,7 +1040,7 @@ SayHello(); // Hello User!
       <guid>http://forabi.net/post/angular-guide/</guid>
       <description>
 
-&lt;p&gt;&lt;em&gt;هذه ترجمة (بتصرف) &lt;a href=&#34;http://toddmotto.com/ultimate-guide-to-learning-angular-js-in-one-day/&#34;&gt;لمقالة Todd Motto على مدوّنته&lt;/a&gt; وإليه يعود ضمير المتكلم في المقالة. نُشرت للمرة الأولى على &lt;a href=&#34;http://www.webtuts.me/ultimate-guide-to-learning-angular-js-in-one-day/&#34;&gt;مدوّنة دروس الويب&lt;/a&gt;، وأعيدُ نشرها هنا.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;هذه ترجمة (بتصرف) &lt;a href=&#34;http://toddmotto.com/ultimate-guide-to-learning-angular-js-in-one-day/&#34;&gt;لمقالة Todd Motto على مدوّنته&lt;/a&gt; وإليه يعود ضمير المتكلم في المقالة. نُشرت للمرة الأولى على &lt;a href=&#34;https://academy.hsoub.com/programming/javascript/angularjs/%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84-%D9%84%D8%AA%D8%B9%D9%84%D9%85-angular-js-%D9%81%D9%8A-%D9%8A%D9%88%D9%85-%D9%88%D8%A7%D8%AD%D8%AF-r11/&#34;&gt;أكاديمية حسوب&lt;/a&gt;، وأعيدُ نشرها هنا.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://forabi.net/images/AngularJS-medium.png&#34; alt=&#34;شعار Angular JS&#34; /&gt;&lt;/p&gt;
 
