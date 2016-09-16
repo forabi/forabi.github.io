@@ -2,9 +2,9 @@
 <html lang="ar">
 <head>
 <meta charset="utf-8">
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.16" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="http://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
@@ -36,7 +36,7 @@
 
 <p>Harmony هو الاسم الرمزي للإصدار السادس من لغة ECMAScript وهي اللغة القياسية التي تقوم عليها JavaScript، والإصدار الجديد يأتي بميزات جديدة تتناول العديد من جوانب اللغة بما فيها الصياغة (syntax) وأسلوب البناء وأنواع جديدة من المكونات المدمجة في اللغة. في هذا المقال نتعرف على بعض من المميزات التي ستجعل كتابة شيفرة JavaScript أكثر اختصاراً وفعالية.</p>
 
-<h2 id="متغيرات-نطاقها-القطعة-البرمجية-block-scoped-variables:dc2d7b8a998cf439f4fce9639f16330a">متغيرات نطاقها القطعة البرمجية (Block-scoped Variables)</h2>
+<h2 id="متغيرات-نطاقها-القطعة-البرمجية-block-scoped-variables">متغيرات نطاقها القطعة البرمجية (Block-scoped Variables)</h2>
 
 <p>في الإصدار الحالي من JavaScript، تُعامل كل المتغيرات المفروضة ضمن دالة (<code>function</code>) على أنها تابعة لهذه الدالة (Function-scoped) أي يمكن الوصول إليها من أي موقع ضمن هذه الدالة، حتى وإن كانت هذه المتغيرات قد فُرضِت ضمن قطعة برمجية فرعية ضمن هذه الدالة (كحلقة <code>for</code> أو جملة شرطية <code>if</code>)، وهذا يخالف ما تتبناه بعض من أشهر لغات البرمجة، وقد يسبب بعض الارتباك لمن لم يعتد عليه.
 لنوضح أكثر في هذا المثال:</p>
@@ -80,7 +80,7 @@ for (var j = 0; j &lt; doubles.length; j++) {
 
 <p>عند تطبيق هذا المثال (يمكنك تطبيقه في Firefox وChrome لأن كلا المتصفحين بدأا بدعم <code>let</code>) سنحصل على النتيجة البديهية <code>2</code> ثم <code>4</code> ثم <code>6</code>. بالطبع بإمكاننا تحسين الشيفرة باعتماد <code>let</code> عند التصريح عن كل المتغيرات السابقة، وهو الأمر الذي يجب أن تعتاد فعله من اليوم!</p>
 
-<h2 id="شيفرة-أقصر-وأسهل-للقراءة:dc2d7b8a998cf439f4fce9639f16330a">شيفرة أقصر وأسهل للقراءة</h2>
+<h2 id="شيفرة-أقصر-وأسهل-للقراءة">شيفرة أقصر وأسهل للقراءة</h2>
 
 <p>لعل أكثر ما أُحبّه في JavaScript مرونتها الفائقة، وبالذات القدرة على إمرار دوال مجهولة (Anonymous Functions) لدوال أخرى، الأمر الذي يسمح لنا بكتابة شيفرة ما كان من الممكن كتابتها بلغات أخرى إلا بضعفي عدد الأسطر وربما أكثر. لاحظ هذا المثال:</p>
 
@@ -181,7 +181,7 @@ console.log(multilineString);
 
 <p>كذلك سيكون بإمكاننا تحسين هذا النص أكثر من ذلك باستخدام <strong>الأصناف (Classes)</strong>، نعم! سيكون لدينا أصناف أخيرًا! (سنستعرضها لاحقاً)</p>
 
-<h2 id="الثوابت-constants:dc2d7b8a998cf439f4fce9639f16330a">الثوابت (Constants)</h2>
+<h2 id="الثوابت-constants">الثوابت (Constants)</h2>
 
 <p>سيداتي وسادتي&hellip; رحبوا بالثوابت&hellip; نعم إنها أخيرًا متوفرة في JavaScript، إحدى المكونات الأساسية لأي لغة برمجية التي لم تكن متوفرة في JavaScript، أصبحت الآن متوفرة. والآن نأتي للسؤال البديهي: لماذا أحتاج للثوابت؟ أليس بإمكاني التصريح عن متغير دون أن أغير قيمته بعد إعطاءه القيمة الأولية؟ نعم بالطبع بإمكانك ذلك، لكن هذا لا يعني بالضرورة أن المستخدم أو نصاً برمجيًا من طرف ثالث ليس بإمكانه تغيير قيمة هذا المتغير في سياق التنفيذ، وطالما أن المتغير &laquo;متغير&raquo; بطبيعته، فإننا دومًا بحاجة إلى شيء من أصل اللغة يحمينا من تغييره خطأ. عند التصريح عن ثابت فإننا نعطيه قيمة أولية ثم ستتولى الآلة البرمجية لـJavaScript حماية هذا الثابت من التغيير، وسُيرمى خطأ عند محاولة إسناد قيمة جديدة لهذا الثابت.</p>
 
@@ -193,7 +193,7 @@ myConstant = 'Trying to change your constant';
 console.log(myConstant); // &quot;Never change this!&quot;
 </code></pre>
 
-<h2 id="الم-عاملات-الافتراضية-default-parameters:dc2d7b8a998cf439f4fce9639f16330a">المُعاملات الافتراضية (Default Parameters)</h2>
+<h2 id="الم-عاملات-الافتراضية-default-parameters">المُعاملات الافتراضية (Default Parameters)</h2>
 
 <p>غياب دعم المُعاملات الافتراضية في JavaScript واحد من أكثر الأشياء التي تزعجني، لأنها تجبرني على كتابة شيفرة مثل هذه:</p>
 
@@ -219,7 +219,7 @@ SayHello('Fawwaz'); // Hello Fawwaz!
 SayHello(); // Hello User!
 </code></pre>
 
-<h2 id="الوعود-promises:dc2d7b8a998cf439f4fce9639f16330a">الوعود (Promises)</h2>
+<h2 id="الوعود-promises">الوعود (Promises)</h2>
 
 <p>الوعود هي الحل الذي تأتينا به JavaScript لحل مشكلة هرم الموت (Pyramid of Death) الذي نواجهه عند تنفيذ مهمات غير متزامنة تعتمد إحداها على الأخرى:</p>
 

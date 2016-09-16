@@ -2,9 +2,9 @@
 <html lang="ar">
 <head>
 <meta charset="utf-8">
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.16" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="http://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
@@ -34,7 +34,7 @@
 
 <p>مُلاحظة: نُشر <a href="https://academy.hsoub.com/programming/javascript/%D9%85%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85-%D9%85%D9%86-%D8%AC%D8%A7%D9%81%D8%A7%D8%B3%D9%83%D8%B1%D8%A8%D8%AA-ecmascript-6-%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-r26/">هذا المقال على أكاديمية حسوب</a>.</p>
 
-<h2 id="التفكيك-destructuring:e6a141d149c2e03f19b615655a2b05dd">التفكيك Destructuring</h2>
+<h2 id="التفكيك-destructuring">التفكيك Destructuring</h2>
 
 <p>ذكرنا في الجزء السابق أن اهتمامًا كبيرًا أُوليَ لتسهيل كتابة الشفرة وقراءتها في ECMAScript 6، و<strong>الإسناد بالتفكيك (Destructuring assignment)</strong> لا يخرج عن هذا السياق، وهو ليس بالمفهوم الجديد في عالم البرمجة، فهو معروف في Python وفي Ruby. بعيدًا عن تعقيدات المصطلحات، إليك هذا المثال:</p>
 
@@ -102,7 +102,7 @@ theSwitch = 0;
 _ref = [theSwitch, theBait], theBait = _ref[0], theSwitch = _ref[1];
 </code></pre>
 
-<h2 id="الم-كر-رات-iterators-وحلقة-for-of:e6a141d149c2e03f19b615655a2b05dd">المُكرِّرات (Iterators) وحلقة <code>for... of</code></h2>
+<h2 id="الم-كر-رات-iterators-وحلقة-for-of">المُكرِّرات (Iterators) وحلقة <code>for... of</code></h2>
 
 <p>ما من لغة برمجة تخلو من وسيلة للمرور على عدد من القيم و<strong>تكرار</strong> تنفيذ عمليّة معيّنة على هذه القيم، من أبسط هذه الوسائل حلقة <code>for</code> التقليديّة الشّهيرة، وفي JavaScript يشيع استخدام حلقة <code>for... in</code> إلى جانبها للمرور على أسماء خصائص العناصر، إذ يمكننا معرفة كل خصائص العنصر <code>document</code> بسطرين فقط:</p>
 
@@ -219,7 +219,7 @@ console.log([`Hello ${person}` for (person of people)]);
 
 <p>لكن دعونا نتوقّف قليلاً ولننتقل إلى الجانب الفلسفي لهذه الإضافات في JavaScript، قد تبدو للوهلة الأولى تعقيدات بلا طائل، خصوصًا وأنّ كثيرًا منها لا يهدف سوى للتسهيل، ولا يقدّم شيئًا يستحيل إنجازه بالإصدارات السابقة من اللغة؛ هنا يمكن الرّدّ بأنّ تطوّر اللغة متعلّق بكيفيّة استخدامها والخبرة التي تُكتسب مع مرور السّنين، حيث تظهر للمطوّرين حاجات جديدة وأفكار تطبّق مرارًا لدرجة أنها ترتقي لتصبح ضمن أساسات اللغة. سهولة كتابة الشفرة لم تعد رفاهية، بل هي ضرورة لإنجاز المشاريع الكبيرة لأنّها تتيح اختصار الوقت الذي كان سيضيع في كتابة متكرّرة ومُملّة، كما أنّها تُلبّي ما يتوقّعه المطوّرون من لغة أصبحت تؤخذ على محمل الجدّ وتُستخدم في تطوير تطبيقات ضخمة ومُعقّدة بعد أن كان جُلّ استخدامها تنفيذ بعض المهام البسيطة.</p>
 
-<h2 id="الم-ول-دات-generators:e6a141d149c2e03f19b615655a2b05dd">المُولِّدات (Generators)</h2>
+<h2 id="الم-ول-دات-generators">المُولِّدات (Generators)</h2>
 
 <p>المولدات (Generators) ببساطة هي دوال يمكن إيقافها والعودة إليها في وقت لاحق مع الاحتفاظ بسياقها دون تغيير، صياغة دوال المولدات لا تختلف كثيرًا عن صياغة الدوال التقليدية، كل ما عليك هو إضافة إشارة * بعد <code>function</code> واستخدام <code>yield</code> بدل <code>return</code>، المثال التالي سيوضح فكرة المولدات أكثر:</p>
 
@@ -252,14 +252,12 @@ nameGenerator.next().value; // undefined
   }
 }
 
-
 let numGen = numberGenerator();
 numGen.next(); // { value: 0, done: false }
 numGen.next(); // { value: 1, done: false }
 numGen.next(); // { value: 2, done: false }
 numGen.next(); // { value: 3, done: false }
 // ...
-
 
 </code></pre></li>
 
@@ -269,11 +267,9 @@ numGen.next(); // { value: 3, done: false }
   console.log(name);
 }
 
-
 // &quot;Muhammad&quot;
 // &quot;Salem&quot;
 // &quot;Abdullah&quot;
-
 
 </code></pre></li>
 
@@ -503,7 +499,7 @@ suspend(function*() {
 
 <p>في هذا المثال يجب على <code>getJSON</code> أن تُعيد وعدًا <code>Promise</code> ليستطيع مُفسّر اللّغة انتظاره إلى أن يُحقّق (resolve) أو يُرفض (reject)، والقيمة الّتي تُحقّق تُحفظ ضمن المُتغيّر <code>user</code>، وأما عند رفض الوعد يُرمى خطأ (<code>throw</code>) يمكن تلقّيه (<code>catch</code>) كما في الشيفرة غير المتزامنة.</p>
 
-<h2 id="م-عام-ل-البقي-ة-rest-parameter-والناشرة-spread:e6a141d149c2e03f19b615655a2b05dd">مُعامِل البقيّة (Rest parameter) والناشرة (Spread)</h2>
+<h2 id="م-عام-ل-البقي-ة-rest-parameter-والناشرة-spread">مُعامِل البقيّة (Rest parameter) والناشرة (Spread)</h2>
 
 <p>بعد كلّ هذا الكلام المُعقّد عن الأشياء غير المتزامنة التي نريد جعلها تبدو متزامنة وما إلى ذلك، سنختم الجزء الثّاني بفكرتين بسيطتين أُضيفتا إلى ECMAScript في الإصدار السّادس وتحلّان مشكلتين شائعتين في كثير من اللّغات البرمجيّة:</p>
 
@@ -576,7 +572,7 @@ addThreeOrMoreNumbers(1, 2, 3);
 
 <p>في الجزء القادم سنتعرف بمشيئة الله على الوحدات (Modules) التي تُعتبر طريقة جديدة لتنظيم الشفرة اُستلهمَت من عالم Node.js وrequire.js، وسُنلقي نظرة على الأصناف (Classes)، المكوّن البرمجيّ الذي وجد طريقه أخيرًا إلى JavaScriptّ!</p>
 
-<h3 id="المصادر:e6a141d149c2e03f19b615655a2b05dd">المصادر</h3>
+<h3 id="المصادر">المصادر</h3>
 
 <ol>
 <li><a href="https://developer.mozilla.org">شبكة مطوّري موزيلّا</a></li>

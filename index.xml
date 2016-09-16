@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>مدوّنة فوّاز</title>
-    <link>http://forabi.net/</link>
+    <link>https://forabi.net/</link>
     <description>Recent content on مدوّنة فوّاز</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ar</language>
     <lastBuildDate>Wed, 04 Nov 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://forabi.net/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://forabi.net/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ما الجديد في الإصدار القادم من JavaScript؟ (الجزء الثّاني)</title>
-      <link>http://forabi.net/post/whats-new-in-es6-p2/</link>
+      <link>https://forabi.net/post/whats-new-in-es6-p2/</link>
       <pubDate>Wed, 04 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://forabi.net/post/whats-new-in-es6-p2/</guid>
+      <guid>https://forabi.net/post/whats-new-in-es6-p2/</guid>
       <description>
 
 &lt;p&gt;مُلاحظة: نُشر &lt;a href=&#34;https://academy.hsoub.com/programming/javascript/%D9%85%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85-%D9%85%D9%86-%D8%AC%D8%A7%D9%81%D8%A7%D8%B3%D9%83%D8%B1%D8%A8%D8%AA-ecmascript-6-%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-r26/&#34;&gt;هذا المقال على أكاديمية حسوب&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;التفكيك-destructuring:e6a141d149c2e03f19b615655a2b05dd&#34;&gt;التفكيك Destructuring&lt;/h2&gt;
+&lt;h2 id=&#34;التفكيك-destructuring&#34;&gt;التفكيك Destructuring&lt;/h2&gt;
 
 &lt;p&gt;ذكرنا في الجزء السابق أن اهتمامًا كبيرًا أُوليَ لتسهيل كتابة الشفرة وقراءتها في ECMAScript 6، و&lt;strong&gt;الإسناد بالتفكيك (Destructuring assignment)&lt;/strong&gt; لا يخرج عن هذا السياق، وهو ليس بالمفهوم الجديد في عالم البرمجة، فهو معروف في Python وفي Ruby. بعيدًا عن تعقيدات المصطلحات، إليك هذا المثال:&lt;/p&gt;
 
@@ -87,7 +87,7 @@ theSwitch = 0;
 _ref = [theSwitch, theBait], theBait = _ref[0], theSwitch = _ref[1];
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;الم-كر-رات-iterators-وحلقة-for-of:e6a141d149c2e03f19b615655a2b05dd&#34;&gt;المُكرِّرات (Iterators) وحلقة &lt;code&gt;for... of&lt;/code&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;الم-كر-رات-iterators-وحلقة-for-of&#34;&gt;المُكرِّرات (Iterators) وحلقة &lt;code&gt;for... of&lt;/code&gt;&lt;/h2&gt;
 
 &lt;p&gt;ما من لغة برمجة تخلو من وسيلة للمرور على عدد من القيم و&lt;strong&gt;تكرار&lt;/strong&gt; تنفيذ عمليّة معيّنة على هذه القيم، من أبسط هذه الوسائل حلقة &lt;code&gt;for&lt;/code&gt; التقليديّة الشّهيرة، وفي JavaScript يشيع استخدام حلقة &lt;code&gt;for... in&lt;/code&gt; إلى جانبها للمرور على أسماء خصائص العناصر، إذ يمكننا معرفة كل خصائص العنصر &lt;code&gt;document&lt;/code&gt; بسطرين فقط:&lt;/p&gt;
 
@@ -204,7 +204,7 @@ console.log([`Hello ${person}` for (person of people)]);
 
 &lt;p&gt;لكن دعونا نتوقّف قليلاً ولننتقل إلى الجانب الفلسفي لهذه الإضافات في JavaScript، قد تبدو للوهلة الأولى تعقيدات بلا طائل، خصوصًا وأنّ كثيرًا منها لا يهدف سوى للتسهيل، ولا يقدّم شيئًا يستحيل إنجازه بالإصدارات السابقة من اللغة؛ هنا يمكن الرّدّ بأنّ تطوّر اللغة متعلّق بكيفيّة استخدامها والخبرة التي تُكتسب مع مرور السّنين، حيث تظهر للمطوّرين حاجات جديدة وأفكار تطبّق مرارًا لدرجة أنها ترتقي لتصبح ضمن أساسات اللغة. سهولة كتابة الشفرة لم تعد رفاهية، بل هي ضرورة لإنجاز المشاريع الكبيرة لأنّها تتيح اختصار الوقت الذي كان سيضيع في كتابة متكرّرة ومُملّة، كما أنّها تُلبّي ما يتوقّعه المطوّرون من لغة أصبحت تؤخذ على محمل الجدّ وتُستخدم في تطوير تطبيقات ضخمة ومُعقّدة بعد أن كان جُلّ استخدامها تنفيذ بعض المهام البسيطة.&lt;/p&gt;
 
-&lt;h2 id=&#34;الم-ول-دات-generators:e6a141d149c2e03f19b615655a2b05dd&#34;&gt;المُولِّدات (Generators)&lt;/h2&gt;
+&lt;h2 id=&#34;الم-ول-دات-generators&#34;&gt;المُولِّدات (Generators)&lt;/h2&gt;
 
 &lt;p&gt;المولدات (Generators) ببساطة هي دوال يمكن إيقافها والعودة إليها في وقت لاحق مع الاحتفاظ بسياقها دون تغيير، صياغة دوال المولدات لا تختلف كثيرًا عن صياغة الدوال التقليدية، كل ما عليك هو إضافة إشارة * بعد &lt;code&gt;function&lt;/code&gt; واستخدام &lt;code&gt;yield&lt;/code&gt; بدل &lt;code&gt;return&lt;/code&gt;، المثال التالي سيوضح فكرة المولدات أكثر:&lt;/p&gt;
 
@@ -237,14 +237,12 @@ nameGenerator.next().value; // undefined
   }
 }
 
-
 let numGen = numberGenerator();
 numGen.next(); // { value: 0, done: false }
 numGen.next(); // { value: 1, done: false }
 numGen.next(); // { value: 2, done: false }
 numGen.next(); // { value: 3, done: false }
 // ...
-
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
@@ -254,11 +252,9 @@ numGen.next(); // { value: 3, done: false }
   console.log(name);
 }
 
-
 // &amp;quot;Muhammad&amp;quot;
 // &amp;quot;Salem&amp;quot;
 // &amp;quot;Abdullah&amp;quot;
-
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
@@ -488,7 +484,7 @@ suspend(function*() {
 
 &lt;p&gt;في هذا المثال يجب على &lt;code&gt;getJSON&lt;/code&gt; أن تُعيد وعدًا &lt;code&gt;Promise&lt;/code&gt; ليستطيع مُفسّر اللّغة انتظاره إلى أن يُحقّق (resolve) أو يُرفض (reject)، والقيمة الّتي تُحقّق تُحفظ ضمن المُتغيّر &lt;code&gt;user&lt;/code&gt;، وأما عند رفض الوعد يُرمى خطأ (&lt;code&gt;throw&lt;/code&gt;) يمكن تلقّيه (&lt;code&gt;catch&lt;/code&gt;) كما في الشيفرة غير المتزامنة.&lt;/p&gt;
 
-&lt;h2 id=&#34;م-عام-ل-البقي-ة-rest-parameter-والناشرة-spread:e6a141d149c2e03f19b615655a2b05dd&#34;&gt;مُعامِل البقيّة (Rest parameter) والناشرة (Spread)&lt;/h2&gt;
+&lt;h2 id=&#34;م-عام-ل-البقي-ة-rest-parameter-والناشرة-spread&#34;&gt;مُعامِل البقيّة (Rest parameter) والناشرة (Spread)&lt;/h2&gt;
 
 &lt;p&gt;بعد كلّ هذا الكلام المُعقّد عن الأشياء غير المتزامنة التي نريد جعلها تبدو متزامنة وما إلى ذلك، سنختم الجزء الثّاني بفكرتين بسيطتين أُضيفتا إلى ECMAScript في الإصدار السّادس وتحلّان مشكلتين شائعتين في كثير من اللّغات البرمجيّة:&lt;/p&gt;
 
@@ -561,7 +557,7 @@ addThreeOrMoreNumbers(1, 2, 3);
 
 &lt;p&gt;في الجزء القادم سنتعرف بمشيئة الله على الوحدات (Modules) التي تُعتبر طريقة جديدة لتنظيم الشفرة اُستلهمَت من عالم Node.js وrequire.js، وسُنلقي نظرة على الأصناف (Classes)، المكوّن البرمجيّ الذي وجد طريقه أخيرًا إلى JavaScriptّ!&lt;/p&gt;
 
-&lt;h3 id=&#34;المصادر:e6a141d149c2e03f19b615655a2b05dd&#34;&gt;المصادر&lt;/h3&gt;
+&lt;h3 id=&#34;المصادر&#34;&gt;المصادر&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;https://developer.mozilla.org&#34;&gt;شبكة مطوّري موزيلّا&lt;/a&gt;&lt;/li&gt;
@@ -574,10 +570,10 @@ addThreeOrMoreNumbers(1, 2, 3);
     
     <item>
       <title>JavaScript تستطيع أن تُنظّف أطباقك!</title>
-      <link>http://forabi.net/post/javascript-all-the-things/</link>
+      <link>https://forabi.net/post/javascript-all-the-things/</link>
       <pubDate>Sun, 10 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://forabi.net/post/javascript-all-the-things/</guid>
+      <guid>https://forabi.net/post/javascript-all-the-things/</guid>
       <description>
 
 &lt;p&gt;مُلاحظة: نُشر &lt;a href=&#34;https://academy.hsoub.com/programming/javascript/javascript-%D8%AA%D8%B3%D8%AA%D8%B7%D9%8A%D8%B9-%D8%A3%D9%86-%D8%AA%D9%8F%D9%86%D8%B8%D9%91%D9%81-%D8%A3%D8%B7%D8%A8%D8%A7%D9%82%D9%83-%D8%A3%D9%8A%D8%B6%D8%A7-r13/&#34;&gt;هذا المقال على أكاديمية حسوب&lt;/a&gt;.&lt;/p&gt;
@@ -628,11 +624,11 @@ addThreeOrMoreNumbers(1, 2, 3);
 
 &lt;p&gt;ضحكت كثيرًا عندما شاهدت هذه الصورة منذ بضعة أسابيع، التي تُعبّر بالضّبط عن موضوع هذه التدوينة:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://forabi.net/images/javascript-all-the-things.jpg&#34; alt=&#34;JavaScript كل الأشياء!&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://forabi.net/images/javascript-all-the-things.jpg&#34; alt=&#34;JavaScript كل الأشياء!&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;تسخر هذه الصّورة بشدّة من تعصّب بعض مبرمجي JavaScript الذي يدعوهم إلى الظنّ بأنّ على كل تطبيق جديد في الكرة الأرضية أن يستخدم JavaScript من اليوم فصاعدًا، وأنّ لغات أخرى ستصبح طيّ النسيان ولا يستخدمها إلّا المبرمجون القدامى الذين عفى عليهم الدهر؛ الأمر ليس مقتصرًا على متعصّبي JavaScript وحدهم، فلكلّ لغة برمجة أنصارها ومتعصّبوها، لكن JavaScript بالذّات هي أكثر اللغات التي تترافق بهذه الظاهرة، للأسباب التي ذكرتها سابقًا.&lt;/p&gt;
 
-&lt;h2 id=&#34;ما-خ-لاصة-هذا-الحديث:cdc78e8e97c37deb996b7b9b3263b191&#34;&gt;ما خُلاصة هذا الحديث؟&lt;/h2&gt;
+&lt;h2 id=&#34;ما-خ-لاصة-هذا-الحديث&#34;&gt;ما خُلاصة هذا الحديث؟&lt;/h2&gt;
 
 &lt;p&gt;ما أريد قوله من هذه التدوينة السّريعة أن أنصح المتعصّبين للغة برمجية أيًّا كانت أن يتوقّفوا عن إهانة قدرتهم العقليّة على التّعلّم وتقبّل الكتابة بلغة أخرى يرون أنّها للفاشلين فقط أو للقادمين من العصر الحجري&amp;hellip; لم أتعلّم هذا إلا بالطّريقة الصّعبة، وأعتقد أنّ السّبب الّذي جعلني أتقبّل هذه الحقيقة هو كوني غير مختصّ، تعلّمي للبرمجة غير مرهون بعملٍ أو بربح مادّيٍّ، أنا فقط أُبرمج على سبيل التّسلية، وكلّ مشاريعي التي كتبتها (&lt;a href=&#34;https://github.com/forabi/forabi.github.io&#34;&gt;هذه المدوّنة&lt;/a&gt; بنيتها من الصّفر، وتطبيق &lt;a href=&#34;https://github.com/forabi/aQuran&#34;&gt;aQuran&lt;/a&gt;، و&lt;a href=&#34;https://github.com/forabi/refeed&#34;&gt;تطبيق جديد أكتبه لتوليد خلاصات RSS&lt;/a&gt;&amp;hellip;) كلّها كانت مجرّد تجربة ومحاولة لاستكشاف أنماط التصميم (design patterns) ومفاهيم برمجيّة أخرى. نعم تعلّمت الكثير عن البرمجة عمومًا من خلال JavaScript، لكنّها لن تكون اللّغة الوحيدة التي أكتب بها لبقيّة حياتي بالطّبع! يبدو أن هدفي التالي سيكون لغة &lt;a href=&#34;https://en.wikipedia.org/wiki/Go_%28language%29&#34;&gt;Go&lt;/a&gt; الحديثة العهد.
 البرمجة أوسع من صياغة اللّغة (syntax) لذا فلا يعتبر انتقالي لتعلّم لغة أخرى خسارة، والكثير من المفاهيم البرمجية &lt;a href=&#34;http://www.rwaq.org/courses/test-driven-development&#34;&gt;كالبرمجة المُقادة بالاختبارات&lt;/a&gt; (test-driven development) والتّعامل مع الاستثناءات (exception handling) ومكوّنات اللغة كالأصناف (classes) والواجهات (interfaces) والدّوالّ (functions) هي أشياء توجد بعضها أو كلّها في كلّ اللّغات.&lt;/p&gt;
@@ -641,21 +637,21 @@ addThreeOrMoreNumbers(1, 2, 3);
     
     <item>
       <title>5 أسباب دفعتني لترك فيس بوك</title>
-      <link>http://forabi.net/post/closing-facebook/</link>
+      <link>https://forabi.net/post/closing-facebook/</link>
       <pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://forabi.net/post/closing-facebook/</guid>
+      <guid>https://forabi.net/post/closing-facebook/</guid>
       <description>
 
 &lt;p&gt;ملاحظة: أنا هنا أتحدث عن &lt;strong&gt;&lt;a href=&#34;https://www.facebook.com/help/224562897555674&#34;&gt;حذف الحساب&lt;/a&gt;&lt;/strong&gt; وليس تعطيله مؤقّتًا (deactivating).&lt;/p&gt;
 
 &lt;p&gt;منذ أن أغلقت حسابي على فيس بوك منذ قرابة شهرين، وأنا أفكر كيف سأشرح الدوافع التي جعلتني أتّخذ هذا القرار، لأنني أريد أن أساعد المتردّدين في اتخاذ قرار كهذا وعليّ أن أكون واضحًا ومفصّلاً. هناك الكثير من الأشياء التي قد تُعجبك في فيس بوك، فهو بالأساس مُلتقى للعائلة (خصوصًا للمغتربين) ومصدر للأخبار ومكان لمناقشة الأمور الدراسية مع زملائك ومراسلة أصدقائك وإنجاز بعض الأعمال الجادّة ويمكنه كذلك أن يُساعدك في &amp;laquo;قتل الوقت&amp;raquo;.&lt;/p&gt;
 
-&lt;h2 id=&#34;5-التشتت:290e3b4a1bab62a67f75380913943bb6&#34;&gt;#5 التشتت&lt;/h2&gt;
+&lt;h2 id=&#34;5-التشتت&#34;&gt;#5 التشتت&lt;/h2&gt;
 
 &lt;p&gt;عندما نظرت إلى هذه الخصائص بتأنٍّ، اكتشفت على الفور أنها السبب الذي يجعلني أترك فيس بوك؛ فهذا الخليط من المنشورات المؤلّف من أخبار عالمية وأخرى محلية ثم شخصية ودراسية المرتبة وفق خوارزمية غامضة -لا يبدو أنها تفهم النفس البشرية بقدر ما تفهمهما خوارزميات الإعلانات في فيس بوك- لا يمكن أن يجتمع إلا في فيس بوك، وهو في النهاية يسبب لك مقدارًا من التشتت الذي لا تدرك عواقبه إلا بعد فوات الأوان. ما العلاقة التي تجمع فيديو دعوي مع أغنية لمطرب ما مع كون أصدقائك يأكلون شيئًا ما في مكان ما؟ هل يستطيع عقلك ربط هذه الأحداث التي تقرأها متتالية في سياق ما؟ هل الرابط فعلاً هو العنصر الاجتماعي؟ هل يمكن أن يحدث هذا في الحياة الواقعية؟ أعتقد أن التعرض المستمر لهذا الضغط الذي يسببه تنوع المحتوى الذي تتابعه سيؤثر سلبًا على خلايا دماغك، فإما أن يُفقدها القدرة على ربط أحداث متناسقة، أو أن يجعلها ترى روابط بين أشياء لا يُفترض أن تكون ذات صلة، والنتيجة ستكون تغيرًا في القدرة على التفكير وبالتالي السلوك الذي يخضع له.&lt;/p&gt;
 
-&lt;h2 id=&#34;4-النفاق-الاجتماعي:290e3b4a1bab62a67f75380913943bb6&#34;&gt;#4 النفاق الاجتماعي&lt;/h2&gt;
+&lt;h2 id=&#34;4-النفاق-الاجتماعي&#34;&gt;#4 النفاق الاجتماعي&lt;/h2&gt;
 
 &lt;p&gt;فيس بوك ببساطة لم يعد شبكة اجتماعية، بل أصبح واقع الحياة الاجتماعية، فكلّ ما في حياتنا الواقعية ينتهي في نشرة أخبار فيس بوك بل إننا كثيرًا ما نفعل أشياء في حياتنا الواقعية لغرض المشاركة على فيس بوك أو على الأقل يكون ذلك دافعًا من الدوافع. كم مرة التقطت مع أصدقائك صورة جماعية، وكان الهدف من التقاطها هو مجرد الاحتفاظ بها كذكرى، دون أن تفكر في نشرها على فيس بوك؟ كم مرة خطرت على بالك فكرة وقاومت ذلك الدافع الخفيّ الذي يجعلك تنشرها على الفور في فيس بوك وسط جمهور قد لا يبالي على الإطلاق بما قد تفكّر؟&lt;/p&gt;
 
@@ -663,14 +659,14 @@ addThreeOrMoreNumbers(1, 2, 3);
 
 &lt;p&gt;من السُخرية أن يؤدي استخدامك الطويل لشبكة اجتماعية تزعم أنها تربط الناس ببعضهم إلى أن تصبح شخصًا غير اجتماعي. لكن هذا أمر حقيقيّ وأعتقد أن لديّ نظرية تُفسّر الآلية التي يحدث ذلك من خلالها: عندما لا تنخرط بشكل كافٍ في النشاطات الاجتماعية لأصدقائك على فيس بوك، لأنك لا تراها تستحق أي تعليق أو إعجاب (هل يهمك حقًا ما الذي يستمع إليه صديقك أو ما الذي يأكله؟ هل تجد الأمر مثيرًا &lt;em&gt;للإعجاب&lt;/em&gt; أو يستحق *التعليق*؟) فإن خوارزمية فيس بوك تُنقص من أهمّيّة المنشور بالنسبة لك وتقرّر أن منشورًا كهذا أقل أهمية من غيره في نشرة الأخبار، ولذا سيبدأ فيس بوك بإخفاء المنشورات التي يعتقد أنها مشابهة له في المستقبل، وعندها ولأنك لا تتفاعل مجدّدًا مع هذه المنشورات (باعتبار أنك لا تراها) فإن أهمّيّتها ستستمر بالانحدار، وشيئًا فشيئًا يُصبح كل ما ينشره شخص ما غير مهمّ في نظر هذه الخوارزمية، لأنها تأخذ في الحسبان تواصلك مع صاحب المنشور (بالإضافة إلى تفاعلك من خلال الإعجابات والتعليقات). وهذا يعني أن كثرة المنشورات غير المهمة في فيس بوك (وهي الغالبية العظمى من المنشورات) ستؤثّر أيضًا على احتمال ظهور منشورات قد تراها مهمّة من الشّخص ذاته، وعليه فإنك عندما تشعر بصدق أنك لا ترى منشورًا ما مهمًّا، فإن فيس بوك يُعاقبك على عدم تفاعلك بأن يحرمك من منشورات قد تكون مهمّة لك؛ بالطّبع، ليس هذا مقصودًا، لكنها الحواسيب التي تفشل في تفسير الدوافع النفسية! المطلوب منك في نظر خوارزميات فيس بوك أن تُعلّق وتشارك على كل شيء يصادفك، وإلا فإن نشرة أخبارك ستصبح كصحراء مُقفرة، وستعود مرارًا لتجد أن نشرة أخبارك لا تتغيّر. فيس بوك لا يحترم صدقك في الإعجاب بمنشور أو تجاهله، كل ما يهمه أن تكون نشيطًا دومًا بحيث تضمن لهم مزيدًا من ساعات الاستخدام التي تنعكس على أرباح الموقع! الآن راقب انعكاس ذلك على حياتك الحقيقية، لطالما سألني بعض أصدقائي: لماذا لا تشارك في منشوراتي؟ (ظنًّا منهم أنني لا أرغب بأن أكون صديقًا لهم فعلاً)؛ الجواب دومًا يكون: إما أن يكون المنشور غير مهم، أو عليكم أن تسألوا خوارزمية فيس بوك!&lt;/p&gt;
 
-&lt;h2 id=&#34;3-الإدمان:290e3b4a1bab62a67f75380913943bb6&#34;&gt;#3 الإدمان&lt;/h2&gt;
+&lt;h2 id=&#34;3-الإدمان&#34;&gt;#3 الإدمان&lt;/h2&gt;
 
 &lt;p&gt;أعرف أنه لا يمكن للكيمياء تفسير كل الدوافع النفسية للإنسان، لكنني على الأقل أصدّق أن شعور السعادة يترافق مع إفراز مادة الدوبامين بأمر من الدماغ، وهي المادة ذاتها المسؤولة عن &lt;em&gt;&amp;laquo;شعور المكافأة&amp;raquo;&lt;/em&gt; بعدد الإعجابات التي نالتها تلك الصورة التي نشرتها على فيس بوك. إفراز الدوبامين يدفع إلى الحاجة للمزيد منه، في الوقت ذاته ترتفع العتبة اللازمة لإحداث شعور الابتهاج مع التعرض لنفس المُثير، بكلمات أبسط: يصبح الإنسان مُدمنًا، ويحتاج دومًا إلى جرعة إضافية لتُعيد له شعور السعادة. إدمان فيس بوك لا يختلف من ناحية المبدأ عن إدمان المخدرات أو أي عادة أخرى؛ يكون في البداية أمرًا نفعله بكامل وعينا، ثم يصبح أمرًا خارجًا عن السيطرة.&lt;/p&gt;
 
 &lt;p&gt;كم مرة وجدت نفسك تفتح صفحة فيس بوك في المتصفح بشكل روتيني دون انتباه؟ هل لاحظت أن هذه العادة تتكرر بتواتر أكبر عند شعورك باليأس أو بالفراغ؟
 مع الوقت ستصبح كل انفعالاتك ومشاعرك ودوافعك متمحورة حول &amp;laquo;كيف أحصل على إعجابات أكثر؟&amp;raquo; لاستعادة هذا الشعور؛ الأسوأ أن هذا يحدث بلا وعيٍ منك إلى أن تقرّر أن تفعل شيئًا ما وتبدأ بمراقبة نفسك.&lt;/p&gt;
 
-&lt;h2 id=&#34;2-الخصوصية:290e3b4a1bab62a67f75380913943bb6&#34;&gt;#2 الخصوصية&lt;/h2&gt;
+&lt;h2 id=&#34;2-الخصوصية&#34;&gt;#2 الخصوصية&lt;/h2&gt;
 
 &lt;p&gt;وهي واحدة من أكثر الأشياء التي أصبحت مؤخرًا أوليها اهتمامًا، خاصّة بعد انتقالي الكامل إلى Linux؛ فالبرامج الحرّة والخصوصية أمران مرتبطان بشدّة، فالحرص على الخصوصية ساهم في نشأة حركة البرامج الحرّة، والانتقال إلى استعمال نظام حرّ ويحمي خصوصيّتي ثم الاستمرار في الاعتماد على خدمة تنمو وتتغذّى على بيانات مستخدميها وتحوّلها إلى مُدخلات في آلات توليد الإعلانات أمران لا يتفقان. هاك الصفقة التي تعقدها مع فيس بوك ضمنيًّا عندما تبدأ باستخدامه:&lt;/p&gt;
 
@@ -684,9 +680,9 @@ addThreeOrMoreNumbers(1, 2, 3);
 
 &lt;p&gt;إليك الملخص: خيارات الخصوصية تدفعك لمشاركة المزيد من المعلومات عن نفسك وعن حياتك التي ربما لم تكن لتشاركها قبل أن تتوفّر هذه الخيارات.&lt;/p&gt;
 
-&lt;h2 id=&#34;1-هذه:290e3b4a1bab62a67f75380913943bb6&#34;&gt;#1 هذه&lt;/h2&gt;
+&lt;h2 id=&#34;1-هذه&#34;&gt;#1 هذه&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://forabi.net/images/i-dont-want-to-live-on-this-planet-anymore.jpg&#34; alt=&#34;لا أريد الحياة على هذا الكوكب بعد اليوم&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://forabi.net/images/i-dont-want-to-live-on-this-planet-anymore.jpg&#34; alt=&#34;لا أريد الحياة على هذا الكوكب بعد اليوم&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;لا شيء لدي أقوله عن هذه الصورة!&lt;/p&gt;
 </description>
@@ -694,17 +690,17 @@ addThreeOrMoreNumbers(1, 2, 3);
     
     <item>
       <title>ما الجديد في الإصدار القادم من JavaScript؟ (الجزء الأول)</title>
-      <link>http://forabi.net/post/whats-new-in-es6/</link>
+      <link>https://forabi.net/post/whats-new-in-es6/</link>
       <pubDate>Wed, 28 May 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://forabi.net/post/whats-new-in-es6/</guid>
+      <guid>https://forabi.net/post/whats-new-in-es6/</guid>
       <description>
 
 &lt;p&gt;مُلاحظة: نُشر &lt;a href=&#34;https://academy.hsoub.com/programming/javascript/%D9%85%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85-%D9%85%D9%86-%D8%AC%D8%A7%D9%81%D8%A7%D8%B3%D9%83%D8%B1%D8%A8%D8%AA-ecmascript-6-%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%A3%D9%88%D9%84-r12/&#34;&gt;هذا المقال على أكاديمية حسوب&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Harmony هو الاسم الرمزي للإصدار السادس من لغة ECMAScript وهي اللغة القياسية التي تقوم عليها JavaScript، والإصدار الجديد يأتي بميزات جديدة تتناول العديد من جوانب اللغة بما فيها الصياغة (syntax) وأسلوب البناء وأنواع جديدة من المكونات المدمجة في اللغة. في هذا المقال نتعرف على بعض من المميزات التي ستجعل كتابة شيفرة JavaScript أكثر اختصاراً وفعالية.&lt;/p&gt;
 
-&lt;h2 id=&#34;متغيرات-نطاقها-القطعة-البرمجية-block-scoped-variables:dc2d7b8a998cf439f4fce9639f16330a&#34;&gt;متغيرات نطاقها القطعة البرمجية (Block-scoped Variables)&lt;/h2&gt;
+&lt;h2 id=&#34;متغيرات-نطاقها-القطعة-البرمجية-block-scoped-variables&#34;&gt;متغيرات نطاقها القطعة البرمجية (Block-scoped Variables)&lt;/h2&gt;
 
 &lt;p&gt;في الإصدار الحالي من JavaScript، تُعامل كل المتغيرات المفروضة ضمن دالة (&lt;code&gt;function&lt;/code&gt;) على أنها تابعة لهذه الدالة (Function-scoped) أي يمكن الوصول إليها من أي موقع ضمن هذه الدالة، حتى وإن كانت هذه المتغيرات قد فُرضِت ضمن قطعة برمجية فرعية ضمن هذه الدالة (كحلقة &lt;code&gt;for&lt;/code&gt; أو جملة شرطية &lt;code&gt;if&lt;/code&gt;)، وهذا يخالف ما تتبناه بعض من أشهر لغات البرمجة، وقد يسبب بعض الارتباك لمن لم يعتد عليه.
 لنوضح أكثر في هذا المثال:&lt;/p&gt;
@@ -748,7 +744,7 @@ for (var j = 0; j &amp;lt; doubles.length; j++) {
 
 &lt;p&gt;عند تطبيق هذا المثال (يمكنك تطبيقه في Firefox وChrome لأن كلا المتصفحين بدأا بدعم &lt;code&gt;let&lt;/code&gt;) سنحصل على النتيجة البديهية &lt;code&gt;2&lt;/code&gt; ثم &lt;code&gt;4&lt;/code&gt; ثم &lt;code&gt;6&lt;/code&gt;. بالطبع بإمكاننا تحسين الشيفرة باعتماد &lt;code&gt;let&lt;/code&gt; عند التصريح عن كل المتغيرات السابقة، وهو الأمر الذي يجب أن تعتاد فعله من اليوم!&lt;/p&gt;
 
-&lt;h2 id=&#34;شيفرة-أقصر-وأسهل-للقراءة:dc2d7b8a998cf439f4fce9639f16330a&#34;&gt;شيفرة أقصر وأسهل للقراءة&lt;/h2&gt;
+&lt;h2 id=&#34;شيفرة-أقصر-وأسهل-للقراءة&#34;&gt;شيفرة أقصر وأسهل للقراءة&lt;/h2&gt;
 
 &lt;p&gt;لعل أكثر ما أُحبّه في JavaScript مرونتها الفائقة، وبالذات القدرة على إمرار دوال مجهولة (Anonymous Functions) لدوال أخرى، الأمر الذي يسمح لنا بكتابة شيفرة ما كان من الممكن كتابتها بلغات أخرى إلا بضعفي عدد الأسطر وربما أكثر. لاحظ هذا المثال:&lt;/p&gt;
 
@@ -849,7 +845,7 @@ console.log(multilineString);
 
 &lt;p&gt;كذلك سيكون بإمكاننا تحسين هذا النص أكثر من ذلك باستخدام &lt;strong&gt;الأصناف (Classes)&lt;/strong&gt;، نعم! سيكون لدينا أصناف أخيرًا! (سنستعرضها لاحقاً)&lt;/p&gt;
 
-&lt;h2 id=&#34;الثوابت-constants:dc2d7b8a998cf439f4fce9639f16330a&#34;&gt;الثوابت (Constants)&lt;/h2&gt;
+&lt;h2 id=&#34;الثوابت-constants&#34;&gt;الثوابت (Constants)&lt;/h2&gt;
 
 &lt;p&gt;سيداتي وسادتي&amp;hellip; رحبوا بالثوابت&amp;hellip; نعم إنها أخيرًا متوفرة في JavaScript، إحدى المكونات الأساسية لأي لغة برمجية التي لم تكن متوفرة في JavaScript، أصبحت الآن متوفرة. والآن نأتي للسؤال البديهي: لماذا أحتاج للثوابت؟ أليس بإمكاني التصريح عن متغير دون أن أغير قيمته بعد إعطاءه القيمة الأولية؟ نعم بالطبع بإمكانك ذلك، لكن هذا لا يعني بالضرورة أن المستخدم أو نصاً برمجيًا من طرف ثالث ليس بإمكانه تغيير قيمة هذا المتغير في سياق التنفيذ، وطالما أن المتغير &amp;laquo;متغير&amp;raquo; بطبيعته، فإننا دومًا بحاجة إلى شيء من أصل اللغة يحمينا من تغييره خطأ. عند التصريح عن ثابت فإننا نعطيه قيمة أولية ثم ستتولى الآلة البرمجية لـJavaScript حماية هذا الثابت من التغيير، وسُيرمى خطأ عند محاولة إسناد قيمة جديدة لهذا الثابت.&lt;/p&gt;
 
@@ -861,7 +857,7 @@ myConstant = &#39;Trying to change your constant&#39;;
 console.log(myConstant); // &amp;quot;Never change this!&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;الم-عاملات-الافتراضية-default-parameters:dc2d7b8a998cf439f4fce9639f16330a&#34;&gt;المُعاملات الافتراضية (Default Parameters)&lt;/h2&gt;
+&lt;h2 id=&#34;الم-عاملات-الافتراضية-default-parameters&#34;&gt;المُعاملات الافتراضية (Default Parameters)&lt;/h2&gt;
 
 &lt;p&gt;غياب دعم المُعاملات الافتراضية في JavaScript واحد من أكثر الأشياء التي تزعجني، لأنها تجبرني على كتابة شيفرة مثل هذه:&lt;/p&gt;
 
@@ -887,7 +883,7 @@ SayHello(&#39;Fawwaz&#39;); // Hello Fawwaz!
 SayHello(); // Hello User!
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;الوعود-promises:dc2d7b8a998cf439f4fce9639f16330a&#34;&gt;الوعود (Promises)&lt;/h2&gt;
+&lt;h2 id=&#34;الوعود-promises&#34;&gt;الوعود (Promises)&lt;/h2&gt;
 
 &lt;p&gt;الوعود هي الحل الذي تأتينا به JavaScript لحل مشكلة هرم الموت (Pyramid of Death) الذي نواجهه عند تنفيذ مهمات غير متزامنة تعتمد إحداها على الأخرى:&lt;/p&gt;
 
@@ -946,15 +942,15 @@ SayHello(); // Hello User!
     
     <item>
       <title>الإصدار الجديد من aQuran</title>
-      <link>http://forabi.net/post/aquran-1.0-beta-announcement/</link>
+      <link>https://forabi.net/post/aquran-1.0-beta-announcement/</link>
       <pubDate>Fri, 04 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://forabi.net/post/aquran-1.0-beta-announcement/</guid>
+      <guid>https://forabi.net/post/aquran-1.0-beta-announcement/</guid>
       <description>
 
 &lt;p&gt;استكمالاً &lt;a href=&#34;https://arabia.io/webdev/5902-مشروع-تطبيق-للقرآن-الكريم-للهواتف-الذكية-مبني-بلغات-الويب&#34;&gt;للموضوع السابق&lt;/a&gt;، قمت للتو برفع نسخة تجريبية من التطبيق على GitHub Pages بعد محاولة الاستضافة على عدة مواقع أخرى باءت بالفشل :)&lt;/p&gt;
 
-&lt;h2 id=&#34;ما-الجديد-منذ-الموضوع-السابق:47448cfa59c8911a339a0405061c8503&#34;&gt;ما الجديد منذ الموضوع السابق؟&lt;/h2&gt;
+&lt;h2 id=&#34;ما-الجديد-منذ-الموضوع-السابق&#34;&gt;ما الجديد منذ الموضوع السابق؟&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;تم الانتقال إلى &lt;em&gt;قواعد بيانات IndexedDB&lt;/em&gt; ضمن المتصفح، وهي من الميزات الحديثة ضمن المتصفحات، حيث يتم تخزين قاعدة بيانات النص القرآني والترجمات ومعلومات التلاوات ضمن المتصفح، وبهذا لا داعي لأي شيء من جهة الخادم، سوى تقديم الملفات الثابتة static، ولا داعي أيضًا لإبقاء كامل قاعدة البيانات ضمن الذاكرة، وهو ما كنت أفعله في السابق.&lt;/li&gt;
@@ -970,18 +966,18 @@ SayHello(); // Hello User!
 &lt;li&gt;جودة التلاوات قابلة للتكيف مع سرعة الاتصال (لا يوجد متصفح حالياً يتبنى الواجهة البرمجية لمعلومات الاتصال Network Information API سوى Firefox OS على حد علمي، وعلى هذا ستحصل دوماً على أعلى دقة للتلاوة على بقية المتصفحات)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;صور-التطبيق-http-imgur-com-a-pvpew:47448cfa59c8911a339a0405061c8503&#34;&gt;&lt;a href=&#34;http://imgur.com/a/PvPEW&#34;&gt;صور التطبيق&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;صور-التطبيق-http-imgur-com-a-pvpew&#34;&gt;&lt;a href=&#34;http://imgur.com/a/PvPEW&#34;&gt;صور التطبيق&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://forabi.net/images/aquran-beta/1/&#34; alt=&#34;1&#34; /&gt;
-&lt;img src=&#34;http://forabi.net/images/aquran-beta/2.png&#34; alt=&#34;2&#34; /&gt;
-&lt;img src=&#34;http://forabi.net/images/aquran-beta/3.png&#34; alt=&#34;3&#34; /&gt;
-&lt;img src=&#34;http://forabi.net/images/aquran-beta/4.png&#34; alt=&#34;4&#34; /&gt;
-&lt;img src=&#34;http://forabi.net/images/aquran-beta/5.png&#34; alt=&#34;5&#34; /&gt;
-&lt;img src=&#34;http://forabi.net/images/aquran-beta/6.png&#34; alt=&#34;6&#34; /&gt;
-&lt;img src=&#34;http://forabi.net/images/aquran-beta/7.png&#34; alt=&#34;7&#34; /&gt;
-&lt;img src=&#34;http://forabi.net/images/aquran-beta/8.png&#34; alt=&#34;8&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://forabi.net/images/aquran-beta/1/&#34; alt=&#34;1&#34; /&gt;
+&lt;img src=&#34;https://forabi.net/images/aquran-beta/2.png&#34; alt=&#34;2&#34; /&gt;
+&lt;img src=&#34;https://forabi.net/images/aquran-beta/3.png&#34; alt=&#34;3&#34; /&gt;
+&lt;img src=&#34;https://forabi.net/images/aquran-beta/4.png&#34; alt=&#34;4&#34; /&gt;
+&lt;img src=&#34;https://forabi.net/images/aquran-beta/5.png&#34; alt=&#34;5&#34; /&gt;
+&lt;img src=&#34;https://forabi.net/images/aquran-beta/6.png&#34; alt=&#34;6&#34; /&gt;
+&lt;img src=&#34;https://forabi.net/images/aquran-beta/7.png&#34; alt=&#34;7&#34; /&gt;
+&lt;img src=&#34;https://forabi.net/images/aquran-beta/8.png&#34; alt=&#34;8&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;متطلبات-التشغيل:47448cfa59c8911a339a0405061c8503&#34;&gt;متطلبات التشغيل&lt;/h2&gt;
+&lt;h2 id=&#34;متطلبات-التشغيل&#34;&gt;متطلبات التشغيل&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;أحدث نسخة من Chrome أو Firefox على Android 4.0+&lt;/li&gt;
@@ -989,7 +985,7 @@ SayHello(); // Hello User!
 &lt;li&gt;Firefox OS 1.2+&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;شكر-خاص:47448cfa59c8911a339a0405061c8503&#34;&gt;شكر خاص&lt;/h2&gt;
+&lt;h2 id=&#34;شكر-خاص&#34;&gt;شكر خاص&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;أحب أن أتقدم بالشكر الجزيل للدكتور &lt;a href=&#34;https://arabia.io/u/خالد-حسني&#34;&gt;&lt;em&gt;خالد حسني&lt;/em&gt;&lt;/a&gt; لمساهمته الكبيرة في تطوير المشروع، حيث قدم لي نسخًا معدلة من خط أميري قرآن، كما تم اعتماد &lt;a href=&#34;https://bitbucket.org/khaledhosny/quran&#34;&gt;النص القرآني الذي يعمل عليه&lt;/a&gt;، وهو يتبع معايير&lt;/li&gt;
@@ -997,7 +993,7 @@ SayHello(); // Hello User!
 &lt;li&gt;&lt;em&gt;مجتمع Arabia I/O&lt;/em&gt; لتشجيعهم لي على المتابعة&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;مشاكل-معروفة:47448cfa59c8911a339a0405061c8503&#34;&gt;مشاكل معروفة&lt;/h2&gt;
+&lt;h2 id=&#34;مشاكل-معروفة&#34;&gt;مشاكل معروفة&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;بطء التحميل للمرة الأولى: الأمر يعتمد على سرعة اتصالك، في المرات القادمة التي يتم فتح التطبيق فيها، المفترض أن تستخدم النسخة المخزنة ضمن AppCache، وهذا يعني أنه لا حاجة للاتصال بعد ذلك (باستثناء عند تشغيل التلاوات بالطبع).&lt;/li&gt;
@@ -1016,7 +1012,7 @@ SayHello(); // Hello User!
 &lt;li&gt;النسخة المستضافة على GitHub Pages لا توفر سوى الترجمات باللغتين العربية والإنكليزية حالياً.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;الخطوات-التالية:47448cfa59c8911a339a0405061c8503&#34;&gt;الخطوات التالية&lt;/h2&gt;
+&lt;h2 id=&#34;الخطوات-التالية&#34;&gt;الخطوات التالية&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;حل المشاكل السابقة&lt;/li&gt;
@@ -1026,7 +1022,7 @@ SayHello(); // Hello User!
 
 &lt;p&gt;&lt;a href=&#34;http://forabi.github.io/aQuran&#34;&gt;جرب التطبيق!&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;المساهمات:47448cfa59c8911a339a0405061c8503&#34;&gt;المساهمات&lt;/h2&gt;
+&lt;h2 id=&#34;المساهمات&#34;&gt;المساهمات&lt;/h2&gt;
 
 &lt;p&gt;هل تجيد تطوير تطبيقات الويب؟ &lt;a href=&#34;https://github.com/forabi/aQuran&#34;&gt;ساعدني على GitHub&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -1034,25 +1030,25 @@ SayHello(); // Hello User!
     
     <item>
       <title>الدليل الكامل لتعلم Angular JS في يوم واحد</title>
-      <link>http://forabi.net/post/angular-guide/</link>
+      <link>https://forabi.net/post/angular-guide/</link>
       <pubDate>Sat, 29 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://forabi.net/post/angular-guide/</guid>
+      <guid>https://forabi.net/post/angular-guide/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;هذه ترجمة (بتصرف) &lt;a href=&#34;http://toddmotto.com/ultimate-guide-to-learning-angular-js-in-one-day/&#34;&gt;لمقالة Todd Motto على مدوّنته&lt;/a&gt; وإليه يعود ضمير المتكلم في المقالة. نُشرت للمرة الأولى على &lt;a href=&#34;https://academy.hsoub.com/programming/javascript/angularjs/%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84-%D9%84%D8%AA%D8%B9%D9%84%D9%85-angular-js-%D9%81%D9%8A-%D9%8A%D9%88%D9%85-%D9%88%D8%A7%D8%AD%D8%AF-r11/&#34;&gt;أكاديمية حسوب&lt;/a&gt;، وأعيدُ نشرها هنا.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://forabi.net/images/AngularJS-medium.png&#34; alt=&#34;شعار Angular JS&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://forabi.net/images/AngularJS-medium.png&#34; alt=&#34;شعار Angular JS&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;ما-هو-angularjs:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;ما هو AngularJS؟&lt;/h2&gt;
+&lt;h2 id=&#34;ما-هو-angularjs&#34;&gt;ما هو AngularJS؟&lt;/h2&gt;
 
 &lt;p&gt;هو إطار عمل JavaScript لطرف العميل يتبع بنية Model-View-Controller/Model-View-View-Model، ويعتبر اليوم مهماً لبناء تطبيقات ويب وحيدة الصفحة (SAP) أو حتى المواقع العادية. يُعتبر Angular JS قفزة كبيرة نحو مستقبل HTML وما يجلبه الإصدار الخامس منها (مع التطورات على صعيد JavaScript بالطبع!)، ويبعث الحياة من جديد في تعاملنا مع الويب الحديث. هذا المقال جولة شاملة في Angular JS مستخلصة من تجاربي ونصائح وممارسات تعلمتها خلال استخدامي.&lt;/p&gt;
 
-&lt;h2 id=&#34;المصطلحات:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;المصطلحات&lt;/h2&gt;
+&lt;h2 id=&#34;المصطلحات&#34;&gt;المصطلحات&lt;/h2&gt;
 
 &lt;p&gt;ليس عليك أن تبذل جهداً كبيراً لتعلم Angular، وأهم ما يجب معرفته معاني المصطلحات وتبني طريقة MVC، وMVC اختصار لـ_Model-View-Controller_، أي &lt;em&gt;نموذج-طريقة عرض-مُتحكِّم&lt;/em&gt;. فيما يلي بعض المصطلحات والواجهات البرمجية الأساسية التي تزوّدنا بها Angular.&lt;/p&gt;
 
-&lt;h3 id=&#34;mvc:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;MVC&lt;/h3&gt;
+&lt;h3 id=&#34;mvc&#34;&gt;MVC&lt;/h3&gt;
 
 &lt;p&gt;ربما سمعت بهذا الاختصار من قبل، وهو مستخدم في لغات برمجة عديدة كوسيلة لبناء هيكل التطبيقات أو البرامج. وهاك تلخيص سريع لمعناه:
   - &lt;em&gt;النموذج&lt;/em&gt; (&lt;em&gt;Model&lt;/em&gt;): بنية البيانات التي تقوم عليها أجزاء التطبيقات، غالباً ما تمثل بصيغة JSON. يفضل أن تكون لديك معرفة مسبقة بـJSON قبل تعلم Angular، لأنها ضرورية للتواصل بين الخادم وطريقة العرض (سنأتي على شرحها في النقطة التالية). على سبيل المثال، لنفترض أن لدينا مجموعة من المستخدمين، يمكن تمثيل &lt;em&gt;بيانات تعريفهم&lt;/em&gt; كما يلي:&lt;/p&gt;
@@ -1072,11 +1068,11 @@ SayHello(); // Hello User!
   - &lt;em&gt;طريقة العرض&lt;/em&gt; (&lt;em&gt;View&lt;/em&gt;): وهو أمر سهل التفسير، فهي ببساطة المُخرج النهائي أو صفحة HTML التي تعرض البيانات (النموذج) على المستخدم مثلاً. باستخدام إطار عمل MVC، تُجلب البيانات من النموذج وتُعرض المعلومات المناسبة في صفحة HTML.
   - &lt;em&gt;المُتحكِّم&lt;/em&gt; (&lt;em&gt;Controller&lt;/em&gt;): وله من اسمه نصيب، فهو يتحكم بالأشياء! ولكن أية أشياء؟ البيانات. المُتحكمات هي الطريقة التي تصل من خلالها بين &lt;em&gt;الخادم&lt;/em&gt; و_طريقة العرض_، فتسمح بتحديث البيانات سريعاً من خلال التواصل مع كلا الخادم والعميل.&lt;/p&gt;
 
-&lt;h2 id=&#34;إعداد-مشروع-angular-js-الأساسيات:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;إعداد مشروع Angular JS (الأساسيات)&lt;/h2&gt;
+&lt;h2 id=&#34;إعداد-مشروع-angular-js-الأساسيات&#34;&gt;إعداد مشروع Angular JS (الأساسيات)&lt;/h2&gt;
 
 &lt;p&gt;يجب أولاً تهيئة الأساسيات التي يقوم عليها مشروعنا. يجب أن نبدأ بتطبيق (&lt;code&gt;ng-app&lt;/code&gt;) الذي يُعرِّف التطبيق (و&lt;code&gt;ng&lt;/code&gt; هي بادئة تعني Angular وتسبق عادة كل مكونات Angular JS)، ثم متحكم (Controller) ليتواصل مع طريقة العرض، ثم ربط DOM ولا ننسى تضمين Angular بالطبع! إليك الأساسيات:&lt;/p&gt;
 
-&lt;h2 id=&#34;نص-html-مع-تصريحات-ng:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;نص HTML مع تصريحات &lt;code&gt;ng-*&lt;/code&gt;:&lt;/h2&gt;
+&lt;h2 id=&#34;نص-html-مع-تصريحات-ng&#34;&gt;نص HTML مع تصريحات &lt;code&gt;ng-*&lt;/code&gt;:&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-app=&amp;quot;myApp&amp;quot;&amp;gt;
   &amp;lt;div ng-controller=&amp;quot;MainCtrl&amp;quot;&amp;gt;
@@ -1085,7 +1081,7 @@ SayHello(); // Hello User!
 &amp;lt;/div&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;وحدة-angular-مع-متحكم:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;وحدة Angular مع متحكم:&lt;/h3&gt;
+&lt;h3 id=&#34;وحدة-angular-مع-متحكم&#34;&gt;وحدة Angular مع متحكم:&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var myApp = angular.module(&#39;myApp&#39;, []);
 
@@ -1112,7 +1108,7 @@ myApp.controller(&#39;UserCtrl&#39;, [&#39;$scope&#39;, function ($scope) {...}]
 
 &lt;p&gt;بهذه الطريقة أُقسّم النص البرمجي على عدة ملفات، وفي كل ملف أربط مكوّناً من المكونات مع فضاء الأسماء myApp فيصبح تلقائياً جزءاً من تطبيقي. نعم، الأمر كما فهمت، أفضل أن أنشئ ملفاً مستقلاً لكل متحكم ومُرشِد (directive) ومعمل (factory) وأي شيء آخر (ستشكرني على هذا!). فيما بعد يمكنك دمجها معاً وتقليصها لتصبح ملفاً واحدًا (مستخدماً مدير مهام مثل Grunt أو Gulp) فتدفعَه إلى &lt;code&gt;DOM&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h3 id=&#34;الم-تحك-مات-controllers:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;المُتحكّمات (Controllers)&lt;/h3&gt;
+&lt;h3 id=&#34;الم-تحك-مات-controllers&#34;&gt;المُتحكّمات (Controllers)&lt;/h3&gt;
 
 &lt;p&gt;أصبحت تعرف الآن مفهوم MVC وتعلمت طريقة إعداد مشروع جديد، فلنطّلع الآن على الكيفية التي يُطبِّق فيها Angular JS العمل بالمتحكّمات.
 بناء على المثال السابق، بإمكاننا الآن أن نخطو خطوة بسيطة نحو عرض بعض البيانات ضمن طريقة العرض مستخدمين متحكّماً. يستخدم Angular تركيب &lt;em&gt;&amp;laquo;مقود الدراجة (handlebars)&amp;raquo;&lt;/em&gt; لقولبة HTML. ببساطة يعني هذا أن بإمكان المتحكمات أن تعرض البيانات في صفحة HTML بأن تستبدل كل عبارة فيها مكتوبة ضمن الأقواس المزدوجة هكذا: &lt;code&gt;{{ data }}&lt;/code&gt; قيمة يُعينها المتحكم. في الحالة المثالية يجب أن لا تحوي صفحة HTML نصاً حقيقيًا أو قيماً مدرجة مسبقاً، ويجب أن تترك هذه المهمة لمتحكمات Angular. فيما يلي مثال يبيّن كيف يمكن عرض نص أو سلسلة حروف &lt;code&gt;String&lt;/code&gt; بسيطة ضمن الصفحة:&lt;/p&gt;
@@ -1188,7 +1184,7 @@ function MainCtrl ($scope) {
 
 &lt;p&gt;لا تفعل هذا! هذا سيجعل كل الوظائف المُصرّحة تابعةً للنطاق العامّ (global scope) ولا يربطها بشكل جيد مع التطبيق. هذا يعني كذلك أن عمليات التقليص للنص البرمجي والتجارب ستكون أكثر صعوبة. لا تلوّث فضاء الاسماء العام، بل اجعل المتحكمات &lt;em&gt;ضمن&lt;/em&gt; التطبيق.&lt;/p&gt;
 
-&lt;h3 id=&#34;الم-رش-دات-directives:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;المُرشِدات (Directives)&lt;/h3&gt;
+&lt;h3 id=&#34;الم-رش-دات-directives&#34;&gt;المُرشِدات (Directives)&lt;/h3&gt;
 
 &lt;p&gt;الُمرشد في أبسط صوره هو نص HTML مٌقولَب، يفضل أن يكون استخدامه متكررًا ضمن التطبيق. توفر المرشدات طريقة سهلة لإدخال أجزاء DOM ضمن التطبيق دون عناء. تعلم استخدام المرشدات ليس أمراً سهلاً على الإطلاق، وإتقانها يتطلب جهداً، ولكن الفقرات التالية ستضعك على بداية الطريق.&lt;/p&gt;
 
@@ -1277,7 +1273,7 @@ function MainCtrl ($scope) {
 
 &lt;p&gt;هنا أخبرنا Angular بأن وسم &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; هذا هو قالب (&lt;em&gt;&lt;code&gt;ng-template&lt;/code&gt;&lt;/em&gt;) وأعطيناه المُعرف. سيبحث Angular عن القالب أو عن ملف html، فاستخدم ما تراه مناسباً. شخصياً، أفضّل إنشاء ملفات html لسهولة تنظيمها ولتحسين الأداء وإبقاء DOM نظيفاً، فقد يستخدم مشروعك مع الوقت عشرات المُرشدات، وترتيبها في ملفات مستقلة يجعل مراجعتها أسهل.&lt;/p&gt;
 
-&lt;h3 id=&#34;الخدمات-services:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;الخدمات (Services)&lt;/h3&gt;
+&lt;h3 id=&#34;الخدمات-services&#34;&gt;الخدمات (Services)&lt;/h3&gt;
 
 &lt;p&gt;كثيراً ما تثير الخدمات في Angular ارتباك المطورين؛ ومن خبرتي وأبحاثي، أعتقد أن الخدمات وُضعت كنمط وأسلوب للتصميم أكثر من اختلافها بالوظيفة التي تؤديها. بعد التنقيب في مصدر Angular، وجدت أنها تُعالج وتبنى باستخدام المُجمّع (compiler) ذاته، وكذلك فهي تقدم العديد من الوظائف المشابهة. أنصح باستخدام الخدمات لبناء &lt;em&gt;الكائنات المُتفرِّدة&lt;/em&gt; (&lt;em&gt;singletons&lt;/em&gt;)، واستخدام المعامل (Factories) لبناء وظائف أكثر تعقيداً كالكائنات الحرفيّة (Object Literals).
 فيما يلي مثال لاستخدام خدمة توجد ناتج الضرب لعددين:&lt;/p&gt;
@@ -1313,7 +1309,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, &#39;Math&#39;, function
 }]);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;المعامل-factories:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;المعامل (Factories)&lt;/h3&gt;
+&lt;h3 id=&#34;المعامل-factories&#34;&gt;المعامل (Factories)&lt;/h3&gt;
 
 &lt;p&gt;إيضاح فكرة المعامل سهل إذا كنت قد استوعبت فكرة الخدمات، بإمكاننا إنشاء كائن حرفي (Object Literal) ضمن المعمل أو طرائق أكثر تعقيداً:&lt;/p&gt;
 
@@ -1341,7 +1337,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, &#39;Math&#39;, function
 
 &lt;p&gt;إذا أرت طلب التحديثات من الخادم، بإمكانك إنشاء طريقة &lt;code&gt;Server.poll&lt;/code&gt; أو إن كنت تستخدم مقبساً (ٍSocket)، فربما ترغب بإنشاء الطريقة &lt;code&gt;Server.socket&lt;/code&gt; وهكذا&amp;hellip; المعامل تسمح لك بتنظيم نصك البرمجي ضمن وحدات يمكن إدراجها ضمن المتحكمات منعاً لتكرار النص البرمجي فيها والحاجة المتكررة لصيانته.&lt;/p&gt;
 
-&lt;h3 id=&#34;الم-رش-حات:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;المُرشّحات&lt;/h3&gt;
+&lt;h3 id=&#34;الم-رش-حات&#34;&gt;المُرشّحات&lt;/h3&gt;
 
 &lt;p&gt;تستخدم المرشحات مع مصفوفات (arrays) من البيانات وخارج الحلقات (loops). إن احتجت للمرور على عناصر من مصفوفة بيانات والحصول على بعض منها فقط، فأنت في المكان الصحيح! يمكنك أيضًا استخدام المرشحات لتصفية ما يكتبه المستخدم ضمن حقل إدخال &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; مثلاً. هناك عدة طرق لاستخدام المرشحات: ضمن متحكم، أو كطريقة مُعرفة. فيما يلي الطريقة الأخيرة:&lt;/p&gt;
 
@@ -1414,7 +1410,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
 
 &lt;p&gt;كان هذا القسم الأكبر مما تحتاج لمعرفته عن AngularJS وواجهاتها البرمجية، ومع أن ما تعلمناه كافٍ لبناء تطبيق Angular، ولكننا إلى الآن لم نسكتشف أغوراها!&lt;/p&gt;
 
-&lt;h3 id=&#34;ربط-البيانات-ثنائي-الاتجاه:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;ربط البيانات ثنائي الاتجاه&lt;/h3&gt;
+&lt;h3 id=&#34;ربط-البيانات-ثنائي-الاتجاه&#34;&gt;ربط البيانات ثنائي الاتجاه&lt;/h3&gt;
 
 &lt;p&gt;عندما سمعت للمرة الأولى عن &lt;strong&gt;ربط البيانات ثنائي الاتجاه&lt;/strong&gt; لم أفهم ما يعنيه. باختصار يمكن القول إنه حلقة متصلة من البيانات المُزامنة: حدّث النموذج (Model) لتُحدَّث طريقة العرض (View)، أو حدّث طريقة العرض ليُحدَّث النموذج (Model). هذا يعني أن البيانات تبقى محدثة دوماً دون عناء. إن ربطت نموذج &lt;code&gt;ng-model&lt;/code&gt; مع حقل إدخال &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; وكتبت فيه، فهذا يُنشئ (أو يُحدِّث) نموذجاً في الوقت ذاته.
 فيما يلي نقوم بإنشاء حقل &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; ونربطه بنموذج نسميه &lt;code&gt;myModel&lt;/code&gt;، يمكنني الآن استخدام صياغة مقود الدراجة لعكس هذا النموذج وما يطرأ عليه من تحديثات في طريقة العرض في الوقت ذاته:&lt;/p&gt;
@@ -1438,7 +1434,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
 
 &lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/qrr3q/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
 
-&lt;h3 id=&#34;طلبات-xhr-ajax-http-وربط-json:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;طلبات &lt;code&gt;XHR&lt;/code&gt;/Ajax/&lt;code&gt;$http&lt;/code&gt; وربط &lt;code&gt;JSON&lt;/code&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;طلبات-xhr-ajax-http-وربط-json&#34;&gt;طلبات &lt;code&gt;XHR&lt;/code&gt;/Ajax/&lt;code&gt;$http&lt;/code&gt; وربط &lt;code&gt;JSON&lt;/code&gt;&lt;/h3&gt;
 
 &lt;p&gt;نعرف الآن كيف نرسل بيانات بسيطة ضمن المجال (&lt;code&gt;$scope&lt;/code&gt;)، ونعرف ما يكفي عن كيفية عمل النماذج وربط البيانات ثنائي الجانب، والآن حان الوقت لمحاكاة طلبات &lt;code&gt;XHR&lt;/code&gt; حقيقية للخادم. ليس هذا ضرورياً لمواقع الويب العادية، لكنه مناسب جداً لجلب البيانات في تطبيقات الويب.
 عندما تطور تطبيقك على جهازك المحلي، فغالباً ما تستخدم شيئاً مثل Java أو ASP.NET أو PHP أو غيرها لتشغيل خادم محلي. وسواء كنا نتصل بقاعدة بيانات محلية أم بخادم بعيد كواجهة برمجية، فإننا نتبع نفس الخطوات بالضبط.&lt;/p&gt;
@@ -1520,7 +1516,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
 
 &lt;p&gt;هذا سيعرض اسم المستخدم. لننتقل الآن إلى خطوة أبعد بفهم &lt;strong&gt;ربط البيانات التصريحي (Declarative data-binding)&lt;/strong&gt; حيث تصبح الأمور أكثر إثارة!&lt;/p&gt;
 
-&lt;h3 id=&#34;ربط-البيانات-التصريحي:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;ربط البيانات التصريحي&lt;/h3&gt;
+&lt;h3 id=&#34;ربط-البيانات-التصريحي&#34;&gt;ربط البيانات التصريحي&lt;/h3&gt;
 
 &lt;p&gt;تقوم فلسفة Angular على إنشاء نصوص HTML ديناميكية قادرة على القيام بوظائف بنفسها لم نكن نتوقع أنها ممكنة ضمن المتصفح. هذه هي المهمة التي تقوم بها Angualar على خير وجه.
 لنتخيل أننا أرسلنا طلب AJAX لجلب قائمة بعناوين البريد الإلكتروني وسطر الموضوع فيها مع تاريخ إرسالها، ولنفترض أننا نريد عرضها ضمن الصفحة. في هذا المكان بالضبط تذهلنا Angular بقدراتها. لننشئ أولاً متحكماً بالبريد الإلكتروني:&lt;/p&gt;
@@ -1572,7 +1568,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
 
 &lt;p&gt;اطلع على المُرشدات التي توفرها Angular لتتعرف على القدرات الكاملة للربط التصريحي. بهذا نكون قد عرفنا كيف نصل البيانات بين الخادم وطريقة العرض.&lt;/p&gt;
 
-&lt;h3 id=&#34;وظائف-المجال-scope-functions:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;وظائف المجال (Scope functions)&lt;/h3&gt;
+&lt;h3 id=&#34;وظائف-المجال-scope-functions&#34;&gt;وظائف المجال (Scope functions)&lt;/h3&gt;
 
 &lt;p&gt;تعتبر وظائف المجال الخطوة التالية في بناء وظائف التطبيق واستكمالاً للربط التصريحي. فيما يلي وظيفة بسيطة تحذف إحدى الرسائل:&lt;/p&gt;
 
@@ -1599,7 +1595,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
 
 &lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/BgZmt/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
 
-&lt;h3 id=&#34;طرائق-dom-التصريحية:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;طرائق DOM التصريحية&lt;/h3&gt;
+&lt;h3 id=&#34;طرائق-dom-التصريحية&#34;&gt;طرائق DOM التصريحية&lt;/h3&gt;
 
 &lt;p&gt;ننتقل الآن لطرائق DOM، وهي أيضًا مُرشدات تؤدي وظيفة ضمن الصفحة بدونها كنا سنكتب الكثير من النص البرمجي. إحدى الأمثلة المناسبة لإيضاح الفكرة هنا هي إظهار أو إخفاء قسم التنقل ضمن الصفحة باستخدام &lt;code&gt;ng-show&lt;/code&gt; و&lt;code&gt;ng-click&lt;/code&gt;، لنرَ بساطة هذا:&lt;/p&gt;
 
@@ -1617,7 +1613,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
 
 &lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/ZUyW5/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
 
-&lt;h3 id=&#34;التعبيرات-expressions:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;التعبيرات (Expressions)&lt;/h3&gt;
+&lt;h3 id=&#34;التعبيرات-expressions&#34;&gt;التعبيرات (Expressions)&lt;/h3&gt;
 
 &lt;p&gt;من أفضل ما يقدمه Angular، يقدم بديلاً عن الحاجة لكتابة الكثير من JavaScript والنصوص المكررة.&lt;/p&gt;
 
@@ -1643,7 +1639,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
 
 &lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/XCwcr/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
 
-&lt;h3 id=&#34;طرق-العرض-الديناميكية-والتوجيه-routing:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;طرق العرض الديناميكية والتوجيه (Routing)&lt;/h3&gt;
+&lt;h3 id=&#34;طرق-العرض-الديناميكية-والتوجيه-routing&#34;&gt;طرق العرض الديناميكية والتوجيه (Routing)&lt;/h3&gt;
 
 &lt;p&gt;هي ما تقوم عليه فلسفة تطبيقات الويب (والمواقع) أحادية الصفحة: لديك قسم الترويسة وقسم التذييل وشريط جانبي ثم المحتوى الذي يُحدث تلقائياً بناءً على الرابط الحالي.&lt;/p&gt;
 
@@ -1690,7 +1686,7 @@ myApp.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;, function ($scope) {
 &lt;p&gt;بإمكاننا الآن تحميل الصفحة &lt;code&gt;emails.html&lt;/code&gt; ببساطة لتقوم بعرض قائمة الرسائل الإلكترونية. الخلاصة أننا استطعنا أن نبني تطبيقاً معقداً للغاية بجهد ضئيل جداً.
 توفر الخدمة &lt;code&gt;$routerProvider&lt;/code&gt; المزيد من الخيارات، لكن ما تعلمناه عنها كافٍ في البداية. هناك أيضاً أشياء مثل مُعترِضات &lt;code&gt;$http&lt;/code&gt; التي تبدأ أحداثاً خلال مسير طلب AJAX، فتتيح لنا عرض مقدار التقدم على سبيل المثال أثناء جلب البيانات.&lt;/p&gt;
 
-&lt;h3 id=&#34;البيانات-الثابتة-العامة:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;البيانات الثابتة العامة&lt;/h3&gt;
+&lt;h3 id=&#34;البيانات-الثابتة-العامة&#34;&gt;البيانات الثابتة العامة&lt;/h3&gt;
 
 &lt;p&gt;في تطبيق Gmail للويب، تُكتب بيانات كثيرة بصيغة JSON ضمن الصفحة (انقر باليمين واختر عرض المصدر في صفحة Gmail). إن قمنا بخطوة مشابهة، أي كتابة البيانات ضمن الصفحة، فهذا سيجعل وقت عرضها أقل وسيبدو التطبيق أكثر سرعة.&lt;/p&gt;
 
@@ -1715,7 +1711,7 @@ globalData.emails = &amp;lt;javaTagHereToGenerateMessages&amp;gt;;
 }]);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;تقليص-الملفات-minification:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;تقليص الملفات (Minification)&lt;/h3&gt;
+&lt;h3 id=&#34;تقليص-الملفات-minification&#34;&gt;تقليص الملفات (Minification)&lt;/h3&gt;
 
 &lt;p&gt;سنتحدث قليلاً عن تقليص حجم النصوص البرمجية التي كتبناها. ربما تكون قد جربت تقليص نصوصك البرمجية التي كتبتها لـAngular وصادفت خطأ.
 ليس هناك أمور خاصة يتطلبها تقليص حجم هذه الملفات، باستثناء الحاجة لإدراج أسماء المتطلبات ضمن مصفوفة قبل الطريقة المُصرّح عنها، لنوضح أكثر:&lt;/p&gt;
@@ -1748,7 +1744,7 @@ function (a,b,c,d) {
 
 &lt;p&gt;عليك أن تحافظ على ترتيب المتطلبات المحقونة في المصفوفة &lt;code&gt;[&#39;_one&#39;, &#39;_two&#39;]&lt;/code&gt; وضمن مُعاملات الطريقة &lt;code&gt;function(_one, _two)&lt;/code&gt;، وإلا ستسبب لنفسك ولفريق العمل معك مشاكل كثيرة!&lt;/p&gt;
 
-&lt;h3 id=&#34;الاختلافات-بين-mvc-وmvvm:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;الاختلافات بين MVC وMVVM&lt;/h3&gt;
+&lt;h3 id=&#34;الاختلافات-بين-mvc-وmvvm&#34;&gt;الاختلافات بين MVC وMVVM&lt;/h3&gt;
 
 &lt;p&gt;سننهي مقالتنا العملاقة الآن بشرح سريع يشمل الفروق بين MVC وMVVM:&lt;/p&gt;
 
@@ -1770,14 +1766,14 @@ function (a,b,c,d) {
 
 &lt;iframe width=&#34;100%&#34; height=&#34;300&#34; src=&#34;http://jsfiddle.net/toddmotto/C9GHF/embedded/result,html,js&#34; allowfullscreen=&#34;allowfullscreen&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
 
-&lt;h3 id=&#34;مكونات-الويب-في-html5:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;مكونات الويب في HTML5&lt;/h3&gt;
+&lt;h3 id=&#34;مكونات-الويب-في-html5&#34;&gt;مكونات الويب في HTML5&lt;/h3&gt;
 
 &lt;p&gt;قد تبدو هذه الفكرة مكررة، ولكنني سأعيدها هنا لنتحدث عن مكونات الويب.
 يسمح Angular بإنشاء عناصر (elements) مخصصة مثل: &lt;code&gt;&amp;lt;myCustomElement&amp;gt;&amp;lt;/myCustomElement&amp;gt;&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;في الحقيقة هذا أشبه ما يكون بمستقبل HTML5 التي تقدم فكرة جديدة تُسمى مكونّات الويب (Web Components)، والتي تتركب من عناصر مخصصة ضمن HTML مترافقة مع نص JavaScript ديناميكي، وهذا أمر مثيرٌ للغاية - والأكثر إثارة أنه ممكن اليوم باستخدام Angular! فريق Angular بعيد النظر - شكراً لكم!&lt;/p&gt;
 
-&lt;h3 id=&#34;تعليقات-المجال-scope:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;تعليقات المجال (Scope)&lt;/h3&gt;
+&lt;h3 id=&#34;تعليقات-المجال-scope&#34;&gt;تعليقات المجال (Scope)&lt;/h3&gt;
 
 &lt;p&gt;أعتقد أن تعليقات المجال إضافة جميلة لسياق العمل، فبدل الحاجة لكتابة التعليقات ضمن HTML بالطريقة التالية:&lt;/p&gt;
 
@@ -1797,7 +1793,7 @@ function (a,b,c,d) {
 &amp;lt;!-- /scope: MainCtrl --&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;تصحيح-العلل-في-angular:593045a4d4bce5fe4586e7fc68a557fc&#34;&gt;تصحيح العلل في Angular&lt;/h3&gt;
+&lt;h3 id=&#34;تصحيح-العلل-في-angular&#34;&gt;تصحيح العلل في Angular&lt;/h3&gt;
 
 &lt;p&gt;تتوفر إضافة جميلة للغاية لمتصفح Chrome ينصح بها فريق Angular، وتسمى &lt;a href=&#34;https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en&#34;&gt;Batarang&lt;/a&gt;.&lt;/p&gt;
 
@@ -1807,10 +1803,10 @@ function (a,b,c,d) {
     
     <item>
       <title>عن Google Reader وRSS</title>
-      <link>http://forabi.net/post/google-reader-rss/</link>
+      <link>https://forabi.net/post/google-reader-rss/</link>
       <pubDate>Sat, 02 Mar 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://forabi.net/post/google-reader-rss/</guid>
+      <guid>https://forabi.net/post/google-reader-rss/</guid>
       <description>
 
 &lt;p&gt;أنا غاضبٌ جدًّا، على الرغم من أنّ هذا كان متوقّعًا، فإنني لم أتوقّع أن يحدث بهذه السرعة! منذ بدأت Google بتطوير تطبيق Currents كان هذا إحدى الإشارات التي تنذر بقرب موت Reader، وقبله فإن تطبيق Reader على Android بالكاد حصل على تحديث يمنحه واجهة Holo، ولم يطوّر بعد ذلك مطلقًا، وربّما هذا ما كان غرّني بالاستمرار في استخدامه: إنّه يعمل فحسب (It just works كما يُقال)؛ فلا داعي للتحديثات، ولا ميزات تنقصه، ولا عيوب تشوبه.&lt;/p&gt;
@@ -1830,7 +1826,7 @@ function (a,b,c,d) {
 
 &lt;p&gt;ما أعنيه أن لا يمكن أن يحدد شخصٌ أعرفه في حياتي ما أقرأه من مصادر ومتى أقرأه، وهذه هي المشكلة الرئيسية في اعتبار الشبكات الاجتماعية بديلاً لقارئات RSS. فكون فلان صديقك لا يمنحه حق قولبة معرفتك ضمن ما يراه مناسبًا، بل من حقك أن تحدد بالضبط من أين تقرأ ومتى تقرأ.&lt;/p&gt;
 
-&lt;h3 id=&#34;إذن-ما-مصير-rss-بعد-موت-reader:2b8b8fdf6b90ea08deafd8bbf491ce4d&#34;&gt;إذن ما مصير RSS بعد موت Reader؟&lt;/h3&gt;
+&lt;h3 id=&#34;إذن-ما-مصير-rss-بعد-موت-reader&#34;&gt;إذن ما مصير RSS بعد موت Reader؟&lt;/h3&gt;
 
 &lt;p&gt;هذا الجزء مقتبس من &lt;a href=&#34;http://3gc.r2.ly/?id=15648&#34;&gt;تدوينة لـDave Winer&lt;/a&gt;:&lt;/p&gt;
 
@@ -1840,7 +1836,7 @@ function (a,b,c,d) {
 &lt;li&gt;ظهور بديل قوي يدفع تطوير RSS للأمام (وهو ما يبدو مستبعدًا)&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&#34;ليس-للمستخدمين-حيلة:2b8b8fdf6b90ea08deafd8bbf491ce4d&#34;&gt;&amp;laquo;ليس للمستخدمين حيلة&amp;raquo;&lt;/h3&gt;
+&lt;h3 id=&#34;ليس-للمستخدمين-حيلة&#34;&gt;&amp;laquo;ليس للمستخدمين حيلة&amp;raquo;&lt;/h3&gt;
 
 &lt;p&gt;في &lt;a href=&#34;http://www.marco.org/2013/03/21/thursday-sandwich&#34;&gt;تدوينة أعجبتني لـMarco Arment&lt;/a&gt; مؤسس Instapaper وأحد مؤسسي Tumblr، يقول:&lt;/p&gt;
 
