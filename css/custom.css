@@ -1,20 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Amiri:700&subset=arabic');
+
 body {
-  font-family: "Roboto", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #FCFCFC;
+  font-size: 1.8rem;
 }
 
-h1 { font-size: 2.1rem; }
-h2 { font-size: 1.9rem; }
-h3 { font-size: 1.7rem; }
-h4,
-h5,
-h6 { font-size: 1.5rem; }
+figure {
+  text-align: center;
+}
+
+figure figcaption {
+  font-size: 90%;
+  color: darkgray;
+}
+
+a {
+  text-decoration: none;
+}
+
+#toc {
+  color: gray;
+}
+
+blockquote {
+  font-style: italic;
+  padding: 1.5rem;
+}
+
+
+blockquote {
+  border-right: 3px solid lightgray;
+}
+
+blockquote[dir="ltr"] {
+  border-right: none;
+  border-left: 3px solid lightgray;
+}
+
+.note-title {
+  text-transform: uppercase;
+  font-size: smaller;
+  display: block;
+  color: #585807;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #eaeab6;
+}
+
+.note {
+  background: #fdfddf;
+  border: 1px solid #eaeab6;
+  border-radius: 2px;
+  padding: 0.5rem;
+  margin: 0.5rem -0.5rem;
+  font-size: 1.5rem;
+}
+
+.toc {
+  color: initial;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.toc > nav > ul > li {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6, .note-title {
+  font-family: Amiri, serif;
+  font-weight: 700;
+  line-height: 1.9;
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2.3rem; }
+h4 { font-size: 2.1rem; }
+h5 { font-size: 2.0rem; }
+h6 { font-size: 1.9rem; }
 
 img {
-  max-width: 100%;
+  max-width: calc(100% + 10rem);
   height: auto;
   vertical-align: middle;
   border: 0;
+  margin: 1rem -2rem;
 }
 
 header,
@@ -49,8 +119,17 @@ main {
   margin-bottom: 0;
 }
 
-.entry-title a {
+.entry-text {
+  text-align: justify;
+  text-justify: kashida;
+}
+
+.entry-text a {
   text-decoration: none;
+}
+
+.entry-text a:hover {
+  text-decoration: underline;
 }
 
 .entry-meta {

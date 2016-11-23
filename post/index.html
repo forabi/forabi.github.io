@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8">
-<meta name="generator" content="Hugo 0.16" />
+<meta charset="utf-8">	
+<meta name="generator" content="Hugo 0.17" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
@@ -27,6 +27,11 @@
 		<h1 class="list-title">Posts</h1>
 
 		<article itemscope itemtype="http://schema.org/Blog">
+			<h2 class="entry-title" itemprop="headline"><a href="/post/announcing-webceph/">الإعلان عن WebCeph</a></h2>
+			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-11-20">November 20, 2016</time></span>
+		</article>
+
+		<article itemscope itemtype="http://schema.org/Blog">
 			<h2 class="entry-title" itemprop="headline"><a href="/post/whats-new-in-es6-p2/">ما الجديد في الإصدار القادم من JavaScript؟ (الجزء الثّاني)</a></h2>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="2015-11-04">November 04, 2015</time></span>
 		</article>
@@ -47,7 +52,7 @@
 		</article>
 
 		<article itemscope itemtype="http://schema.org/Blog">
-			<h2 class="entry-title" itemprop="headline"><a href="/post/aquran-1.0-beta-announcement/">الإصدار الجديد من aQuran</a></h2>
+			<h2 class="entry-title" itemprop="headline"><a href="/post/aquran-1/">الإصدار الجديد من aQuran</a></h2>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="2014-04-04">April 04, 2014</time></span>
 		</article>
 
@@ -87,9 +92,18 @@
 </script>
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var t = document.querySelector('template#toc-template');
+  var container = document.querySelector('#toc');
+  if (!t || !container) return;
+  var clone = document.importNode(t.content, true);
+  container.innerHTML = '';
+  container.appendChild(clone);
+});
+</script>
 </body>
 </html>

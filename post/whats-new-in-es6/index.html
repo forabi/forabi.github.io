@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8">
-<meta name="generator" content="Hugo 0.16" />
+<meta charset="utf-8">	
+<meta name="generator" content="Hugo 0.17" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
@@ -27,7 +27,8 @@
 		<article itemscope itemtype="http://schema.org/BlogPosting">
 			<h1 class="entry-title" itemprop="headline">ما الجديد في الإصدار القادم من JavaScript؟ (الجزء الأول)</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="28/05/2014">28/05/2014</time></span>
-			<section itemprop="entry-text">
+			
+			<section class="entry-text" itemprop="entry-text">
 				
 
 <p>مُلاحظة: نُشر <a href="https://academy.hsoub.com/programming/javascript/%D9%85%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85-%D9%85%D9%86-%D8%AC%D8%A7%D9%81%D8%A7%D8%B3%D9%83%D8%B1%D8%A8%D8%AA-ecmascript-6-%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%A3%D9%88%D9%84-r12/">هذا المقال على أكاديمية حسوب</a>.</p>
@@ -118,7 +119,7 @@ let greetings = [`Hello ${ person }!` for (person of people)];
 console.log(greetings); // ['Hello Ahmed!', 'Hello Samer!', 'Hello Khaled!'];
 </code></pre>
 
-<p>هنا استبدلنا إشارات الاقتباس (<code>'</code> أو <code>&quot;</code>) بالإشارة ` الأمر الذي أتاح لنا إحاطة المتغير <code>person</code> بقوسين معكوفين مسبوقين بإشارة <code>$</code>، وهذه الصياغة تدعى <strong>&laquo;السلاسل النصية المقولبة&raquo;</strong> أو Template Strings، والتي تسمح -بالإضافة إلى القولبة- بالعديد من الأشياء الرائعة، كالعبارات على عدة أسطر:</p>
+<p>هنا استبدلنا إشارات الاقتباس (<code>'</code> أو <code>&quot;</code>) بالإشارة ` الأمر الذي أتاح لنا إحاطة المتغير <code>person</code> بقوسين معكوفين مسبوقين بإشارة <code>$</code>، وهذه الصياغة تدعى <strong>&ldquo;السلاسل النصية المقولبة&rdquo;</strong> أو Template Strings، والتي تسمح -بالإضافة إلى القولبة- بالعديد من الأشياء الرائعة، كالعبارات على عدة أسطر:</p>
 
 <pre><code class="language-javascript">let multilineString = `I am
 a multiline
@@ -181,7 +182,7 @@ console.log(multilineString);
 
 <h2 id="الثوابت-constants">الثوابت (Constants)</h2>
 
-<p>سيداتي وسادتي&hellip; رحبوا بالثوابت&hellip; نعم إنها أخيرًا متوفرة في JavaScript، إحدى المكونات الأساسية لأي لغة برمجية التي لم تكن متوفرة في JavaScript، أصبحت الآن متوفرة. والآن نأتي للسؤال البديهي: لماذا أحتاج للثوابت؟ أليس بإمكاني التصريح عن متغير دون أن أغير قيمته بعد إعطاءه القيمة الأولية؟ نعم بالطبع بإمكانك ذلك، لكن هذا لا يعني بالضرورة أن المستخدم أو نصاً برمجيًا من طرف ثالث ليس بإمكانه تغيير قيمة هذا المتغير في سياق التنفيذ، وطالما أن المتغير &laquo;متغير&raquo; بطبيعته، فإننا دومًا بحاجة إلى شيء من أصل اللغة يحمينا من تغييره خطأ. عند التصريح عن ثابت فإننا نعطيه قيمة أولية ثم ستتولى الآلة البرمجية لـJavaScript حماية هذا الثابت من التغيير، وسُيرمى خطأ عند محاولة إسناد قيمة جديدة لهذا الثابت.</p>
+<p>سيداتي وسادتي&hellip; رحبوا بالثوابت&hellip; نعم إنها أخيرًا متوفرة في JavaScript، إحدى المكونات الأساسية لأي لغة برمجية التي لم تكن متوفرة في JavaScript، أصبحت الآن متوفرة. والآن نأتي للسؤال البديهي: لماذا أحتاج للثوابت؟ أليس بإمكاني التصريح عن متغير دون أن أغير قيمته بعد إعطاءه القيمة الأولية؟ نعم بالطبع بإمكانك ذلك، لكن هذا لا يعني بالضرورة أن المستخدم أو نصاً برمجيًا من طرف ثالث ليس بإمكانه تغيير قيمة هذا المتغير في سياق التنفيذ، وطالما أن المتغير &ldquo;متغير&rdquo; بطبيعته، فإننا دومًا بحاجة إلى شيء من أصل اللغة يحمينا من تغييره خطأ. عند التصريح عن ثابت فإننا نعطيه قيمة أولية ثم ستتولى الآلة البرمجية لـJavaScript حماية هذا الثابت من التغيير، وسُيرمى خطأ عند محاولة إسناد قيمة جديدة لهذا الثابت.</p>
 
 <pre><code class="language-javascript">const myConstant = 'Never change this!';
 
@@ -273,6 +274,25 @@ SayHello(); // Hello User!
 <p>في الجزء القادم سنتعرّف على المكوّنات الجديدة الأكثر إثارة، كالمولّدات التي ستجعلنا نغير من طريقة تعاملنا مع البيانات اللامتزامنة كليًّا!</p>
 
 			</section>
+			<template id="toc-template">
+				<details class="toc">
+					<summary>جدول المحتويات</summary>
+					<p>
+					<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#متغيرات-نطاقها-القطعة-البرمجية-block-scoped-variables">متغيرات نطاقها القطعة البرمجية (Block-scoped Variables)</a></li>
+<li><a href="#شيفرة-أقصر-وأسهل-للقراءة">شيفرة أقصر وأسهل للقراءة</a></li>
+<li><a href="#الثوابت-constants">الثوابت (Constants)</a></li>
+<li><a href="#الم-عاملات-الافتراضية-default-parameters">المُعاملات الافتراضية (Default Parameters)</a></li>
+<li><a href="#الوعود-promises">الوعود (Promises)</a></li>
+</ul></li>
+</ul>
+</nav>
+					</p>
+				</details>
+			</template>
 		</article>
 	</main>
 
@@ -300,10 +320,19 @@ SayHello(); // Hello User!
 </script>
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var t = document.querySelector('template#toc-template');
+  var container = document.querySelector('#toc');
+  if (!t || !container) return;
+  var clone = document.importNode(t.content, true);
+  container.innerHTML = '';
+  container.appendChild(clone);
+});
+</script>
 </body>
 </html>
 

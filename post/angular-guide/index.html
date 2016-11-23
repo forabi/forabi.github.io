@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8">
-<meta name="generator" content="Hugo 0.16" />
+<meta charset="utf-8">	
+<meta name="generator" content="Hugo 0.17" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
@@ -27,7 +27,8 @@
 		<article itemscope itemtype="http://schema.org/BlogPosting">
 			<h1 class="entry-title" itemprop="headline">الدليل الكامل لتعلم Angular JS في يوم واحد</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="29/03/2014">29/03/2014</time></span>
-			<section itemprop="entry-text">
+			
+			<section class="entry-text" itemprop="entry-text">
 				
 
 <p><em>هذه ترجمة (بتصرف) <a href="http://toddmotto.com/ultimate-guide-to-learning-angular-js-in-one-day/">لمقالة Todd Motto على مدوّنته</a> وإليه يعود ضمير المتكلم في المقالة. نُشرت للمرة الأولى على <a href="https://academy.hsoub.com/programming/javascript/angularjs/%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84-%D9%84%D8%AA%D8%B9%D9%84%D9%85-angular-js-%D9%81%D9%8A-%D9%8A%D9%88%D9%85-%D9%88%D8%A7%D8%AD%D8%AF-r11/">أكاديمية حسوب</a>، وأعيدُ نشرها هنا.</em></p>
@@ -794,6 +795,48 @@ function (a,b,c,d) {
 <p>برمجة سعيدة!</p>
 
 			</section>
+			<template id="toc-template">
+				<details class="toc">
+					<summary>جدول المحتويات</summary>
+					<p>
+					<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#ما-هو-angularjs">ما هو AngularJS؟</a></li>
+<li><a href="#المصطلحات">المصطلحات</a>
+<ul>
+<li><a href="#mvc">MVC</a></li>
+</ul></li>
+<li><a href="#إعداد-مشروع-angular-js-الأساسيات">إعداد مشروع Angular JS (الأساسيات)</a></li>
+<li><a href="#نص-html-مع-تصريحات-ng">نص HTML مع تصريحات <code>ng-*</code>:</a>
+<ul>
+<li><a href="#وحدة-angular-مع-متحكم">وحدة Angular مع متحكم:</a></li>
+<li><a href="#الم-تحك-مات-controllers">المُتحكّمات (Controllers)</a></li>
+<li><a href="#الم-رش-دات-directives">المُرشِدات (Directives)</a></li>
+<li><a href="#الخدمات-services">الخدمات (Services)</a></li>
+<li><a href="#المعامل-factories">المعامل (Factories)</a></li>
+<li><a href="#الم-رش-حات">المُرشّحات</a></li>
+<li><a href="#ربط-البيانات-ثنائي-الاتجاه">ربط البيانات ثنائي الاتجاه</a></li>
+<li><a href="#طلبات-xhr-ajax-http-وربط-json">طلبات <code>XHR</code>/Ajax/<code>$http</code> وربط <code>JSON</code></a></li>
+<li><a href="#ربط-البيانات-التصريحي">ربط البيانات التصريحي</a></li>
+<li><a href="#وظائف-المجال-scope-functions">وظائف المجال (Scope functions)</a></li>
+<li><a href="#طرائق-dom-التصريحية">طرائق DOM التصريحية</a></li>
+<li><a href="#التعبيرات-expressions">التعبيرات (Expressions)</a></li>
+<li><a href="#طرق-العرض-الديناميكية-والتوجيه-routing">طرق العرض الديناميكية والتوجيه (Routing)</a></li>
+<li><a href="#البيانات-الثابتة-العامة">البيانات الثابتة العامة</a></li>
+<li><a href="#تقليص-الملفات-minification">تقليص الملفات (Minification)</a></li>
+<li><a href="#الاختلافات-بين-mvc-وmvvm">الاختلافات بين MVC وMVVM</a></li>
+<li><a href="#مكونات-الويب-في-html5">مكونات الويب في HTML5</a></li>
+<li><a href="#تعليقات-المجال-scope">تعليقات المجال (Scope)</a></li>
+<li><a href="#تصحيح-العلل-في-angular">تصحيح العلل في Angular</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+					</p>
+				</details>
+			</template>
 		</article>
 	</main>
 
@@ -821,10 +864,19 @@ function (a,b,c,d) {
 </script>
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var t = document.querySelector('template#toc-template');
+  var container = document.querySelector('#toc');
+  if (!t || !container) return;
+  var clone = document.importNode(t.content, true);
+  container.innerHTML = '';
+  container.appendChild(clone);
+});
+</script>
 </body>
 </html>
 

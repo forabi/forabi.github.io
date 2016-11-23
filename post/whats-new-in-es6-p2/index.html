@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8">
-<meta name="generator" content="Hugo 0.16" />
+<meta charset="utf-8">	
+<meta name="generator" content="Hugo 0.17" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
@@ -27,7 +27,8 @@
 		<article itemscope itemtype="http://schema.org/BlogPosting">
 			<h1 class="entry-title" itemprop="headline">ما الجديد في الإصدار القادم من JavaScript؟ (الجزء الثّاني)</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="04/11/2015">04/11/2015</time></span>
-			<section itemprop="entry-text">
+			
+			<section class="entry-text" itemprop="entry-text">
 				
 
 <p>مُلاحظة: نُشر <a href="https://academy.hsoub.com/programming/javascript/%D9%85%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A7%D9%84%D8%A5%D8%B5%D8%AF%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85-%D9%85%D9%86-%D8%AC%D8%A7%D9%81%D8%A7%D8%B3%D9%83%D8%B1%D8%A8%D8%AA-ecmascript-6-%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-r26/">هذا المقال على أكاديمية حسوب</a>.</p>
@@ -580,6 +581,27 @@ addThreeOrMoreNumbers(1, 2, 3);
 </ol>
 
 			</section>
+			<template id="toc-template">
+				<details class="toc">
+					<summary>جدول المحتويات</summary>
+					<p>
+					<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#التفكيك-destructuring">التفكيك Destructuring</a></li>
+<li><a href="#الم-كر-رات-iterators-وحلقة-for-of">المُكرِّرات (Iterators) وحلقة <code>for... of</code></a></li>
+<li><a href="#الم-ول-دات-generators">المُولِّدات (Generators)</a></li>
+<li><a href="#م-عام-ل-البقي-ة-rest-parameter-والناشرة-spread">مُعامِل البقيّة (Rest parameter) والناشرة (Spread)</a>
+<ul>
+<li><a href="#المصادر">المصادر</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+					</p>
+				</details>
+			</template>
 		</article>
 	</main>
 
@@ -607,10 +629,19 @@ addThreeOrMoreNumbers(1, 2, 3);
 </script>
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var t = document.querySelector('template#toc-template');
+  var container = document.querySelector('#toc');
+  if (!t || !container) return;
+  var clone = document.importNode(t.content, true);
+  container.innerHTML = '';
+  container.appendChild(clone);
+});
+</script>
 </body>
 </html>
 

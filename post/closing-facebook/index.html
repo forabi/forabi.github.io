@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8">
-<meta name="generator" content="Hugo 0.16" />
+<meta charset="utf-8">	
+<meta name="generator" content="Hugo 0.17" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
@@ -27,7 +27,8 @@
 		<article itemscope itemtype="http://schema.org/BlogPosting">
 			<h1 class="entry-title" itemprop="headline">5 أسباب دفعتني لترك فيس بوك</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="20/07/2014">20/07/2014</time></span>
-			<section itemprop="entry-text">
+			
+			<section class="entry-text" itemprop="entry-text">
 				
 
 <p>ملاحظة: أنا هنا أتحدث عن <strong><a href="https://www.facebook.com/help/224562897555674">حذف الحساب</a></strong> وليس تعطيله مؤقّتًا (deactivating).</p>
@@ -74,6 +75,25 @@
 <p>لا شيء لدي أقوله عن هذه الصورة!</p>
 
 			</section>
+			<template id="toc-template">
+				<details class="toc">
+					<summary>جدول المحتويات</summary>
+					<p>
+					<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#5-التشتت">#5 التشتت</a></li>
+<li><a href="#4-النفاق-الاجتماعي">#4 النفاق الاجتماعي</a></li>
+<li><a href="#3-الإدمان">#3 الإدمان</a></li>
+<li><a href="#2-الخصوصية">#2 الخصوصية</a></li>
+<li><a href="#1-هذه">#1 هذه</a></li>
+</ul></li>
+</ul>
+</nav>
+					</p>
+				</details>
+			</template>
 		</article>
 	</main>
 
@@ -101,10 +121,19 @@
 </script>
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var t = document.querySelector('template#toc-template');
+  var container = document.querySelector('#toc');
+  if (!t || !container) return;
+  var clone = document.importNode(t.content, true);
+  container.innerHTML = '';
+  container.appendChild(clone);
+});
+</script>
 </body>
 </html>
 
