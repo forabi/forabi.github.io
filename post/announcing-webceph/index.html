@@ -752,7 +752,7 @@ const getUnreadMessageCount = (state) =&gt; {
 <p>افترض أنّ لديّ التّابع التّالي الّذي يُغيّر لون نص الصّفحة:</p>
 
 <pre><code class="language-javascript">
-var content = document.getElementById('#content');
+var content = document.getElementById('content');
 
 function setTextColor(color) {
   content.style.color = color;
@@ -764,7 +764,7 @@ setTextColor('red');
 
 <p>افترض أنّني في موضع آخر من الصّفحة، قمت بإنشاء مُتغيّر آخر باسم مُطابق سهوًا، لكنّه يُشير إلى محتوى المقالة:</p>
 
-<pre><code class="language-javascript">var content = document.getElementById('.article-text');
+<pre><code class="language-javascript">var content = document.querySelector('.article-text');
 </code></pre>
 
 <p>فإنّ استدعاء التّابع <code>setTextColor</code> هذه المرّة سيُغيّر لون نصّ المقالة بدل لون الصّفحة، وهذا يعني أنّنا لا نستطيع ضمان أنّ التّابع سيُحدث نفس التأثير في كلّ مرّة نستدعيه، حتّى وإن كانت مدخلاته هي نفسها.</p>
