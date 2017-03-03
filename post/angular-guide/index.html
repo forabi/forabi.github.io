@@ -2,12 +2,46 @@
 <html lang="ar">
 <head>
 <meta charset="utf-8">	
-<meta name="generator" content="Hugo 0.17" />
+<meta name="generator" content="Hugo 0.19" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
 <link rel="stylesheet" href="/css/custom.css">
-<link rel="stylesheet" href="/css/rtl.css">
+
+	<style>
+		 
+		html {
+			direction: rtl;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			letter-spacing: normal;
+		}
+
+		code {
+			font-family: 'Consolas', 'Courier New', Thabit, monospace;
+		}
+
+		code[class*="language-"] {
+			direction: ltr;
+			text-align: left;
+		}
+
+		code::before {
+			display: inline;
+			content: '\200e';
+		}
+
+		code::after {
+			content: '\200e';
+			display: inline;
+		}
+
+		.hljs-comment {
+			direction: reset;
+		}
+	</style>
+
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="مدوّنة فوّاز">
 <title>الدليل الكامل لتعلم Angular JS في يوم واحد - مدوّنة فوّاز</title>
 </head>
@@ -863,6 +897,7 @@ function (a,b,c,d) {
 	ga('send', 'pageview');
 </script>
 
+<link href="https://fonts.googleapis.com/css?family=Amiri:700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>

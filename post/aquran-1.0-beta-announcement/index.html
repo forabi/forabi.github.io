@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8">
-<meta name="generator" content="Hugo 0.16" />
+<meta charset="utf-8">	
+<meta name="generator" content="Hugo 0.19" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
 <link rel="stylesheet" href="/css/custom.css">
-<link rel="stylesheet" href="/css/rtl.css">
+
+	<style>
+		 
+		html {
+			direction: rtl;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			letter-spacing: normal;
+		}
+
+		code {
+			font-family: 'Consolas', 'Courier New', Thabit, monospace;
+		}
+
+		code[class*="language-"] {
+			direction: ltr;
+			text-align: left;
+		}
+
+		code::before {
+			display: inline;
+			content: '\200e';
+		}
+
+		code::after {
+			content: '\200e';
+			display: inline;
+		}
+
+		.hljs-comment {
+			direction: reset;
+		}
+	</style>
+
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="مدوّنة فوّاز">
 <title>الإصدار الجديد من aQuran - مدوّنة فوّاز</title>
 </head>
@@ -27,7 +61,8 @@
 		<article itemscope itemtype="http://schema.org/BlogPosting">
 			<h1 class="entry-title" itemprop="headline">الإصدار الجديد من aQuran</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="04/04/2014">04/04/2014</time></span>
-			<section itemprop="entry-text">
+			
+			<section class="entry-text" itemprop="entry-text">
 				
 
 <p>استكمالاً <a href="https://arabia.io/webdev/5902-مشروع-تطبيق-للقرآن-الكريم-للهواتف-الذكية-مبني-بلغات-الويب">للموضوع السابق</a>، قمت للتو برفع نسخة تجريبية من التطبيق على GitHub Pages بعد محاولة الاستضافة على عدة مواقع أخرى باءت بالفشل :)</p>
@@ -109,6 +144,27 @@
 <p>هل تجيد تطوير تطبيقات الويب؟ <a href="https://github.com/forabi/aQuran">ساعدني على GitHub</a></p>
 
 			</section>
+			<template id="toc-template">
+				<details class="toc">
+					<summary>جدول المحتويات</summary>
+					<p>
+					<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#ما-الجديد-منذ-الموضوع-السابق">ما الجديد منذ الموضوع السابق؟</a></li>
+<li><a href="#صور-التطبيق-http-imgur-com-a-pvpew"><a href="http://imgur.com/a/PvPEW">صور التطبيق</a></a></li>
+<li><a href="#متطلبات-التشغيل">متطلبات التشغيل</a></li>
+<li><a href="#شكر-خاص">شكر خاص</a></li>
+<li><a href="#مشاكل-معروفة">مشاكل معروفة</a></li>
+<li><a href="#الخطوات-التالية">الخطوات التالية</a></li>
+<li><a href="#المساهمات">المساهمات</a></li>
+</ul></li>
+</ul>
+</nav>
+					</p>
+				</details>
+			</template>
 		</article>
 	</main>
 
@@ -135,11 +191,21 @@
 	ga('send', 'pageview');
 </script>
 
+<link href="https://fonts.googleapis.com/css?family=Amiri:700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var t = document.querySelector('template#toc-template');
+  var container = document.querySelector('#toc');
+  if (!t || !container) return;
+  var clone = document.importNode(t.content, true);
+  container.innerHTML = '';
+  container.appendChild(clone);
+});
+</script>
 </body>
 </html>
 

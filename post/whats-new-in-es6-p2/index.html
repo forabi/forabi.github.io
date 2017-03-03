@@ -2,12 +2,46 @@
 <html lang="ar">
 <head>
 <meta charset="utf-8">	
-<meta name="generator" content="Hugo 0.17" />
+<meta name="generator" content="Hugo 0.19" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/skeleton.css">
 <link rel="stylesheet" href="/css/custom.css">
-<link rel="stylesheet" href="/css/rtl.css">
+
+	<style>
+		 
+		html {
+			direction: rtl;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			letter-spacing: normal;
+		}
+
+		code {
+			font-family: 'Consolas', 'Courier New', Thabit, monospace;
+		}
+
+		code[class*="language-"] {
+			direction: ltr;
+			text-align: left;
+		}
+
+		code::before {
+			display: inline;
+			content: '\200e';
+		}
+
+		code::after {
+			content: '\200e';
+			display: inline;
+		}
+
+		.hljs-comment {
+			direction: reset;
+		}
+	</style>
+
 <link rel="alternate" href="/index.xml" type="application/rss+xml" title="مدوّنة فوّاز">
 <title>ما الجديد في الإصدار القادم من JavaScript؟ (الجزء الثّاني) - مدوّنة فوّاز</title>
 </head>
@@ -126,7 +160,7 @@ _ref = [theSwitch, theBait], theBait = _ref[0], theSwitch = _ref[1];
 // &quot;2&quot;
 </code></pre>
 
-<p>من عيوب حلقة <code>for... in</code> أن لا شيء في تعريف اللغة يُجبر مُفسّر اللّغة على إخراج العناصر بترتيب ثابت بالضّرورة، وهذا يعني أنها تصبح مباشرة غير صالحة للمرور على المصفوفات - التي تستخدم لحفظ عناصر <em>مُرتّبة</em> - بطريقة بديهيّة، ويحلّ محلّها حلقة <code>for</code> التقليديّة عندئذٍ، وأمّا عند استخدامها للمرور على الكائنات، فإنّها لا تُعيد إلّا الخصائص الّتي تُعرّف على أنها قابلة للتعداد (enumerable)، وهو شيء يُحدّد عند تعريف الخاصّة، كما أنّها تُعيد الخصائص القابلة للتعداد التي ورثها الكائن عن &ldquo;آباءه&rdquo; ضمن سلسلة الوراثة، وهو تصرّف قد لا يكون مرغوبًا دومًا، وغالبًا سترى المطوّرين يُجرون فحصًا للخاصّة قبل متابعة تنفيذ الشفرة لمعرفة ما إذا كانت تخصّ العنصر ذاته أمّ أنّه ورثها:</p>
+<p>من عيوب حلقة <code>for... in</code> أن لا شيء في تعريف اللغة يُجبر مُفسّر اللّغة على إخراج العناصر بترتيب ثابت بالضّرورة، وهذا يعني أنها تصبح مباشرة غير صالحة للمرور على المصفوفات - التي تستخدم لحفظ عناصر <em>مُرتّبة</em> - بطريقة بديهيّة، ويحلّ محلّها حلقة <code>for</code> التقليديّة عندئذٍ، وأمّا عند استخدامها للمرور على الكائنات، فإنّها لا تُعيد إلّا الخصائص الّتي تُعرّف على أنها قابلة للتعداد (enumerable)، وهو شيء يُحدّد عند تعريف الخاصّة، كما أنّها تُعيد الخصائص القابلة للتعداد التي ورثها الكائن عن &laquo;آباءه&raquo; ضمن سلسلة الوراثة، وهو تصرّف قد لا يكون مرغوبًا دومًا، وغالبًا سترى المطوّرين يُجرون فحصًا للخاصّة قبل متابعة تنفيذ الشفرة لمعرفة ما إذا كانت تخصّ العنصر ذاته أمّ أنّه ورثها:</p>
 
 <pre><code class="language-javascript">var obj = { a: 1, b: 2, c: 3 }; // كائن جديد لا يرث سوى النموذج Object
 
@@ -530,7 +564,7 @@ add(1, 2, 3)
 
 </code></pre>
 
-<p>حسنًا لقد اضطررنا إلى &ldquo;استعارة&rdquo; دالة الاختزال من مصفوفة فارغة لتطبيقها على الكائن الخاص <code>arguments</code> الذي يُعتبر &ldquo;شبيه مصفوفة&rdquo; ولا يملك ما تمتلكه المصفوفة من دوالّ، لماذا لا يمكننا كتابة هذا فحسب:</p>
+<p>حسنًا لقد اضطررنا إلى &laquo;استعارة&raquo; دالة الاختزال من مصفوفة فارغة لتطبيقها على الكائن الخاص <code>arguments</code> الذي يُعتبر &laquo;شبيه مصفوفة&raquo; ولا يملك ما تمتلكه المصفوفة من دوالّ، لماذا لا يمكننا كتابة هذا فحسب:</p>
 
 <pre><code class="language-javascript">function add(...numbers) {
     return numbers.reduce(function(memo, n) { return memo + n; });
@@ -545,7 +579,7 @@ add(1, 2, 3)
 
 </code></pre>
 
-<p>وأمّا الفكرة الثّانية فهي تكاد تكون عكس السّابقة، فإذا كانت الأولى تجمع بقيّة المعاملات في كائن مُفرَد، فإنّ هذه &ldquo;تَنشر&rdquo; محتويات المصفوفة إلى عناصرها المكوّنة لها، ماذا لو لم نكن أذكياء وعجزنا عن الإتيان بدالة تجمع عددًا غير منتهٍ من الأرقام:</p>
+<p>وأمّا الفكرة الثّانية فهي تكاد تكون عكس السّابقة، فإذا كانت الأولى تجمع بقيّة المعاملات في كائن مُفرَد، فإنّ هذه &laquo;تَنشر&raquo; محتويات المصفوفة إلى عناصرها المكوّنة لها، ماذا لو لم نكن أذكياء وعجزنا عن الإتيان بدالة تجمع عددًا غير منتهٍ من الأرقام:</p>
 
 <pre><code class="language-javascript">function addThreeNumbers(n1, n2, n3) {
      return n1 + n2 + n3;
@@ -628,6 +662,7 @@ addThreeOrMoreNumbers(1, 2, 3);
 	ga('send', 'pageview');
 </script>
 
+<link href="https://fonts.googleapis.com/css?family=Amiri:700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
