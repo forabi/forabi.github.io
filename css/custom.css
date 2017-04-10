@@ -15,7 +15,7 @@ figure figcaption {
 
 a {
   text-decoration: none;
-  text-decoration-skip: line;
+  text-decoration-skip: ink;
 }
 
 #toc {
