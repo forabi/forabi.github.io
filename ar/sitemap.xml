@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://forabi.net/post/announcing-webceph/</loc>
     <lastmod>2016-11-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://forabi.net/en/post/announcing-webceph/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://forabi.net/post/announcing-webceph/"
+                />
   </url>
   
   <url>
@@ -42,15 +53,65 @@
   </url>
   
   <url>
+    <loc>https://forabi.net/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://forabi.net/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://forabi.net/categories/"
+                />
+  </url>
+  
+  <url>
     <loc>https://forabi.net/post/</loc>
     <lastmod>2016-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://forabi.net/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://forabi.net/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://forabi.net/tags/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://forabi.net/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://forabi.net/tags/"
+                />
   </url>
   
   <url>
     <loc>https://forabi.net/</loc>
     <lastmod>2016-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://forabi.net/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://forabi.net/"
+                />
   </url>
   
 </urlset>
